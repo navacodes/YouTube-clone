@@ -5,16 +5,16 @@ import { themeSettings } from "./theme";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Login from "./scenes/login/";
 import Layout from "./Layout.jsx";
 import Home from "./scenes/home/";
-import Login from "./scenes/login/";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   return (
-    <div className="App">
+    <div className="app">
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />

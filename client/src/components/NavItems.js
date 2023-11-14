@@ -21,6 +21,8 @@ import LanguageIcon from "../svgs/Language.svg";
 import RestrictedModeIcon from "../svgs/RestrictedMode.svg";
 import LocationIcon from "../svgs/Location.svg";
 import KeyboardIcon from "../svgs/Keyboard.svg";
+import UploadVideoIcon from "../svgs/UploadVideo.svg";
+import GoLiveIcon from "../svgs/GoLive.svg";
 
 const navItems1 = [
   {
@@ -265,6 +267,18 @@ const navItems10 = [
     active: false,
   },
 ];
+const navItems11 = [
+  {
+    text: "Upload video",
+    icon: UploadVideoIcon,
+    active: false,
+  },
+  {
+    text: "Go live",
+    icon: GoLiveIcon,
+    active: false,
+  },
+];
 
 export {
   navItems1,
@@ -278,4 +292,5 @@ export {
   navItems8,
   navItems9,
   navItems10,
+  navItems11,
 };

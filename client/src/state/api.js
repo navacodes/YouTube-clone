@@ -17,7 +17,7 @@ const baseQuery = fetchBaseQuery({
 export const myApi = createApi({
   reducerPath: "youtubeApi",
   baseQuery,
-  tagTypes: ["User", "Subscription"],
+  tagTypes: ["User", "Subscription", "Videos"],
   endpoints: (build) => ({
     loginUser: build.mutation({
       query: (credentials) => ({
@@ -47,9 +47,19 @@ export const myApi = createApi({
       method: "GET",
       providesTags: ["Subscription"],
     }),
+    getVideos: build.query({
+      query: () => `/api/v1/view/videos`,
+      method: "GET",
+      providesTags: ["Videos"],
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginUserMutation, useGetSubsriptionQuery,useLogoutUserMutation } = myApi;
+export const {
+  useLoginUserMutation,
+  useGetSubsriptionQuery,
+  useLogoutUserMutation,
+  useGetVideosQuery,
+} = myApi;

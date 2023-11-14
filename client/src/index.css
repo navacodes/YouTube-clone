@@ -1,3 +1,11 @@
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  width: 100%;
+}
+
 @-webkit-keyframes fadeOutLeft {
   0% {
     opacity: 1;
@@ -72,4 +80,14 @@
   -webkit-animation: 250ms linear 250ms fadeInLeft;
   animation: 250ms linear 250ms fadeInLeft;
   animation-fill-mode: forwards;
+}
+.video {
+  transition: all 100ms ease-in-out;
+}
+
+.visible-visible {
+  visibility: visible;
+}
+.visible-hidden {
+  visibility: hidden;
 }

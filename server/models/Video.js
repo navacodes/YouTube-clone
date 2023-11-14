@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const videoSchema = new mongoose.Schema(
   {
-    vidUrl: String,
+    mediaUrl: String,
     title: {
       type: String,
       required: true,
@@ -17,9 +17,9 @@ const videoSchema = new mongoose.Schema(
     },
     videoType: {
       type: String,
-      enum: ['video', 'short'],
+      enum: ["video", "short"],
     },
-    private: {
+    privateVid: {
       type: Boolean,
       default: false,
     },
@@ -27,6 +27,8 @@ const videoSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+
 
 const Video = mongoose.model("Video", videoSchema);
 

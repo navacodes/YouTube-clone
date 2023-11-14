@@ -100,8 +100,8 @@ mongoose
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
-    await User.create(users);
-    // await Video.create(videosCloud);
+    // await User.create(users);
+    await Video.create(videosCloud);
     // await Youtuber.create(youtubersCloud);
     console.log(`Data successfully loaded`);
   } catch (error) {
@@ -113,9 +113,9 @@ const importData = async () => {
 //  DELETE ALL DATA FROM DB
 const deleteData = async () => {
   try {
-    await User.deleteMany();
+    // await User.deleteMany();
     // await Youtuber.deleteMany();
-    // await Video.deleteMany();
+    await Video.deleteMany();
     console.log(`Data deleted succesfully`);
   } catch (error) {
     console.log(error);

@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useJwt } from "react-jwt";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -47,13 +48,13 @@ const closedMixin = (theme) => ({
   },
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "left",
-  padding: "11px 18px 16px 16px",
-  height: "59px",
-}));
+// const DrawerHeader = styled("div")(({ theme }) => ({
+//   display: "flex",
+//   alignItems: "center",
+//   justifyContent: "left",
+//   padding: "11px 18px 16px 16px",
+//   height: "59px",
+// }));
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "isSideBarOpen",
@@ -73,6 +74,175 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+const SubscriptionsSectionLoggedIn = ({
+  isSideBarOpen,
+  theme,
+  data,
+  isLoading,
+  showMoreSubscriptionRef,
+  addMoreSubscriptions,
+  elementsToAdd,
+}) => {
+  return (
+    isSideBarOpen && (
+      <>
+        <Divider />
+        <Typography
+          variant="h5"
+          component="div"
+          sx={{
+            padding: "18px 108px 4px 20px",
+            color: theme.palette.textPrimaryDark,
+          }}>
+          Subscriptions
+        </Typography>
+
+        {!data || isLoading ? (
+          <Typography
+            sx={{
+              padding: "18px 108px 4px 20px",
+              color: theme.palette.textPrimaryDark,
+            }}>
+            Loading...
+          </Typography>
+        ) : (
+          <List
+            sx={{
+              paddingTop: "0px",
+              paddingBottom: "10px",
+            }}>
+            {data.channels.map((channel, idx, array) => {
+              if (idx <= 7) {
+                return (
+                  <ListItem
+                    key={channel.name}
+                    sx={{
+                      padding: "0px 12px",
+                      borderRadius: "10px",
+                      "& .MuiListItemButton-root:hover": {
+                        backgroundColor: theme.palette.darkGrayHome,
+                      },
+                      "& .MuiTypography-root": {
+                        fontSize: "14px",
+                      },
+                    }}
+                    disablePadding>
+                    <ListItemButton
+                      sx={{
+                        backgroundColor: theme.palette.bgHomeDark,
+                        color: theme.palette.textPrimaryDark,
+                        padding: isSideBarOpen
+                          ? "8px 12px"
+                          : " 12px 10px 12px 16px",
+                        borderRadius: "10px",
+                      }}>
+                      <ListItemIcon
+                        sx={{
+                          color: "white",
+                          borderRadius: "50%",
+                        }}>
+                        <img
+                          src={channel?.imgUrl}
+                          width="24px"
+                          alt={channel?.imgUrl}
+                          style={{
+                            borderRadius: "50%",
+                          }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={
+                          channel.name.length <= 18
+                            ? channel.name
+                            : channel.name.substring(0, 17).concat("...")
+                        }
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              }
+            })}
+            <ListItem
+              ref={showMoreSubscriptionRef}
+              key={`Show ${data.channels.length - 7} more`}
+              className="showMoreSubscription"
+              sx={{
+                paddingX: "12px",
+                "& .MuiListItemButton-root:hover": {
+                  backgroundColor: theme.palette.darkGrayHome,
+                },
+                "& .MuiTypography-root": {
+                  fontSize: "14px",
+                },
+              }}
+              onClick={addMoreSubscriptions}
+              disablePadding>
+              <ListItemButton
+                sx={{
+                  backgroundColor: theme.palette.bgHomeDark,
+                  color: theme.palette.textPrimaryDark,
+                  padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
+                  borderRadius: "10px",
+                }}>
+                <ListItemIcon>{<ExpandMoreOutlinedIcon />}</ListItemIcon>
+                <ListItemText
+                  primary={`Show ${data.channels.length - 7} more`}
+                />
+              </ListItemButton>
+            </ListItem>
+            {elementsToAdd}
+          </List>
+        )}
+      </>
+    )
+  );
+};
+const SubscriptionsSectionLoggedOut = ({ isSideBarOpen, theme, navigate }) => {
+  return (
+    isSideBarOpen && (
+      <>
+        <Divider />
+        <Box sx={{ padding: "16px 32px" }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              color: theme.palette.textPrimaryDark,
+              width: "176px",
+            }}>
+            Sign in to like videos, <br /> comment and subscribe.
+          </Typography>
+          <Box sx={{ mt: "12px" }}>
+            <Box
+              sx={{
+                display: "inline-flex",
+                alignItems: "center",
+                border: "1px solid #ffffff33",
+                padding: "8px 15px",
+                borderRadius: "40px",
+                cursor: "pointer",
+                pointerEvents: "all",
+                ":hover": {
+                  backgroundColor: "#263850",
+                },
+              }}
+              onClick={() => navigate("/login")}>
+              <img
+                src={EmptyProfile}
+                alt="empty-profile"
+                style={{ marginRight: "6px", marginLeft: "-6px" }}
+              />
+              <Typography variant="h6" sx={{ color: "#3ea6ff" }}>
+                Sign in
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      </>
+    )
+  );
+};
+
 export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
   const theme = useTheme();
   // eslint-disable-next-line no-unused-vars
@@ -82,19 +252,23 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
   const [elementsToAdd, setElementsToAdd] = useState([]);
   const windowSize1310 = useMediaQuery("(min-width:1310px)");
   const token = useSelector((state) => state.global.token);
+  const { decodedToken, isExpired } = useJwt(token);
+  const showMoreSubscriptionRef = useRef(null);
 
-  const handleDrawer = () => {
-    setIsSideBarOpen(!isSideBarOpen);
-  };
+  // const handleDrawer = () => {
+  //   setIsSideBarOpen(!isSideBarOpen);
+  // };
   const showLessSubscriptions = () => {
     setElementsToAdd([]);
-    document.querySelector(".showMoreSubscription").style.display = "flex";
+    showMoreSubscriptionRef.current.style.display = "flex";
+    console.log(showMoreSubscriptionRef.current);
   };
   const addMoreSubscriptions = () => {
     const newElements = data.channels.map((channel, idx, array) => {
       if (idx >= 8) {
         return (
           <ListItem
+            key={Math.random() * 1000 - Math.random() * 10}
             sx={{
               padding: "0px 12px",
               borderRadius: "10px",
@@ -179,171 +353,11 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
       </>
     );
 
-    document.querySelector(".showMoreSubscription").style.display = "none";
+    showMoreSubscriptionRef.current.style.display = "none";
+    console.log(showMoreSubscriptionRef.current);
 
     // Set the state variable to null so that the element is not added again
     setElementsToAdd([...elementsToAdd, ...newElements, showLessElement]);
-  };
-
-  const SubscriptionsSectionLoggedIn = () => {
-    return (
-      isSideBarOpen && (
-        <>
-          <Divider />
-          <Typography
-            variant="h5"
-            component="div"
-            sx={{
-              padding: "18px 108px 4px 20px",
-              color: theme.palette.textPrimaryDark,
-            }}>
-            Subscriptions
-          </Typography>
-
-          {!data || isLoading ? (
-            <Typography
-              sx={{
-                padding: "18px 108px 4px 20px",
-                color: theme.palette.textPrimaryDark,
-              }}>
-              Loading...
-            </Typography>
-          ) : (
-            <List
-              sx={{
-                background: theme.palette.bgHomeDark,
-                paddingTop: "0px",
-                paddingBottom: "10px",
-              }}>
-              {data.channels.map((channel, idx, array) => {
-                if (idx <= 7) {
-                  return (
-                    <ListItem
-                      key={channel.name}
-                      sx={{
-                        padding: "0px 12px",
-                        borderRadius: "10px",
-                        "& .MuiListItemButton-root:hover": {
-                          backgroundColor: theme.palette.darkGrayHome,
-                        },
-                        "& .MuiTypography-root": {
-                          fontSize: "14px",
-                        },
-                      }}
-                      disablePadding>
-                      <ListItemButton
-                        sx={{
-                          backgroundColor: theme.palette.bgHomeDark,
-                          color: theme.palette.textPrimaryDark,
-                          padding: isSideBarOpen
-                            ? "8px 12px"
-                            : " 12px 10px 12px 16px",
-                          borderRadius: "10px",
-                        }}>
-                        <ListItemIcon
-                          sx={{
-                            color: "white",
-                            borderRadius: "50%",
-                          }}>
-                          <img
-                            src={channel?.imgUrl}
-                            width="24px"
-                            alt={channel?.imgUrl}
-                            style={{
-                              borderRadius: "50%",
-                            }}
-                          />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary={
-                            channel.name.length <= 18
-                              ? channel.name
-                              : channel.name.substring(0, 17).concat("...")
-                          }
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                  );
-                }
-              })}
-              <ListItem
-                key={`Show ${data.channels.length - 7} more`}
-                className="showMoreSubscription"
-                sx={{
-                  paddingX: "12px",
-                  "& .MuiListItemButton-root:hover": {
-                    backgroundColor: theme.palette.darkGrayHome,
-                  },
-                  "& .MuiTypography-root": {
-                    fontSize: "14px",
-                  },
-                }}
-                onClick={addMoreSubscriptions}
-                disablePadding>
-                <ListItemButton
-                  sx={{
-                    backgroundColor: theme.palette.bgHomeDark,
-                    color: theme.palette.textPrimaryDark,
-                    padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
-                    borderRadius: "10px",
-                  }}>
-                  <ListItemIcon>{<ExpandMoreOutlinedIcon />}</ListItemIcon>
-                  <ListItemText
-                    primary={`Show ${data.channels.length - 7} more`}
-                  />
-                </ListItemButton>
-              </ListItem>
-              {elementsToAdd}
-            </List>
-          )}
-        </>
-      )
-    );
-  };
-  const SubscriptionsSectionLoggedOut = () => {
-    return (
-      isSideBarOpen && (
-        <>
-          <Divider />
-          <Box sx={{ padding: "16px 32px" }}>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                color: theme.palette.textPrimaryDark,
-                width: "176px",
-              }}>
-              Sign in to like videos, <br /> comment and subscribe.
-            </Typography>
-            <Box sx={{ mt: "12px" }}>
-              <Box
-                sx={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  border: "1px solid #ffffff33",
-                  padding: "8px 15px",
-                  borderRadius: "40px",
-                  cursor: "pointer",
-                  pointerEvents: "all",
-                  ":hover": {
-                    backgroundColor: "#263850",
-                  },
-                }}
-                onClick={() => navigate("/login")}>
-                <img
-                  src={EmptyProfile}
-                  alt="empty-profile"
-                  style={{ marginRight: "6px", marginLeft: "-6px" }}
-                />
-                <Typography variant="h6" sx={{ color: "#3ea6ff" }}>
-                  Sign in
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-        </>
-      )
-    );
   };
 
   useEffect(() => {
@@ -353,22 +367,21 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
   }, [windowSize1310]);
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+    <Box component="nav" sx={{}}>
       <Drawer
         variant="permanent"
         isSideBarOpen={isSideBarOpen}
         sx={{
-          background: "white",
+          position: "relative",
           "& .MuiDrawer-paper": {
+            marginTop: "70px",
             backgroundColor: theme.palette.bgHomeDark,
             borderRight: "none",
+            height: "100%",
+            display: "block",
           },
         }}>
-        <DrawerHeader
-          sx={{
-            background: theme.palette.bgHomeDark,
-          }}>
+        {/* <DrawerHeader>
           <IconButton
             onClick={handleDrawer}
             sx={{
@@ -386,10 +399,9 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
               marginTop: "5px",
             }}
           />
-        </DrawerHeader>
+        </DrawerHeader> */}
         <List
           sx={{
-            background: theme.palette.bgHomeDark,
             paddingTop: "0px",
             paddingBottom: "10px",
           }}>
@@ -442,7 +454,6 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
         <Divider />
         <List
           sx={{
-            background: theme.palette.bgHomeDark,
             paddingTop: "10px",
             paddingBottom: "10px",
           }}>
@@ -464,7 +475,6 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
                     disablePadding>
                     <ListItemButton
                       sx={{
-                        backgroundColor: theme.palette.bgHomeDark,
                         color: theme.palette.textPrimaryDark,
                         padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
                         borderRadius: "10px",
@@ -494,7 +504,9 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
                   <ListItemButton
                     onClick={() => {
                       navigate(
-                        `/${lcText === "your videos" ? "studio" : "noroute"}`
+                        `/${lcText === "your videos" ? "studio" : "noroute"}/${
+                          decodedToken.id
+                        }`
                       );
                       setActive(lcText);
                     }}
@@ -521,9 +533,21 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
         </List>
 
         {token ? (
-          <SubscriptionsSectionLoggedIn />
+          <SubscriptionsSectionLoggedIn
+            isSideBarOpen={isSideBarOpen}
+            theme={theme}
+            data={data}
+            isLoading={isLoading}
+            showMoreSubscriptionRef={showMoreSubscriptionRef}
+            addMoreSubscriptions={addMoreSubscriptions}
+            elementsToAdd={elementsToAdd}
+          />
         ) : (
-          <SubscriptionsSectionLoggedOut />
+          <SubscriptionsSectionLoggedOut
+            isSideBarOpen={isSideBarOpen}
+            theme={theme}
+            navigate={navigate}
+          />
         )}
 
         {isSideBarOpen && (
@@ -541,7 +565,6 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
 
             <List
               sx={{
-                background: theme.palette.bgHomeDark,
                 paddingTop: "10px",
                 paddingBottom: "10px",
               }}>
@@ -562,7 +585,6 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
                       disablePadding>
                       <ListItemButton
                         sx={{
-                          backgroundColor: theme.palette.bgHomeDark,
                           color: theme.palette.textPrimaryDark,
                           padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
                           borderRadius: "10px",
@@ -624,7 +646,6 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
                       disablePadding>
                       <ListItemButton
                         sx={{
-                          backgroundColor: theme.palette.bgHomeDark,
                           color: theme.palette.textPrimaryDark,
                           padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
                           borderRadius: "10px",
@@ -675,7 +696,6 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
                     disablePadding>
                     <ListItemButton
                       sx={{
-                        backgroundColor: theme.palette.bgHomeDark,
                         color: theme.palette.textPrimaryDark,
                         padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
                         borderRadius: "10px",
