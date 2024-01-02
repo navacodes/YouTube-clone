@@ -13,3 +13,9 @@ The following is the video of the clone working right now
 
 https://github.com/Dev-Code24/YouTube-clone/assets/97425135/ed2fcb4c-2aee-49ab-8d7e-f7b165425a2b
 
+
+The following is the video of the clone working right now ( as of Jan 2 2024, I have not been able to work on the project from Nov'23 - Dec'23 ) 
+
+https://github.com/Dev-Code24/YouTube-clone/assets/97425135/c2b90788-d96b-4fd6-946b-a95974269a9a
+
+
