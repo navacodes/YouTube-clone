@@ -89,9 +89,12 @@ const importCloudinary = async () => {
 // };
 // addChannelName();
 
-const DB = process.env.MONGO_URL.replace("<password>", process.env.MONGO_PASS);
+const mongoURL = process.env.MONGO_URL.replace(
+  "<password>",
+  process.env.MONGO_PASS
+);
 mongoose
-  .connect(DB, {
+  .connect(mongoURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

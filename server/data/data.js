@@ -4728,6 +4728,7 @@ export const videosCloud = [
   },
   {
     title: "Video-Title #video #15",
+    videoType: "video",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nisi nobis dolor maiores accusamus a iste recusandae quos quia fuga quod debitis quam sit sapiente reiciendis itaque libero modi eveniet iusto quasi, corrupti expedita adipisci! Voluptatibus incidunt eveniet velit vero, labore, officiis nesciunt accusamus tempora, quas sit reprehenderit earum. Doloribus neque quasi, eos quibusdam expedita dolorem ad velit quidem? Fugiat sed, corporis illum quasi blanditiis saepe nostrum eveniet perferendis harum a necessitatibus, expedita consequuntur provident aliquid qui dolor, dicta fuga?",
     createdBy: "653267ea924d38ae1aec49b8",
@@ -4736,6 +4737,7 @@ export const videosCloud = [
   },
   {
     title: "Video-Title #video #16",
+    videoType: "video",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nisi nobis dolor maiores accusamus a iste recusandae quos quia fuga quod debitis quam sit sapiente reiciendis itaque libero modi eveniet iusto quasi, corrupti expedita adipisci! Voluptatibus incidunt eveniet velit vero, labore, officiis nesciunt accusamus tempora, quas sit reprehenderit earum. Doloribus neque quasi, eos quibusdam expedita dolorem ad velit quidem? Fugiat sed, corporis illum quasi blanditiis saepe nostrum eveniet perferendis harum a necessitatibus, expedita consequuntur provident aliquid qui dolor, dicta fuga?",
     createdBy: "653267ea924d38ae1aec49b9",
@@ -4744,6 +4746,7 @@ export const videosCloud = [
   },
   {
     title: "Video-Title #video #17",
+    videoType: "video",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nisi nobis dolor maiores accusamus a iste recusandae quos quia fuga quod debitis quam sit sapiente reiciendis itaque libero modi eveniet iusto quasi, corrupti expedita adipisci! Voluptatibus incidunt eveniet velit vero, labore, officiis nesciunt accusamus tempora, quas sit reprehenderit earum. Doloribus neque quasi, eos quibusdam expedita dolorem ad velit quidem? Fugiat sed, corporis illum quasi blanditiis saepe nostrum eveniet perferendis harum a necessitatibus, expedita consequuntur provident aliquid qui dolor, dicta fuga?",
     createdBy: "653267ea924d38ae1aec49be",
@@ -4752,6 +4755,7 @@ export const videosCloud = [
   },
   {
     title: "Video-Title #video #18",
+    videoType: "video",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nisi nobis dolor maiores accusamus a iste recusandae quos quia fuga quod debitis quam sit sapiente reiciendis itaque libero modi eveniet iusto quasi, corrupti expedita adipisci! Voluptatibus incidunt eveniet velit vero, labore, officiis nesciunt accusamus tempora, quas sit reprehenderit earum. Doloribus neque quasi, eos quibusdam expedita dolorem ad velit quidem? Fugiat sed, corporis illum quasi blanditiis saepe nostrum eveniet perferendis harum a necessitatibus, expedita consequuntur provident aliquid qui dolor, dicta fuga?",
     createdBy: "653267ea924d38ae1aec49c0",
@@ -4760,6 +4764,7 @@ export const videosCloud = [
   },
   {
     title: "Video-Title #video #19",
+    videoType: "video",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nisi nobis dolor maiores accusamus a iste recusandae quos quia fuga quod debitis quam sit sapiente reiciendis itaque libero modi eveniet iusto quasi, corrupti expedita adipisci! Voluptatibus incidunt eveniet velit vero, labore, officiis nesciunt accusamus tempora, quas sit reprehenderit earum. Doloribus neque quasi, eos quibusdam expedita dolorem ad velit quidem? Fugiat sed, corporis illum quasi blanditiis saepe nostrum eveniet perferendis harum a necessitatibus, expedita consequuntur provident aliquid qui dolor, dicta fuga?",
     createdBy: "653267ea924d38ae1aec49c1",
@@ -4768,6 +4773,7 @@ export const videosCloud = [
   },
   {
     title: "Video-Title #video #20",
+    videoType: "video",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nisi nobis dolor maiores accusamus a iste recusandae quos quia fuga quod debitis quam sit sapiente reiciendis itaque libero modi eveniet iusto quasi, corrupti expedita adipisci! Voluptatibus incidunt eveniet velit vero, labore, officiis nesciunt accusamus tempora, quas sit reprehenderit earum. Doloribus neque quasi, eos quibusdam expedita dolorem ad velit quidem? Fugiat sed, corporis illum quasi blanditiis saepe nostrum eveniet perferendis harum a necessitatibus, expedita consequuntur provident aliquid qui dolor, dicta fuga?",
     createdBy: "653267ea924d38ae1aec49c0",
@@ -4776,6 +4782,7 @@ export const videosCloud = [
   },
   {
     title: "Video-Title #video #21",
+    videoType: "video",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nisi nobis dolor maiores accusamus a iste recusandae quos quia fuga quod debitis quam sit sapiente reiciendis itaque libero modi eveniet iusto quasi, corrupti expedita adipisci! Voluptatibus incidunt eveniet velit vero, labore, officiis nesciunt accusamus tempora, quas sit reprehenderit earum. Doloribus neque quasi, eos quibusdam expedita dolorem ad velit quidem? Fugiat sed, corporis illum quasi blanditiis saepe nostrum eveniet perferendis harum a necessitatibus, expedita consequuntur provident aliquid qui dolor, dicta fuga?",
     createdBy: "653267ea924d38ae1aec49c1",
@@ -4784,6 +4791,7 @@ export const videosCloud = [
   },
   {
     title: "Video-Title #video #22",
+    videoType: "video",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nisi nobis dolor maiores accusamus a iste recusandae quos quia fuga quod debitis quam sit sapiente reiciendis itaque libero modi eveniet iusto quasi, corrupti expedita adipisci! Voluptatibus incidunt eveniet velit vero, labore, officiis nesciunt accusamus tempora, quas sit reprehenderit earum. Doloribus neque quasi, eos quibusdam expedita dolorem ad velit quidem? Fugiat sed, corporis illum quasi blanditiis saepe nostrum eveniet perferendis harum a necessitatibus, expedita consequuntur provident aliquid qui dolor, dicta fuga?",
     createdBy: "653267ea924d38ae1aec49c5",
@@ -4792,6 +4800,7 @@ export const videosCloud = [
   },
   {
     title: "Video-Title #video #23",
+    videoType: "video",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nisi nobis dolor maiores accusamus a iste recusandae quos quia fuga quod debitis quam sit sapiente reiciendis itaque libero modi eveniet iusto quasi, corrupti expedita adipisci! Voluptatibus incidunt eveniet velit vero, labore, officiis nesciunt accusamus tempora, quas sit reprehenderit earum. Doloribus neque quasi, eos quibusdam expedita dolorem ad velit quidem? Fugiat sed, corporis illum quasi blanditiis saepe nostrum eveniet perferendis harum a necessitatibus, expedita consequuntur provident aliquid qui dolor, dicta fuga?",
     createdBy: "653267ea924d38ae1aec49c4",
@@ -4800,6 +4809,7 @@ export const videosCloud = [
   },
   {
     title: "Video-Title #video #24",
+    videoType: "video",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nisi nobis dolor maiores accusamus a iste recusandae quos quia fuga quod debitis quam sit sapiente reiciendis itaque libero modi eveniet iusto quasi, corrupti expedita adipisci! Voluptatibus incidunt eveniet velit vero, labore, officiis nesciunt accusamus tempora, quas sit reprehenderit earum. Doloribus neque quasi, eos quibusdam expedita dolorem ad velit quidem? Fugiat sed, corporis illum quasi blanditiis saepe nostrum eveniet perferendis harum a necessitatibus, expedita consequuntur provident aliquid qui dolor, dicta fuga?",
     createdBy: "653267ea924d38ae1aec49c5",

@@ -6,6 +6,8 @@ body,
   width: 100%;
 }
 
+
+
 @-webkit-keyframes fadeOutLeft {
   0% {
     opacity: 1;

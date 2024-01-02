@@ -598,10 +598,13 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
             </IconButton>
             {/* change the yt icon to dynamic icon */}
             <img
+              onClick={() => navigate("/")}
               src={YoutubeLightIcon}
               alt=""
               style={{
                 marginLeft: "11px",
+                cursor: "pointer",
+                pointerEvents: "all",
               }}
             />
           </Box>

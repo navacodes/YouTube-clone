@@ -115,7 +115,7 @@ const SubscriptionsSectionLoggedIn = ({
               if (idx <= 7) {
                 return (
                   <ListItem
-                    key={channel.name}
+                    key={idx * Math.random()}
                     sx={{
                       padding: "0px 12px",
                       borderRadius: "10px",
