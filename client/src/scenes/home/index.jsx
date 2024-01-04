@@ -80,6 +80,7 @@ const formatVideoTime = function (totalTime, currentTime) {
     return { formattedTotalTime, formattedCurrentTime };
   }
 };
+
 const VideoCard = ({
   theme,
   videoData,
@@ -136,12 +137,6 @@ const VideoCard = ({
 
     // console.log(time + ":" + totalTime);
   };
-
-  // const scrub = (e) => {
-  //   const scrubTime =
-  //     (e.offsetX / progressRef.current.offsetWidth) * videoRef.current.duration;
-  //   videoRef.current.currentTime = scrubTime;
-  // };
 
   return (
     <Box
@@ -243,9 +238,13 @@ const VideoCard = ({
 const Home = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetVideosQuery();
-  const moreThan1500 = useMediaQuery("(min-width:1590px)"); // gives true when window size > 1500 grid size 4
-  const moreThan1100 = useMediaQuery("(min-width:1100px)"); // gives true when window size > 1500 grid size 3
-  const moreThan700 = useMediaQuery("(min-width:700px)"); // gives true when window size > 1500 grid size 2
+  const moreThan1500 = useMediaQuery("(min-width:1590px)"); 
+  // gives true when window size > 1500 grid size 4
+  const moreThan1100 = useMediaQuery("(min-width:1100px)"); 
+  // gives true when window size > 1500 grid size 3
+  const moreThan700 = useMediaQuery("(min-width:700px)"); 
+  // gives true when window size > 1500 grid size 2
+  
   // anything less than 700 then grid size 1
 
   return (

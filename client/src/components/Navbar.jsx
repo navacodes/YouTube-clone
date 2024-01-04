@@ -16,6 +16,7 @@ import {
   InputBase,
   IconButton,
   Modal,
+  useMediaQuery,
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -55,9 +56,9 @@ const Search = styled("div")(({ theme }) => ({
   borderRadius: 40,
   backgroundColor: theme.palette.searchHomeDark,
   border: `1px solid ${theme.palette.borderHomeDark}`,
-  marginLeft: 0,
+  marginLeft: "40px",
   maxWidth: "640px",
-  minWidth: "300px",
+  minWidth: "0px",
   justifyContent: "flex-end",
   alignItems: "center",
 }));
@@ -509,9 +510,15 @@ const NavbarLoggedIn = ({
   );
 };
 
-const NavbarLoggedOut = ({ theme, navigate }) => {
+const NavbarLoggedOut = ({ theme, navigate, greaterThan590 }) => {
   return (
-    <FlexBetween>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        minWidth: greaterThan590 ? "225px" : "0px",
+        justifyContent: "flex-end",
+      }}>
       <IconButton sx={{ marginRight: "8px" }}>
         <MoreVertIcon
           sx={{
@@ -525,7 +532,7 @@ const NavbarLoggedOut = ({ theme, navigate }) => {
           display: "inline-flex",
           alignItems: "center",
           border: "1px solid #ffffff33",
-          padding: "8px 15px",
+          padding: "5px 15px",
           borderRadius: "40px",
           cursor: "pointer",
           pointerEvents: "all",
@@ -543,7 +550,7 @@ const NavbarLoggedOut = ({ theme, navigate }) => {
           Sign in
         </Typography>
       </Box>
-    </FlexBetween>
+    </Box>
   );
 };
 
@@ -554,6 +561,7 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
   const [openChannelModal, setOpenChannelModal] = useState(false);
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [logout, { isLoading }] = useLogoutUserMutation();
+  const greaterThan590 = useMediaQuery("(min-width:590px)"); // true when greaterThan590
 
   const handleChannelModal = () => {
     setOpenChannelModal(!openChannelModal);
@@ -582,8 +590,11 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
       <Toolbar
         sx={{
           width: "100%",
+          paddingX: "24px",
         }}>
-        <FlexBetween className="space-between-navbar" sx={{ width: "100%" }}>
+        <FlexBetween
+          className="space-between-navbar"
+          sx={{ width: "100%", flexDirection: "row" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <IconButton
               color="inherit"
@@ -608,27 +619,54 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
               }}
             />
           </Box>
-          <Search className="search-bar">
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-            <IconWrapper
+          {!greaterThan590 && (
+            <Box
               sx={{
-                position: "absolute",
-                padding: theme.spacing(0, 2),
-                pointerEvents: "all",
-                borderRadius: "0 40px 40px 0",
-                backgroundColor: "#222222",
+                display: "flex",
+                flex: 1,
+                fleBbasis: "0.000000001px",
+                justifyContent: "flex-end",
               }}>
-              <SearchIcon
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
                 sx={{
+                  padding: "8px",
                   color: theme.palette.textPrimaryDark,
-                  fontSize: "24px",
-                }}
+                }}>
+                <SearchIcon
+                  sx={{
+                    color: theme.palette.textPrimaryDark,
+                    fontSize: "24px",
+                  }}
+                />
+              </IconButton>
+            </Box>
+          )}
+          {greaterThan590 && (
+            <Search className="search-bar">
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
               />
-            </IconWrapper>
-          </Search>
+              <IconWrapper
+                sx={{
+                  position: "absolute",
+                  padding: theme.spacing(0, 2),
+                  pointerEvents: "all",
+                  borderRadius: "0 40px 40px 0",
+                  backgroundColor: "#222222",
+                }}>
+                <SearchIcon
+                  sx={{
+                    color: theme.palette.textPrimaryDark,
+                    fontSize: "24px",
+                  }}
+                />
+              </IconWrapper>
+            </Search>
+          )}
           {token ? (
             <NavbarLoggedIn
               theme={theme}
@@ -642,7 +680,11 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
               token={token}
             />
           ) : (
-            <NavbarLoggedOut theme={theme} navigate={navigate} />
+            <NavbarLoggedOut
+              greaterThan590={greaterThan590}
+              theme={theme}
+              navigate={navigate}
+            />
           )}
         </FlexBetween>
       </Toolbar>
