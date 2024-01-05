@@ -39,3 +39,5 @@ export const getAllVideos = catchAsync(async (req, res) => {
     videos: videosWithCreatorDetails,
   });
 });
+
+
