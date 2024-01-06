@@ -18,9 +18,6 @@ import MuiDrawer from "@mui/material/Drawer";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useGetSubsriptionQuery } from "../state/api";
-import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
-
 import SubscriptionsSectionLoggedOut from "./SubscriptionsSectionLoggedOut.jsx";
 
 import {
@@ -268,8 +265,6 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
               isSideBarOpen={isSideBarOpen}
               theme={theme}
               showMoreSubscriptionRef={showMoreSubscriptionRef}
-              // elementsToAdd={elementsToAdd}
-              // setElementsToAdd={setElementsToAdd}
             />
           </Suspense>
         ) : (
@@ -507,3 +502,5 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
     </Box>
   );
 }
+
+// See this subscription component is meant to load only when a user logs in, and then the api getting all this data should be fetched, but when this component is loaded from the beginning the api starts throwing an error 304 because the user in not logged in at that moment, so I want the api should fetch all this data only when this a user is logs in.
