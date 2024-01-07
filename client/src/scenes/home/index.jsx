@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { createContext } from "react";
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
@@ -20,7 +21,9 @@ const Home = () => {
   if (moreThan700) gridSize = 2;
   if (moreThan1100) gridSize = 3;
   if (moreThan1500) gridSize = 4;
-
+  const videos = !isLoading
+    ? data.videos.filter((video) => video.videoType === "video")
+    : [];
   return (
     // Need to apply Youtube like logic to make the grids and only two rows before the shorts
     <GridSizeContext.Provider value={gridSize}>
@@ -38,13 +41,22 @@ const Home = () => {
               Loading...
             </Typography>
           ) : (
-            data.videos
-              .filter((video) => video.videoType === "video")
-              .map((videoData, id) => {
+            videos.map((videoData, idx, array) => {
+              if (idx % gridSize === 0) {
+                // Calculate the start index for each chunk
+                const startIndex = idx;
+                const endIndex = Math.min(idx + gridSize, array.length);
+                const chunkArr = array.slice(startIndex, endIndex);
+                // console.log(idx, chunkArr);
                 return (
-                  <VideoRow videoData={videoData} theme={theme} key={id} />
+                  <VideoRow
+                    videoDataArr={chunkArr}
+                    theme={theme}
+                    key={startIndex}
+                  />
                 );
-              })
+              }
+            })
           )}
         </Box>
       </Box>
