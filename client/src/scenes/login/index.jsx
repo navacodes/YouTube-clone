@@ -1,6 +1,13 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, TextField, Typography, Button, Checkbox } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  Checkbox,
+  FormControlLabel,
+} from "@mui/material";
 import GoogleLogo from "../../svgs/GoogleIcon.svg";
 import loginUserIcon from "../../svgs/googleLoginUser.svg";
 import { useTheme } from "@mui/material/styles";
@@ -17,6 +24,8 @@ const Login = () => {
   const emailSection = useRef(null);
   const passwordSection = useRef(null);
   const finalFormRef = useRef(null);
+  const passwordInputRef = useRef(null);
+  const [checked, setChecked] = useState(false);
   const [login, { isLoading }] = useLoginUserMutation();
   const [details, setDetails] = useState({
     email: "",
@@ -58,6 +67,18 @@ const Login = () => {
     } else {
       alert("Please enter a valid email !");
     }
+  };
+
+  const showPassword = () => {
+    if (checked) {
+      passwordInputRef.current.type = "text";
+    } else {
+      passwordInputRef.current.type = "password";
+    }
+  };
+  const handleCheckChange = (event) => {
+    setChecked(event.target.checked);
+    showPassword();
   };
 
   const handleFormSubmit = (e) => {
@@ -278,12 +299,13 @@ const Login = () => {
                   }}>
                   <Box className="textFieldBox" sx={{ width: "100%" }}>
                     <TextField
+                      ref={passwordInputRef}
                       fullWidth
                       id="outlined-password-input"
-                      label="Password"
-                      type="password"
                       variant="outlined"
                       size="normal"
+                      label="Password"
+                      type={checked ? "text" : "password"}
                       value={details.password}
                       onChange={(e) => {
                         setDetails({
@@ -315,32 +337,39 @@ const Login = () => {
                         paddingTop: "11px",
                         paddingBottom: "5px",
                       }}>
-                      <Checkbox
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={checked}
+                            onChange={handleCheckChange}
+                            sx={{
+                              height: "14px",
+                              width: "14px",
+                              "& .MuiButtonBase-root": {
+                                height: "40px",
+                                width: "40px",
+                              },
+                              "& .MuiButtonBase-root.Mui-checked": {
+                                backgroundColor: theme.palette.loginBlue,
+                              },
+                              "& .PrivateSwitchBase-input": {
+                                opacity: 1,
+                              },
+                            }}
+                          />
+                        }
+                        label="Show password"
                         sx={{
-                          height: "14px",
-                          width: "14px",
-
-                          "& .MuiButtonBase-root": {
-                            height: "40px",
-                            width: "40px",
-                          },
-                          "& .MuiButtonBase-root.Mui-checked": {
-                            backgroundColor: theme.palette.loginBlue,
-                          },
-                          "& .PrivateSwitchBase-input": {
-                            opacity: 1,
+                          marginRight: "0px",
+                          marginLeft: "2px",
+                          "& .MuiFormControlLabel-label": {
+                            color: theme.palette.loginBlue,
+                            fontWeight: 600,
+                            letterSpacing: 0.25,
+                            marginLeft: "16px",
                           },
                         }}
                       />
-                      <Typography
-                        sx={{
-                          color: theme.palette.loginBlue,
-                          fontWeight: 600,
-                          letterSpacing: 0.25,
-                          marginLeft: "16px",
-                        }}>
-                        Show password
-                      </Typography>
                     </Box>
                   </Box>
                 </Box>
