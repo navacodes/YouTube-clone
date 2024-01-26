@@ -48,7 +48,12 @@ export const myApi = createApi({
       providesTags: ["Subscription"],
     }),
     getVideos: build.query({
-      query: () => `/api/v1/view/videos`,
+      query: ({ page = 1, pageSize = 8 }) => `/api/v1/view/videos?page=${page}&pageSize=${pageSize}`,
+      method: "GET",
+      providesTags: ["Videos"],
+    }),
+    getSlimVideos: build.query({
+      query: ({ page = 1, pageSize = 8 }) => `/api/v1/view/shorts?page=${page}&pageSize=${pageSize}`,
       method: "GET",
       providesTags: ["Videos"],
     }),
@@ -57,9 +62,4 @@ export const myApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {
-  useLoginUserMutation,
-  useGetSubsriptionQuery,
-  useLogoutUserMutation,
-  useGetVideosQuery,
-} = myApi;
+export const { useLoginUserMutation, useGetSubsriptionQuery, useLogoutUserMutation, useGetVideosQuery, useGetSlimVideosQuery } = myApi;

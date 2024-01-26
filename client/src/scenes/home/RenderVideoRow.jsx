@@ -10,27 +10,12 @@ export default function VideoRows({ isLoading, videos, row }) {
     return <p style={{ color: theme.palette.textPrimaryDark }}>Loading...</p>;
   }
 
-  const renderVideoRows = (startIndex, endIndex) => {
-    const chunkArr = videos.slice(startIndex, endIndex);
-    return <VideoRow videoDataArr={chunkArr} key={startIndex} />;
-  };
-
   return videos.map((videoData, idx, array) => {
-    const topRow = row === "isTopRow" ? idx % gridSize === 0 && idx < 8 : null;
-    const restRow =
-      row === "isRestRow" ? idx % gridSize === 0 && idx > 8 : null;
-
-    if (topRow) {
+    if (idx % gridSize === 0) {
       const startIndex = idx;
       const endIndex = Math.min(idx + gridSize, array.length);
-      return renderVideoRows(startIndex, endIndex);
+      const chunkArr = videos.slice(startIndex, endIndex);
+      return <VideoRow videoDataArr={chunkArr} key={startIndex} />;
     }
-    if (restRow) {
-      const startIndex = idx;
-      const endIndex = Math.min(idx + gridSize, array.length);
-      return renderVideoRows(startIndex, endIndex);
-    }
-
-    return null; // Return null for non-top and non-rest rows
   });
 }

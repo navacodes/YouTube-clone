@@ -8,7 +8,9 @@ export const getChannels = catchAsync(async (req, res) => {
   res.status(200).json({ status: "success", length: youtuber.length, channels: youtuber });
 });
 
-const fetchVideos = async (videos, req, res) => {
+const fetchVideos = async (videos, req, res, startIndex, endIndex) => {
+  let next = true;
+  let prev = false;
   const videoPromises = videos.map(async (video) => {
     try {
       const { createdBy, ...videoData } = video.toObject();
@@ -25,9 +27,16 @@ const fetchVideos = async (videos, req, res) => {
   });
 
   const videosWithCreatorDetails = await Promise.all(videoPromises);
-
+  if (endIndex > 24) {
+    next = false;
+  }
+  if (startIndex > 1) {
+    prev = true;
+  }
   res.status(200).json({
     status: "success",
+    next,
+    prev,
     length: videosWithCreatorDetails.length,
     videos: videosWithCreatorDetails,
   });
@@ -35,8 +44,6 @@ const fetchVideos = async (videos, req, res) => {
 
 export const getAllVideos = catchAsync(async (req, res) => {
   const { page, pageSize } = req.query;
-  console.log("page :", req.query.page);
-  console.log("pageSize :", req.query.pageSize);
   const startIndex = (page - 1) * pageSize;
   const endIndex = page * pageSize;
   let videos;
@@ -45,16 +52,13 @@ export const getAllVideos = catchAsync(async (req, res) => {
       .sort({ _id: "asc" })
       .limit(endIndex - startIndex);
   } else {
-    prevStartIdx = (page - 2) * pageSize;
     videos = await Video.find({ privateVid: false, videoType: "video" }).sort({ _id: "asc" }).skip(startIndex).limit(pageSize);
   }
 
-  fetchVideos(videos, req, res);
+  fetchVideos(videos, req, res, startIndex, endIndex);
 });
 export const getAllSlimVideos = catchAsync(async (req, res) => {
   const { page, pageSize } = req.query;
-  console.log("page :", req.query.page);
-  console.log("pageSize :", req.query.pageSize);
   const startIndex = (page - 1) * pageSize;
   const endIndex = page * pageSize;
   let videos;
@@ -63,9 +67,8 @@ export const getAllSlimVideos = catchAsync(async (req, res) => {
       .sort({ _id: "asc" })
       .limit(endIndex - startIndex);
   } else {
-    prevStartIdx = (page - 2) * pageSize;
     videos = await Video.find({ privateVid: false, videoType: "short" }).sort({ _id: "asc" }).skip(startIndex).limit(pageSize);
   }
 
-  fetchVideos(videos, req, res);
+  fetchVideos(videos, req, res, startIndex, endIndex);
 });

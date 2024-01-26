@@ -2,17 +2,13 @@
 import React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import {
-  Box,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
-  Typography,
   ListItemText,
   Toolbar,
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import FlexBetween from "./FlexBetween.jsx";
 
 const AppBar = styled(MuiAppBar, {
