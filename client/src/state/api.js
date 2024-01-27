@@ -49,6 +49,7 @@ export const myApi = createApi({
     }),
     getVideos: build.query({
       query: ({ page = 1, pageSize = 8 }) => `/api/v1/view/videos?page=${page}&pageSize=${pageSize}`,
+      staleTime: 0,
       method: "GET",
       providesTags: ["Videos"],
     }),

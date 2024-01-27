@@ -40,13 +40,13 @@ const Home = () => {
     slimGridSize = 6;
   }
 
-  const { data: videoData, isLoading: vidLoading, refetch: vidRefetch } = useGetVideosQuery({ page: videoPage, pageSize: gridSize * 2 });
+  const { data: videoData, isLoading: vidLoading, refetch: vidRefetch, originalArgs } = useGetVideosQuery({ page: videoPage, pageSize: gridSize * 2 });
 
   const { data: slimVidData, isLoading: slimVidLoading, refetch: slimVidRefetch } = useGetSlimVideosQuery({ page: slimVideoPage, pageSize: slimGridSize });
 
   useEffect(() => {
     // Only set cachedData if it's currently null
-    if (!topRowVids && !vidLoading) {
+    if (!topRowVids && !vidLoading && videoData.videos) {
       setTopRowVids(videoData.videos);
     }
   }, [videoData, topRowVids, vidLoading]); // Include cachedData in dependencies
@@ -55,18 +55,13 @@ const Home = () => {
 
   const fetchData = async function () {
     setVideoPage((prev) => prev + 1);
-    try {
-      await vidRefetch({ page: videoPage });
-      const temp = (videoData.videos || []).filter((el) => !topRowVids.includes(el));
-      setVidState((prev) => {
-        return [...prev, ...(temp || [])];
-      });
-      next.current = videoData?.next || false;
-      console.log(vidState.length);
-    } catch (error) {
-      // Handle error if needed
-      console.error("Error fetching data:", error);
-    }
+    const newVids = await vidRefetch();
+    const temp = (newVids.data.videos || []).filter((el) => !topRowVids.includes(el));
+    setVidState((prev) => {
+      return prev.concat(temp || []);
+    });
+    next.current = newVids.data.next || false;
+    console.log(newVids.data.videos);
   };
 
   return (
@@ -88,8 +83,9 @@ const Home = () => {
           {/* Rest of the rows */}
           <InfiniteScroll
             dataLength={() => {
+              console.log("vidState.length:", vidState.length);
               return vidState.length;
-            }} //This is important field to render the next data
+            }}
             next={() => fetchData()}
             hasMore={next.current}
             loader={<p style={{ color: theme.palette.textPrimaryDark }}>Loading...</p>}
