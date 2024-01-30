@@ -27,7 +27,7 @@ const fetchVideos = async (videos, req, res, startIndex, endIndex) => {
   });
 
   const videosWithCreatorDetails = await Promise.all(videoPromises);
-  if (endIndex > 24) {
+  if (endIndex >= 24) {
     next = false;
   }
   if (startIndex > 1) {

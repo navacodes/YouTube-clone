@@ -13,7 +13,8 @@ const SlimVideoRow = ({ slimVideoData, theme }) => {
         width: "100%",
         display: "flex",
         marginRight: `${slimGridSize === 2 ? "0px" : "8px"}`,
-      }}>
+      }}
+    >
       {slimVideoData.map((slimVideo, idx) => {
         return <SlimVideoCard key={idx} slimVideo={slimVideo} />;
       })}

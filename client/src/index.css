@@ -1,3 +1,5 @@
+@import "./scenes/home/spinner/spinner.css";
+
 html,
 body,
 #root,
@@ -5,8 +7,6 @@ body,
   height: 100%;
   width: 100%;
 }
-
-
 
 @-webkit-keyframes fadeOutLeft {
   0% {
@@ -74,7 +74,6 @@ body,
   }
 }
 .loginForEmailAndPass {
-  /* transform: translateX(366px) translateY(-100px); */
   display: none;
   opacity: 0;
 }

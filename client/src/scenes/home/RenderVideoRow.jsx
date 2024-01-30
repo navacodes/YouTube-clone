@@ -7,7 +7,7 @@ export default function VideoRows({ isLoading, videos, row }) {
   const { gridSize, theme } = useContext(GridSizeContext);
 
   if (isLoading) {
-    return <p style={{ color: theme.palette.textPrimaryDark }}>Loading...</p>;
+    return <div style={{ width: "100%" }}></div>;
   }
 
   return videos.map((videoData, idx, array) => {

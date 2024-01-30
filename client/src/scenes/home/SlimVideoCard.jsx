@@ -39,7 +39,7 @@ const SlimVideoCard = ({ slimVideo }) => {
       sx={{
         width: `calc(100%/${slimGridSize} - 16px - 0.01px)`,
         marginRight: "16px",
-        marginBottom: "39px",
+        marginBottom: "19px",
       }}
       className="video-box">
       <Box sx={{ width: "100%" }} className="video-container">
