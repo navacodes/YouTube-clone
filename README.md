@@ -21,5 +21,8 @@ https://github.com/Dev-Code24/YouTube-clone/assets/97425135/c2b90788-d96b-4fd6-9
 
 The following is how the clone works as of now. I have added the InfinteScroll feature to the videos and have added the "click to show more shorts" feature on the show more button
 
-https://github.com/Dev-Code24/YouTube-clone/assets/97425135/1e814df8-f726-48f0-ba8b-5d1e437d0876
+https://github.com/Dev-Code24/YouTube-clone/assets/97425135/a6869377-ccdd-4f08-b6d8-c100f1e0809c
+
+
+
 
