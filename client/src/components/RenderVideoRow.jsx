@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import { useContext } from "react";
-import { GridSizeContext } from ".";
+import { GridSizeContext } from "../scenes/home";
 import VideoRow from "./VideoRow";
 
 export default function VideoRows({ isLoading, videos, row }) {

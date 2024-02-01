@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./scenes/login/";
-import Layout from "./Layout.jsx";
+import Layout from "./scenes/home/Layout";
 import Home from "./scenes/home/";
 
 function App() {

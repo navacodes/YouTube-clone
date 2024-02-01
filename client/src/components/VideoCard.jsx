@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { Box, Typography } from "@mui/material";
-import { GridSizeContext } from ".";
+import { GridSizeContext } from "../scenes/home";
 import { formatNumber, formatTimeAgo, formatVideoTime } from "./FormatFns";
 
 const VideoCard = ({ videoData }) => {

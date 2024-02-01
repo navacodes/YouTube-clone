@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { Box, useMediaQuery } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-import FeedFilter from "./components/FeedFilter";
+import Navbar from "../../components/Navbar";
+import Sidebar from "../../components/Sidebar";
+import FeedFilter from "../../components/FeedFilter";
 
 const Layout = () => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -19,16 +19,12 @@ const Layout = () => {
         setIsSideBarOpen={setIsSideBarOpen}
       />
       <Box flexGrow={1} className="center-and-navbar-content">
-        <Box>
-          <Navbar
-            // isStudio={isStudio}
-            isSideBarOpen={isSideBarOpen}
-            setIsSideBarOpen={setIsSideBarOpen}
-          />
-          <Box>
-            <FeedFilter isSideBarOpen={isSideBarOpen} />
-          </Box>
-        </Box>
+        <Navbar
+          // isStudio={isStudio}
+          isSideBarOpen={isSideBarOpen}
+          setIsSideBarOpen={setIsSideBarOpen}
+        />
+        <FeedFilter isSideBarOpen={isSideBarOpen} />
         <Box
           sx={{
             ...(isSideBarOpen && {
@@ -40,7 +36,8 @@ const Layout = () => {
               width: "calc(100% - 73px)",
             }),
             marginTop: "120px",
-          }}>
+          }}
+        >
           <Box sx={{ paddingLeft: "20px" }}>
             <Outlet />
           </Box>

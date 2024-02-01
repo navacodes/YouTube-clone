@@ -6,9 +6,9 @@ import { useTheme } from "@emotion/react";
 import { useGetSlimVideosQuery, useGetVideosQuery } from "../../state/api";
 import { useMediaQuery } from "@mui/material";
 
-import VideoRows from "./RenderVideoRow";
-import SlimVideoRows from "./RenderSlimVideoRow";
-import Spinner from "./spinner";
+import VideoRows from "../../components/RenderVideoRow.jsx";
+import SlimVideoRows from "../../components/RenderSlimVideoRow.jsx";
+import Spinner from "../../components/spinner/index.jsx";
 import LoadMoreBtn from "./loadMoreBtn/";
 
 const GridSizeContext = createContext(null);
@@ -55,7 +55,7 @@ const Home = () => {
 
   const { data: videoData, isLoading: vidLoading, refetch: vidRefetch } = useGetVideosQuery({ page: videoPage, pageSize: 8 });
 
-  const { data: slimVideoData, isLoading: slimVideoLoading, refetch: slimVidRefetch } = useGetSlimVideosQuery({ page: slimVideoPage, pageSize: slimGridSize });
+  const { data: slimVideoData, isLoading: slimVideoLoading, refetch: slimVidRefetch, isFetching: slimFetching } = useGetSlimVideosQuery({ page: slimVideoPage, pageSize: slimGridSize });
 
   useEffect(() => {
     // Only set cachedData if it's currently null or gridSize changes
@@ -162,16 +162,20 @@ const Home = () => {
           <Box>
             <SlimVideoRows key={topRowSlimVids?.length} slimVideos={topRowSlimVids === null ? [] : topRowSlimVids.currVal} isLoading={slimVideoLoading} />
 
-            {!slimVideoLoading && (
-              <div ref={moreShorts} className="more-shorts" style={{ display: "block" }}>
-                {" "}
-                <SlimVideoRows slimVideos={slimVidState} isLoading={slimVideoLoading} />{" "}
-              </div>
-            )}
+            {slimFetching ? (
+              <Spinner />
+            ) : (
+              <>
+                <div ref={moreShorts} className="more-shorts" style={{ display: "block" }}>
+                  {" "}
+                  <SlimVideoRows slimVideos={slimVidState} isLoading={slimVideoLoading} />{" "}
+                </div>
 
-            <Box className="loadMoreBtn--container" sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
-              <LoadMoreBtn moreShortsRef={moreShorts} refetch={handleButtonClick} showMore={slimVidNext.current} />
-            </Box>
+                <Box className="loadMoreBtn--container" sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                  <LoadMoreBtn moreShortsRef={moreShorts} refetch={handleButtonClick} showMore={slimVidNext.current} />
+                </Box>
+              </>
+            )}
           </Box>
 
           {/* Rest of the rows */}

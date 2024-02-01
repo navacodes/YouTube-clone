@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 
 import { useContext } from "react";
-import { GridSizeContext } from ".";
+import { GridSizeContext } from "../scenes/home";
 import SlimVideoCard from "./SlimVideoCard";
 
 const SlimVideoRow = ({ slimVideoData, theme }) => {

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
 import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
-import { useJwt } from "react-jwt";
+import { decodeToken } from "react-jwt";
 import { styled, useTheme } from "@mui/material/styles";
 import { Box, List, Typography, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
@@ -53,7 +53,8 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
   const navigate = useNavigate();
   const windowSize1310 = useMediaQuery("(min-width:1310px)");
   const token = useSelector((state) => state.global.token);
-  const { decodedToken, isExpired } = useJwt(token);
+  let decodedToken = !token ? null : decodeToken(token);
+
   const showMoreSubscriptionRef = useRef(null);
 
   const SubscriptionsSectionLoggedIn = lazy(() => import("./SubscriptionsSectionLoggedIn.jsx"));
@@ -83,25 +84,6 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
           },
         }}
       >
-        {/* <DrawerHeader>
-          <IconButton
-            onClick={handleDrawer}
-            sx={{
-              marginTop: "5px",
-              marginLeft: "-3px",
-            }}>
-            <MenuIcon fontSize={"40"} />
-          </IconButton>
-          <img
-            src={YoutubeLightIcon}
-            alt=""
-            style={{
-              ...(!isSideBarOpen && { display: "none" }),
-              marginLeft: "11px",
-              marginTop: "5px",
-            }}
-          />
-        </DrawerHeader> */}
         <List
           sx={{
             paddingTop: "0px",

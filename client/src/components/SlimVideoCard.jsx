@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import { GridSizeContext } from ".";
+import { GridSizeContext } from "../scenes/home";
 import { Box, Typography } from "@mui/material";
 import { formatNumber } from "./FormatFns";
 
