@@ -1,15 +1,19 @@
 /* eslint-disable array-callback-return */
 import React, { createContext, useEffect, useRef, useState } from "react";
 import InfiniteScroll from "./infinte-scroll/index.jsx";
-import { Box } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { useGetSlimVideosQuery, useGetVideosQuery } from "../../state/api";
 import { useMediaQuery } from "@mui/material";
 
-import VideoRows from "../../components/RenderVideoRow.jsx";
-import SlimVideoRows from "../../components/RenderSlimVideoRow.jsx";
+import FlexBetween from "../../components/FlexBetween.jsx";
+import VideoRows from "../../components/home/RenderVideoRow.jsx";
+import SlimVideoRows from "../../components/home/RenderSlimVideoRow.jsx";
 import Spinner from "../../components/spinner/index.jsx";
 import LoadMoreBtn from "./loadMoreBtn/";
+
+import ShortsLogo from "../../svgs/ShortsRed.svg";
+import CloseIcon from "@mui/icons-material/Close";
 
 const GridSizeContext = createContext(null);
 const Home = () => {
@@ -55,12 +59,20 @@ const Home = () => {
 
   const { data: videoData, isLoading: vidLoading, refetch: vidRefetch } = useGetVideosQuery({ page: videoPage, pageSize: 8 });
 
-  const { data: slimVideoData, isLoading: slimVideoLoading, refetch: slimVidRefetch, isFetching: slimFetching } = useGetSlimVideosQuery({ page: slimVideoPage, pageSize: slimGridSize });
+  const {
+    data: slimVideoData,
+    isLoading: slimVideoLoading,
+    refetch: slimVidRefetch,
+    isFetching: slimFetching,
+  } = useGetSlimVideosQuery({ page: slimVideoPage, pageSize: slimGridSize });
 
   useEffect(() => {
     // Only set cachedData if it's currently null or gridSize changes
     if (!topRowVids && !vidLoading && videoData.videos) {
-      setTopRowVids({ actualData: videoData.videos, currVal: videoData.videos.slice(0, gridSize * 2) });
+      setTopRowVids({
+        actualData: videoData.videos,
+        currVal: videoData.videos.slice(0, gridSize * 2),
+      });
     }
     if (videoPageSize !== gridSize) {
       setTopRowVids((prev) => {
@@ -76,7 +88,10 @@ const Home = () => {
   useEffect(() => {
     // Only set cachedData if it's currently null or slimGridSize changes
     if (!topRowSlimVids && !slimVideoLoading && slimVideoData.videos) {
-      setTopRowSlimVids({ actualData: slimVideoData.videos, currVal: slimVideoData.videos.slice(0, slimGridSize) });
+      setTopRowSlimVids({
+        actualData: slimVideoData.videos,
+        currVal: slimVideoData.videos.slice(0, slimGridSize),
+      });
     }
     if (slimVideoPageSize !== slimGridSize) {
       setTopRowSlimVids((prev) => {
@@ -107,7 +122,10 @@ const Home = () => {
 
   const fetchVidData = async function () {
     try {
-      const newVids = await vidRefetch({ page: videoPage, pageSize: gridSize * 2 });
+      const newVids = await vidRefetch({
+        page: videoPage,
+        pageSize: gridSize * 2,
+      });
       const temp = (newVids.data.videos || []).filter((el) => !topRowVids.currVal.includes(el));
       setVidState((prev) => {
         return prev.concat(temp || []);
@@ -122,7 +140,10 @@ const Home = () => {
   const fetchSlimVidData = async function () {
     try {
       // Use the updated page number for refetch
-      const newVids = await slimVidRefetch({ page: slimVideoPage, pageSize: slimGridSize });
+      const newVids = await slimVidRefetch({
+        page: slimVideoPage,
+        pageSize: slimGridSize,
+      });
 
       const temp = (newVids.data.videos || []).filter((el) => !topRowSlimVids.currVal.includes(el));
 
@@ -156,22 +177,54 @@ const Home = () => {
           }}
         >
           {/* Starting Rows */}
-          <VideoRows key={topRowVids?.length * Math.random() * Math.random()} videos={topRowVids === null ? [] : topRowVids.currVal} isLoading={vidLoading} />
+          <VideoRows
+            key={topRowVids?.length * Math.random() * Math.random()}
+            videos={topRowVids === null ? [] : topRowVids.currVal}
+            isLoading={vidLoading}
+          />
 
           {/* Slim Videos */}
           <Box>
-            <SlimVideoRows key={topRowSlimVids?.length} slimVideos={topRowSlimVids === null ? [] : topRowSlimVids.currVal} isLoading={slimVideoLoading} />
+            {!slimVideoLoading && (
+              <FlexBetween
+                sx={{
+                  width: "100%",
+                  margin: "0 0 24px 8px",
+                  paddingRight: "24px",
+                }}
+              >
+                <Box sx={{ display: "flex" }}>
+                  <img style={{ marginRight: "8px" }} src={ShortsLogo} alt="" />
+                  <Typography sx={{ color: theme.palette.textPrimaryDark, fontWeight: "600" }} variant="h4">
+                    Shorts
+                  </Typography>
+                </Box>
+                <IconButton>
+                  <CloseIcon sx={{ fontSize: "28px" }} />
+                </IconButton>
+              </FlexBetween>
+            )}
+            <SlimVideoRows
+              key={topRowSlimVids?.length}
+              slimVideos={topRowSlimVids === null ? [] : topRowSlimVids.currVal}
+              isLoading={slimVideoLoading}
+            />
 
-            {slimFetching ? (
-              <Spinner />
-            ) : (
+            {!slimFetching && (
               <>
                 <div ref={moreShorts} className="more-shorts" style={{ display: "block" }}>
                   {" "}
                   <SlimVideoRows slimVideos={slimVidState} isLoading={slimVideoLoading} />{" "}
                 </div>
 
-                <Box className="loadMoreBtn--container" sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                <Box
+                  className="loadMoreBtn--container"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                >
                   <LoadMoreBtn moreShortsRef={moreShorts} refetch={handleButtonClick} showMore={slimVidNext.current} />
                 </Box>
               </>
@@ -189,7 +242,12 @@ const Home = () => {
             hasMore={vidNext.current}
             loader={<Spinner />}
             endMessage={
-              <p style={{ textAlign: "center", color: theme.palette.textPrimaryDark }}>
+              <p
+                style={{
+                  textAlign: "center",
+                  color: theme.palette.textPrimaryDark,
+                }}
+              >
                 <b>You have seen it all</b>
               </p>
             }
