@@ -21,7 +21,6 @@ function App() {
   const token = useSelector((state) => state.global.token);
   const decodedToken = !token ? null : decodeToken(token);
 
-
   return (
     <div className="app">
       <BrowserRouter>
@@ -31,6 +30,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route element={<HomeLayout />}>
               <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="/home/*" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<Home />} />
             </Route>
             <Route element={<StudioLayout />}>
