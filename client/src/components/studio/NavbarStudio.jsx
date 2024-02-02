@@ -3,43 +3,22 @@ import React, { useState } from "react";
 import { useJwt } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
-import {
-  Box,
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  Typography,
-  ListItemText,
-  Toolbar,
-  InputBase,
-  IconButton,
-  Modal,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Divider, List, ListItem, ListItemButton, ListItemIcon, Typography, ListItemText, Toolbar, InputBase, IconButton, Modal, useMediaQuery } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
-import FlexBetween from "../components/FlexBetween.jsx";
+import FlexBetween from "../FlexBetween.jsx";
 
 import SearchIcon from "@mui/icons-material/Search";
-import YoutubeLightIcon from "../svgs/YoutubeLight.svg";
-import CreateIcon from "../svgs/Create.svg";
-import BellIcon from "../svgs/Bell-Icon.svg";
-import BlankProfile from "../img/blankProfile.jpg";
-import EmptyProfile from "../svgs/EmptyProfile.svg";
+import YoutubeLightIcon from "../../svgs/YoutubeLight.svg";
+import CreateIcon from "../../svgs/Create.svg";
+import BellIcon from "../../svgs/Bell-Icon.svg";
+import BlankProfile from "../../img/blankProfile.jpg";
+import EmptyProfile from "../../svgs/EmptyProfile.svg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useSelector } from "react-redux";
-import {
-  navItems6,
-  navItems7,
-  navItems8,
-  navItems9,
-  navItems10,
-  navItems11,
-} from "./NavItems.js";
-import { useLogoutUserMutation } from "../state/api.js";
+import { navItems6, navItems7, navItems8, navItems9, navItems10, navItems11 } from "../home/NavItems.js";
+import { useLogoutUserMutation } from "../../state/api.js";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "isSideBarOpen",
@@ -86,18 +65,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const ChannelModal = ({
-  open,
-  handleModal,
-  theme,
-  navigate,
-  logout,
-  isLoadingLogout,
-  isLoading,
-  token,
-}) => {
+const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => {
   const { decodedToken } = useJwt(token);
-  // console.log(decodedToken);
   const style = {
     position: "absolute",
     top: "5.5%",
@@ -122,7 +91,8 @@ const ChannelModal = ({
         "& .MuiBackdrop-root": {
           opacity: 0.1,
         },
-      }}>
+      }}
+    >
       <Box sx={style} className="modal-container">
         <Box
           className="modal-header"
@@ -133,13 +103,15 @@ const ChannelModal = ({
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-          }}>
+          }}
+        >
           <Box className="modal-profileImg">
             <IconWrapper
               sx={{
                 borderRadius: "50%",
                 marginRight: "16px",
-              }}>
+              }}
+            >
               <img
                 src={decodedToken?.profileImg}
                 alt="profile"
@@ -151,14 +123,10 @@ const ChannelModal = ({
             </IconWrapper>
           </Box>
           <Box className="modal-userData">
-            <Typography
-              variant="h5"
-              sx={{ color: theme.palette.textPrimaryDark }}>
+            <Typography variant="h5" sx={{ color: theme.palette.textPrimaryDark }}>
               {decodedToken?.name}
             </Typography>
-            <Typography
-              variant="h5"
-              sx={{ color: theme.palette.textPrimaryDark }}>
+            <Typography variant="h5" sx={{ color: theme.palette.textPrimaryDark }}>
               @{decodedToken?.channelName.toLowerCase()}
             </Typography>
             <Typography
@@ -166,7 +134,8 @@ const ChannelModal = ({
                 navigate(`/studio/${decodedToken?.id}`);
               }}
               variant="h6"
-              sx={{ color: "#3Ea6FF", marginTop: "8px", cursor: "pointer" }}>
+              sx={{ color: "#3Ea6FF", marginTop: "8px", cursor: "pointer" }}
+            >
               View your channel
             </Typography>
           </Box>
@@ -187,7 +156,8 @@ const ChannelModal = ({
                       fontSize: "14px",
                     },
                   }}
-                  disablePadding>
+                  disablePadding
+                >
                   <ListItemButton
                     sx={{
                       color: theme.palette.textPrimaryDark,
@@ -199,11 +169,13 @@ const ChannelModal = ({
                         handleLogout();
                         navigate("/");
                       }
-                    }}>
+                    }}
+                  >
                     <ListItemIcon
                       sx={{
                         color: "white",
-                      }}>
+                      }}
+                    >
                       <img src={icon} alt={icon} />
                     </ListItemIcon>
                     <ListItemText primary={text} />
@@ -228,7 +200,8 @@ const ChannelModal = ({
                       fontSize: "14px",
                     },
                   }}
-                  disablePadding>
+                  disablePadding
+                >
                   <ListItemButton
                     onClick={() => {
                       if (lctxt === "youtube studio") {
@@ -239,11 +212,13 @@ const ChannelModal = ({
                       color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.darkGrayHome,
                       verticalAlign: "middle",
-                    }}>
+                    }}
+                  >
                     <ListItemIcon
                       sx={{
                         color: "white",
-                      }}>
+                      }}
+                    >
                       <img src={icon} alt={icon} />
                     </ListItemIcon>
                     <ListItemText primary={text} />
@@ -266,29 +241,23 @@ const ChannelModal = ({
                       fontSize: "14px",
                     },
                   }}
-                  disablePadding>
+                  disablePadding
+                >
                   <ListItemButton
                     sx={{
                       color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.darkGrayHome,
                       verticalAlign: "middle",
-                    }}>
+                    }}
+                  >
                     <ListItemIcon
                       sx={{
                         color: "white",
-                      }}>
+                      }}
+                    >
                       <img src={icon} alt={icon} />
                     </ListItemIcon>
-                    <ListItemText
-                      primary={`${text} ${
-                        text === "Location:" ? `${decodedToken?.country}` : ""
-                      }`}
-                    />{" "}
-                    {!text.includes("data") && !text.includes("Keyboard") ? (
-                      <ChevronRightIcon />
-                    ) : (
-                      ""
-                    )}
+                    <ListItemText primary={`${text} ${text === "Location:" ? `${decodedToken?.country}` : ""}`} /> {!text.includes("data") && !text.includes("Keyboard") ? <ChevronRightIcon /> : ""}
                   </ListItemButton>
                 </ListItem>
               );
@@ -308,24 +277,23 @@ const ChannelModal = ({
                       fontSize: "14px",
                     },
                   }}
-                  disablePadding>
+                  disablePadding
+                >
                   <ListItemButton
                     sx={{
                       color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.darkGrayHome,
                       verticalAlign: "middle",
-                    }}>
+                    }}
+                  >
                     <ListItemIcon
                       sx={{
                         color: "white",
-                      }}>
+                      }}
+                    >
                       <img src={icon} alt={icon} />
                     </ListItemIcon>
-                    <ListItemText
-                      primary={`${text} ${
-                        text === "Location:" ? `${decodedToken?.country}` : ""
-                      }`}
-                    />{" "}
+                    <ListItemText primary={`${text} ${text === "Location:" ? `${decodedToken?.country}` : ""}`} />{" "}
                   </ListItemButton>
                 </ListItem>
               );
@@ -345,24 +313,23 @@ const ChannelModal = ({
                       fontSize: "14px",
                     },
                   }}
-                  disablePadding>
+                  disablePadding
+                >
                   <ListItemButton
                     sx={{
                       color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.darkGrayHome,
                       verticalAlign: "middle",
-                    }}>
+                    }}
+                  >
                     <ListItemIcon
                       sx={{
                         color: "white",
-                      }}>
+                      }}
+                    >
                       <img src={icon} alt={icon} />
                     </ListItemIcon>
-                    <ListItemText
-                      primary={`${text} ${
-                        text === "Location:" ? `${decodedToken?.country}` : ""
-                      }`}
-                    />{" "}
+                    <ListItemText primary={`${text} ${text === "Location:" ? `${decodedToken?.country}` : ""}`} />{" "}
                   </ListItemButton>
                 </ListItem>
               );
@@ -395,7 +362,8 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
         "& .MuiBackdrop-root": {
           opacity: 0.1,
         },
-      }}>
+      }}
+    >
       <Box sx={style} className="modal-container">
         <List className="menu-section">
           {navItems11.map(({ text, icon }) => {
@@ -410,7 +378,8 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
                     fontSize: "14px",
                   },
                 }}
-                disablePadding>
+                disablePadding
+              >
                 <ListItemButton
                   sx={{
                     color: theme.palette.textPrimaryDark,
@@ -419,11 +388,13 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
                   }}
                   onClick={() => {
                     navigate(`/studio/${decodedToken?.id}`);
-                  }}>
+                  }}
+                >
                   <ListItemIcon
                     sx={{
                       color: "white",
-                    }}>
+                    }}
+                  >
                     <img src={icon} alt={icon} />
                   </ListItemIcon>
                   <ListItemText primary={text} />
@@ -438,22 +409,13 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
   );
 };
 
-const NavbarLoggedIn = ({
-  theme,
-  openChannelModal,
-  handleChannelModal,
-  navigate,
-  logout,
-  isLoadingLogout,
-  handleCreateModal,
-  openCreateModal,
-  token,
-}) => {
+const NavbarLoggedIn = ({ theme, openChannelModal, handleChannelModal, navigate, logout, isLoadingLogout, handleCreateModal, openCreateModal, token }) => {
   return (
     <FlexBetween
       sx={{
         width: "136px",
-      }}>
+      }}
+    >
       <IconWrapper
         onClick={handleCreateModal}
         sx={{
@@ -461,7 +423,8 @@ const NavbarLoggedIn = ({
           " :hover": {
             backgroundColor: theme.palette.darkGrayHome,
           },
-        }}>
+        }}
+      >
         <img src={CreateIcon} alt={CreateIcon} />
       </IconWrapper>
       <IconWrapper
@@ -470,7 +433,8 @@ const NavbarLoggedIn = ({
           " :hover": {
             backgroundColor: theme.palette.darkGrayHome,
           },
-        }}>
+        }}
+      >
         <img src={BellIcon} alt={BellIcon} />
       </IconWrapper>
       <IconWrapper
@@ -480,7 +444,8 @@ const NavbarLoggedIn = ({
           " :hover": {
             backgroundColor: theme.palette.darkGrayHome,
           },
-        }}>
+        }}
+      >
         <img
           src={BlankProfile}
           alt={BlankProfile}
@@ -490,22 +455,8 @@ const NavbarLoggedIn = ({
           }}
         />
       </IconWrapper>
-      <ChannelModal
-        open={openChannelModal}
-        handleModal={handleChannelModal}
-        theme={theme}
-        navigate={navigate}
-        logout={logout}
-        isLoadingLogout={isLoadingLogout}
-        token={token}
-      />
-      <CreateModal
-        open={openCreateModal}
-        handleModal={handleCreateModal}
-        token={token}
-        theme={theme}
-        navigate={navigate}
-      />
+      <ChannelModal open={openChannelModal} handleModal={handleChannelModal} theme={theme} navigate={navigate} logout={logout} token={token} />
+      <CreateModal open={openCreateModal} handleModal={handleCreateModal} token={token} theme={theme} navigate={navigate} />
     </FlexBetween>
   );
 };
@@ -518,7 +469,8 @@ const NavbarLoggedOut = ({ theme, navigate, greaterThan590 }) => {
         alignItems: "center",
         minWidth: greaterThan590 ? "225px" : "0px",
         justifyContent: "flex-end",
-      }}>
+      }}
+    >
       <IconButton sx={{ marginRight: "8px" }}>
         <MoreVertIcon
           sx={{
@@ -540,12 +492,9 @@ const NavbarLoggedOut = ({ theme, navigate, greaterThan590 }) => {
             backgroundColor: "#263850",
           },
         }}
-        onClick={() => navigate("/login")}>
-        <img
-          src={EmptyProfile}
-          alt="empty-profile"
-          style={{ marginRight: "6px", marginLeft: "-6px" }}
-        />
+        onClick={() => navigate("/login")}
+      >
+        <img src={EmptyProfile} alt="empty-profile" style={{ marginRight: "6px", marginLeft: "-6px" }} />
         <Typography variant="h6" sx={{ color: "#3ea6ff" }}>
           Sign in
         </Typography>
@@ -554,7 +503,7 @@ const NavbarLoggedOut = ({ theme, navigate, greaterThan590 }) => {
   );
 };
 
-export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
+export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.global.token);
@@ -586,15 +535,15 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
         "& .MuiToolbar-regular": {
           minHeight: "59px",
         },
-      }}>
+      }}
+    >
       <Toolbar
         sx={{
           width: "100%",
           paddingX: "24px",
-        }}>
-        <FlexBetween
-          className="space-between-navbar"
-          sx={{ width: "100%", flexDirection: "row" }}>
+        }}
+      >
+        <FlexBetween className="space-between-navbar" sx={{ width: "100%", flexDirection: "row" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <IconButton
               color="inherit"
@@ -604,7 +553,8 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
               sx={{
                 padding: "8px",
                 color: theme.palette.textPrimaryDark,
-              }}>
+              }}
+            >
               <MenuIcon fontSize={"40"} />
             </IconButton>
             {/* change the yt icon to dynamic icon */}
@@ -626,7 +576,8 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
                 flex: 1,
                 fleBbasis: "0.000000001px",
                 justifyContent: "flex-end",
-              }}>
+              }}
+            >
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
@@ -634,7 +585,8 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
                 sx={{
                   padding: "8px",
                   color: theme.palette.textPrimaryDark,
-                }}>
+                }}
+              >
                 <SearchIcon
                   sx={{
                     color: theme.palette.textPrimaryDark,
@@ -646,10 +598,7 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
           )}
           {greaterThan590 && (
             <Search className="search-bar">
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
+              <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
               <IconWrapper
                 sx={{
                   position: "absolute",
@@ -657,7 +606,8 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
                   pointerEvents: "all",
                   borderRadius: "0 40px 40px 0",
                   backgroundColor: "#222222",
-                }}>
+                }}
+              >
                 <SearchIcon
                   sx={{
                     color: theme.palette.textPrimaryDark,
@@ -680,11 +630,7 @@ export default function Navbar({ isSideBarOpen, setIsSideBarOpen }) {
               token={token}
             />
           ) : (
-            <NavbarLoggedOut
-              greaterThan590={greaterThan590}
-              theme={theme}
-              navigate={navigate}
-            />
+            <NavbarLoggedOut greaterThan590={greaterThan590} theme={theme} navigate={navigate} />
           )}
         </FlexBetween>
       </Toolbar>

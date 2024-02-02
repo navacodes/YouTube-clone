@@ -1,5 +1,5 @@
 import { Divider,Typography,Box, } from "@mui/material";
-import EmptyProfile from "../svgs/EmptyProfile.svg";
+import EmptyProfile from "../../svgs/EmptyProfile.svg";
 
 export default function SubscriptionsSectionLoggedOut({
   isSideBarOpen,

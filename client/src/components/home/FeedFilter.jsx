@@ -9,7 +9,7 @@ import {
   Toolbar,
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
-import FlexBetween from "./FlexBetween.jsx";
+import FlexBetween from "../FlexBetween.jsx";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "isSideBarOpen",

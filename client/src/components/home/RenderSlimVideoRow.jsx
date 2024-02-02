@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import SlimVideoRow from "./SlimVideoRow";
 import { useContext } from "react";
-import { GridSizeContext } from "../scenes/home";
+import { GridSizeContext } from "../../scenes/home";
 
 export default function SlimVideoRows({ isLoading, slimVideos }) {
   const { slimGridSize } = useContext(GridSizeContext);

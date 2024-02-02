@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
-import { useGetSubsriptionQuery } from "../state/api";
+import { useGetSubsriptionQuery } from "../../state/api";
 import { useState } from "react";
 
 const showLessSubscriptions = (setElementsToAdd, showMoreSubscriptionRef) => {

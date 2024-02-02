@@ -9,9 +9,9 @@ import MuiDrawer from "@mui/material/Drawer";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import SubscriptionsSectionLoggedOut from "./SubscriptionsSectionLoggedOut.jsx";
+import SubscriptionsSectionLoggedOut from "../home/SubscriptionsSectionLoggedOut.jsx";
 
-import { navItems1, navItems2LoggedIn, navItems2LoggedOut, navItems3, navItems4, navItems5 } from "./NavItems.js";
+import { navItems1, navItems2LoggedIn, navItems2LoggedOut, navItems3, navItems4, navItems5 } from "../home/NavItems.js";
 import { useMediaQuery } from "@mui/material";
 
 const drawerWidth = 240;
@@ -47,21 +47,18 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
+export default function SidebarStudio({ isSideBarOpen, setIsSideBarOpen }) {
   const theme = useTheme();
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const windowSize1310 = useMediaQuery("(min-width:1310px)");
   const token = useSelector((state) => state.global.token);
-  let decodedToken = !token ? null : decodeToken(token);
+  const decodedToken = !token ? null : decodeToken(token);
 
   const showMoreSubscriptionRef = useRef(null);
 
-  const SubscriptionsSectionLoggedIn = lazy(() => import("./SubscriptionsSectionLoggedIn.jsx"));
+  const SubscriptionsSectionLoggedIn = lazy(() => import("../home/SubscriptionsSectionLoggedIn.jsx"));
 
-  // const handleDrawer = () => {
-  //   setIsSideBarOpen(!isSideBarOpen);
-  // };
   useEffect(() => {
     if (windowSize1310) setIsSideBarOpen(true);
     if (!windowSize1310) setIsSideBarOpen(false);
@@ -76,7 +73,7 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
         sx={{
           position: "relative",
           "& .MuiDrawer-paper": {
-            marginTop: "70px",
+            marginTop: "59px",
             backgroundColor: theme.palette.bgHomeDark,
             borderRight: "none",
             height: "100%",
@@ -110,8 +107,12 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
               >
                 <ListItemButton
                   onClick={() => {
-                    navigate(`/${lcText}`);
-                    setActive(lcText);
+                    if (lcText === "subscriptions" && !token) {
+                      navigate(`/login`);
+                    } else {
+                      navigate(`/${lcText}`);
+                      setActive(lcText);
+                    }
                   }}
                   sx={{
                     color: theme.palette.textPrimaryDark,
@@ -449,5 +450,3 @@ export default function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
     </Box>
   );
 }
-
-// See this subscription component is meant to load only when a user logs in, and then the api getting all this data should be fetched, but when this component is loaded from the beginning the api starts throwing an error 304 because the user in not logged in at that moment, so I want the api should fetch all this data only when this a user is logs in.

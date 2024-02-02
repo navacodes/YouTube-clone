@@ -1,29 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import Sidebar from "../../components/Sidebar";
-import FeedFilter from "../../components/FeedFilter";
+import NavbarHome from "../../components/home/NavbarHome";
+import SidebarHome from "../../components/home/SidebarHome";
+import FeedFilter from "../../components/home/FeedFilter";
 
-const Layout = () => {
-  // const isNonMobile = useMediaQuery("(min-width:600px)");
+const HomeLayout = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
   return (
     <Box sx={{ width: "100%", height: "100%" }}>
-      <Sidebar
-        // isStudio={isStudio}
-        // isNonMobile={isNonMobile}
-        isSideBarOpen={isSideBarOpen}
-        setIsSideBarOpen={setIsSideBarOpen}
-      />
+      <SidebarHome isSideBarOpen={isSideBarOpen} setIsSideBarOpen={setIsSideBarOpen} />
       <Box flexGrow={1} className="center-and-navbar-content">
-        <Navbar
-          // isStudio={isStudio}
-          isSideBarOpen={isSideBarOpen}
-          setIsSideBarOpen={setIsSideBarOpen}
-        />
+        <NavbarHome isSideBarOpen={isSideBarOpen} setIsSideBarOpen={setIsSideBarOpen} />
         <FeedFilter isSideBarOpen={isSideBarOpen} />
         <Box
           sx={{
@@ -47,4 +37,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default HomeLayout;

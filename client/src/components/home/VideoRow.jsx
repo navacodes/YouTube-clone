@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import VideoCard from "./VideoCard";
 import { useContext } from "react";
-import { GridSizeContext } from "../scenes/home";
+import { GridSizeContext } from "../../scenes/home";
 
 const VideoRow = ({ videoDataArr }) => {
   const { gridSize } = useContext(GridSizeContext);

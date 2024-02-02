@@ -1,28 +1,28 @@
-import HomeIcon from "../svgs/Home.svg";
-import ShortsIcon from "../svgs/Shorts.svg";
-import SubscriptionIcon from "../svgs/Subscription.svg";
-import LibraryIcon from "../svgs/Library.svg";
-import HistoryIcon from "../svgs/History.svg";
-import WatchLaterIcon from "../svgs/WatchLater.svg";
-import YourVideosIcon from "../svgs/YourVideos.svg";
-import LikedVideosIcon from "../svgs/LikedVideos.svg";
-import SettingsIcon from "../svgs/Settings.svg";
-import ReportIcon from "../svgs/Report.svg";
-import HelpIcon from "../svgs/Help.svg";
-import FeedbackIcon from "../svgs/SendFeedback.svg";
-import GoogleAccountIcon from "../svgs/GoogleAccount.svg";
-import SwitchAccountIcon from "../svgs/SwitchAccount.svg";
-import SignOutIcon from "../svgs/SignOut.svg";
-import YTStudioIcon from "../svgs/YTStudio.svg";
-import PNMIcon from "../svgs/PNM.svg";
-import DataInYTIcon from "../svgs/DataInYT.svg";
-import AppearanceIcon from "../svgs/Appearance.svg";
-import LanguageIcon from "../svgs/Language.svg";
-import RestrictedModeIcon from "../svgs/RestrictedMode.svg";
-import LocationIcon from "../svgs/Location.svg";
-import KeyboardIcon from "../svgs/Keyboard.svg";
-import UploadVideoIcon from "../svgs/UploadVideo.svg";
-import GoLiveIcon from "../svgs/GoLive.svg";
+import HomeIcon from "../../svgs/Home.svg";
+import ShortsIcon from "../../svgs/Shorts.svg";
+import SubscriptionIcon from "../../svgs/Subscription.svg";
+import LibraryIcon from "../../svgs/Library.svg";
+import HistoryIcon from "../../svgs/History.svg";
+import WatchLaterIcon from "../../svgs/WatchLater.svg";
+import YourVideosIcon from "../../svgs/YourVideos.svg";
+import LikedVideosIcon from "../../svgs/LikedVideos.svg";
+import SettingsIcon from "../../svgs/Settings.svg";
+import ReportIcon from "../../svgs/Report.svg";
+import HelpIcon from "../../svgs/Help.svg";
+import FeedbackIcon from "../../svgs/SendFeedback.svg";
+import GoogleAccountIcon from "../../svgs/GoogleAccount.svg";
+import SwitchAccountIcon from "../../svgs/SwitchAccount.svg";
+import SignOutIcon from "../../svgs/SignOut.svg";
+import YTStudioIcon from "../../svgs/YTStudio.svg";
+import PNMIcon from "../../svgs/PNM.svg";
+import DataInYTIcon from "../../svgs/DataInYT.svg";
+import AppearanceIcon from "../../svgs/Appearance.svg";
+import LanguageIcon from "../../svgs/Language.svg";
+import RestrictedModeIcon from "../../svgs/RestrictedMode.svg";
+import LocationIcon from "../../svgs/Location.svg";
+import KeyboardIcon from "../../svgs/Keyboard.svg";
+import UploadVideoIcon from "../../svgs/UploadVideo.svg";
+import GoLiveIcon from "../../svgs/GoLive.svg";
 
 const navItems1 = [
   {
@@ -36,7 +36,7 @@ const navItems1 = [
     active: false,
   },
   {
-    text: "Subscription",
+    text: "Subscriptions",
     icon: SubscriptionIcon,
     active: false,
   },
@@ -280,17 +280,4 @@ const navItems11 = [
   },
 ];
 
-export {
-  navItems1,
-  navItems2LoggedIn,
-  navItems2LoggedOut,
-  navItems3,
-  navItems4,
-  navItems5,
-  navItems6,
-  navItems7,
-  navItems8,
-  navItems9,
-  navItems10,
-  navItems11,
-};
+export { navItems1, navItems2LoggedIn, navItems2LoggedOut, navItems3, navItems4, navItems5, navItems6, navItems7, navItems8, navItems9, navItems10, navItems11 };

@@ -2,7 +2,7 @@ import React from "react";
 
 const Spinner = () => {
   return (
-    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+    <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div className="yt-spinner" data-layer="4">
         <div>
           <div className="yt-spinner-container">

@@ -192,35 +192,3 @@
         transform: rotate(-130deg);
     }
 }
-
-
-
-
-
-
-
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-body {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	align-items: center;
-	min-height: 250px;
-	padding-top: 20px;
-	font-weight: bold;
-	background: #f0f0f0;
-}
-.infos {
-	width: 500px;
-	text-align: center;
-	font-family: 'Roboto', Arial;
-	font-size: 14px;
-	line-height: 16px;
-	margin-top: 50px;
-	color: #000;
-}
-.infos a {
-	color: #555;
-	text-decoration: none;
-}
-.infos a:hover {color: #999;}
