@@ -1,23 +1,35 @@
 /* eslint-disable array-callback-return */
 import React, { useState } from "react";
-import { useJwt } from "react-jwt";
+import { useJwt, decodeToken } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
-import { Box, Divider, List, ListItem, ListItemButton, ListItemIcon, Typography, ListItemText, Toolbar, InputBase, IconButton, Modal, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  Typography,
+  ListItemText,
+  Toolbar,
+  InputBase,
+  IconButton,
+  Modal,
+  useMediaQuery,
+  Button,
+} from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import FlexBetween from "../FlexBetween.jsx";
 
 import SearchIcon from "@mui/icons-material/Search";
-import YoutubeLightIcon from "../../svgs/YoutubeLight.svg";
-import CreateIcon from "../../svgs/Create.svg";
-import BellIcon from "../../svgs/Bell-Icon.svg";
+import YoutubeStudioLightIcon from "../../svgs/yt_studio.svg";
+import { CreateIcon, HelpIcon } from "../../svgs/Svgs.jsx";
 import BlankProfile from "../../img/blankProfile.jpg";
-import EmptyProfile from "../../svgs/EmptyProfile.svg";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useSelector } from "react-redux";
-import { navItems6, navItems7, navItems8, navItems9, navItems10, navItems11 } from "../home/NavItems.js";
+import { navItems1, navItems2, navItems3 } from "../studio/NavItems.js";
 import { useLogoutUserMutation } from "../../state/api.js";
 
 const AppBar = styled(MuiAppBar, {
@@ -32,9 +44,9 @@ const Search = styled("div")(({ theme }) => ({
   display: "flex",
   flex: " 0 1 732px",
   position: "relative",
-  borderRadius: 40,
-  backgroundColor: theme.palette.searchHomeDark,
-  border: `1px solid ${theme.palette.borderHomeDark}`,
+  borderRadius: 4,
+  backgroundColor: theme.palette.studioBackground,
+  border: `1px solid #606060`,
   marginLeft: "40px",
   maxWidth: "640px",
   minWidth: "0px",
@@ -52,16 +64,15 @@ const IconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
   width: "100%",
-  paddingLeft: "16px",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 1),
-    fontSize: "16px",
-    color: theme.palette.textPrimaryDark,
-    // vertical padding + font size from searchIcon
-    paddingRight: `calc(1em + ${theme.spacing(4)})`,
-    width: "100%",
+  paddingLeft: "56px",
+  paddingRight: "56px",
+  paddingBottom: "2px",
+  color: "#717171",
+  fontWeight: "600",
+  fontSize: "15px",
+  "& .MuiInputBase-input:active,& .MuiInputBase-input:focus": {
+    color: "white",
   },
 }));
 
@@ -99,7 +110,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
           sx={{
             padding: "16px",
             width: "300px",
-            height: "105px",
+            height: "auto",
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "flex-start",
@@ -129,21 +140,12 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
             <Typography variant="h5" sx={{ color: theme.palette.textPrimaryDark }}>
               @{decodedToken?.channelName.toLowerCase()}
             </Typography>
-            <Typography
-              onClick={() => {
-                navigate(`/studio/${decodedToken?.id}`);
-              }}
-              variant="h6"
-              sx={{ color: "#3Ea6FF", marginTop: "8px", cursor: "pointer" }}
-            >
-              View your channel
-            </Typography>
           </Box>
         </Box>
         <Divider />
         <Box className="modal-menu" sx={{ width: "300px" }}>
           <List className="menu-section">
-            {navItems6.map(({ text, icon }) => {
+            {navItems1.map(({ text, icon }) => {
               const lctxt = text.toLowerCase();
               return (
                 <ListItem
@@ -161,12 +163,12 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
                   <ListItemButton
                     sx={{
                       color: theme.palette.textPrimaryDark,
-                      backgroundColor: theme.palette.darkGrayHome,
+                      backgroundColor: theme.palette.studioBackground,
                       verticalAlign: "middle",
                     }}
                     onClick={() => {
-                      if (lctxt === "sign out") {
-                        handleLogout();
+                      if (lctxt === "sign out" || lctxt === "youtube") {
+                        if (lctxt === "sign out") handleLogout();
                         navigate("/");
                       }
                     }}
@@ -187,7 +189,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
           </List>
           <Divider />
           <List className="menu-section">
-            {navItems7.map(({ text, icon }) => {
+            {navItems2.map(({ text, icon }) => {
               const lctxt = text.toLowerCase();
               return (
                 <ListItem
@@ -210,7 +212,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
                     }}
                     sx={{
                       color: theme.palette.textPrimaryDark,
-                      backgroundColor: theme.palette.darkGrayHome,
+                      backgroundColor: theme.palette.studioBackground,
                       verticalAlign: "middle",
                     }}
                   >
@@ -222,114 +224,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
                       <img src={icon} alt={icon} />
                     </ListItemIcon>
                     <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-          <Divider />
-          <List className="menu-section">
-            {navItems8.map(({ text, icon }) => {
-              return (
-                <ListItem
-                  key={text}
-                  sx={{
-                    "& .MuiListItemButton-root:hover": {
-                      backgroundColor: "#404040",
-                    },
-                    "& .MuiTypography-root": {
-                      fontSize: "14px",
-                    },
-                  }}
-                  disablePadding
-                >
-                  <ListItemButton
-                    sx={{
-                      color: theme.palette.textPrimaryDark,
-                      backgroundColor: theme.palette.darkGrayHome,
-                      verticalAlign: "middle",
-                    }}
-                  >
-                    <ListItemIcon
-                      sx={{
-                        color: "white",
-                      }}
-                    >
-                      <img src={icon} alt={icon} />
-                    </ListItemIcon>
-                    <ListItemText primary={`${text} ${text === "Location:" ? `${decodedToken?.country}` : ""}`} /> {!text.includes("data") && !text.includes("Keyboard") ? <ChevronRightIcon /> : ""}
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-          <Divider />
-          <List className="menu-section">
-            {navItems9.map(({ text, icon }) => {
-              return (
-                <ListItem
-                  key={text}
-                  sx={{
-                    "& .MuiListItemButton-root:hover": {
-                      backgroundColor: "#404040",
-                    },
-                    "& .MuiTypography-root": {
-                      fontSize: "14px",
-                    },
-                  }}
-                  disablePadding
-                >
-                  <ListItemButton
-                    sx={{
-                      color: theme.palette.textPrimaryDark,
-                      backgroundColor: theme.palette.darkGrayHome,
-                      verticalAlign: "middle",
-                    }}
-                  >
-                    <ListItemIcon
-                      sx={{
-                        color: "white",
-                      }}
-                    >
-                      <img src={icon} alt={icon} />
-                    </ListItemIcon>
-                    <ListItemText primary={`${text} ${text === "Location:" ? `${decodedToken?.country}` : ""}`} />{" "}
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-          <Divider />
-          <List className="menu-section">
-            {navItems10.map(({ text, icon }) => {
-              return (
-                <ListItem
-                  key={text}
-                  sx={{
-                    "& .MuiListItemButton-root:hover": {
-                      backgroundColor: "#404040",
-                    },
-                    "& .MuiTypography-root": {
-                      fontSize: "14px",
-                    },
-                  }}
-                  disablePadding
-                >
-                  <ListItemButton
-                    sx={{
-                      color: theme.palette.textPrimaryDark,
-                      backgroundColor: theme.palette.darkGrayHome,
-                      verticalAlign: "middle",
-                    }}
-                  >
-                    <ListItemIcon
-                      sx={{
-                        color: "white",
-                      }}
-                    >
-                      <img src={icon} alt={icon} />
-                    </ListItemIcon>
-                    <ListItemText primary={`${text} ${text === "Location:" ? `${decodedToken?.country}` : ""}`} />{" "}
+                    {text.includes("theme") ? <ChevronRightIcon /> : ""}
                   </ListItemButton>
                 </ListItem>
               );
@@ -345,10 +240,10 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
   const style = {
     position: "absolute",
     top: "5.5%",
-    right: "0.5%",
-    width: "177px",
-    bgcolor: "#282828",
-    borderRadius: "12px",
+    right: "3.78%",
+    width: "184px",
+    bgcolor: "#1f1f1f",
+    borderRadius: "4px",
     boxShadow: 24,
   };
   const { decodedToken } = useJwt(token);
@@ -366,16 +261,17 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
     >
       <Box sx={style} className="modal-container">
         <List className="menu-section">
-          {navItems11.map(({ text, icon }) => {
+          {navItems3.map(({ text, icon }) => {
             return (
               <ListItem
                 key={text}
                 sx={{
+                  // padding:"0 24px",
                   "& .MuiListItemButton-root:hover": {
-                    backgroundColor: "#404040",
+                    backgroundColor: "#1f1f1f",
                   },
                   "& .MuiTypography-root": {
-                    fontSize: "14px",
+                    fontSize: "15px",
                   },
                 }}
                 disablePadding
@@ -383,22 +279,20 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
                 <ListItemButton
                   sx={{
                     color: theme.palette.textPrimaryDark,
-                    backgroundColor: theme.palette.darkGrayHome,
+                    backgroundColor: "#1f1f1f1",
                     verticalAlign: "middle",
-                  }}
-                  onClick={() => {
-                    navigate(`/studio/${decodedToken?.id}`);
                   }}
                 >
                   <ListItemIcon
                     sx={{
                       color: "white",
+                      minWidth: "0px",
+                      margin:"4px 16px 4px 0"
                     }}
                   >
                     <img src={icon} alt={icon} />
                   </ListItemIcon>
                   <ListItemText primary={text} />
-                  {text.includes("Switch") ? <ChevronRightIcon /> : ""}
                 </ListItemButton>
               </ListItem>
             );
@@ -409,104 +303,130 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
   );
 };
 
-const NavbarLoggedIn = ({ theme, openChannelModal, handleChannelModal, navigate, logout, isLoadingLogout, handleCreateModal, openCreateModal, token }) => {
+const RightComponent = ({
+  theme,
+  openChannelModal,
+  handleChannelModal,
+  navigate,
+  handleCreateModal,
+  openCreateModal,
+  token,
+  decodedToken,
+  logout,
+}) => {
   return (
-    <FlexBetween
-      sx={{
-        width: "136px",
-      }}
-    >
-      <IconWrapper
-        onClick={handleCreateModal}
+    <>
+      <Divider orientation="vertical" variant="middle" flexItem sx={{ marginLeft: "18px", height: "38px" }} />
+      <Box
         sx={{
-          borderRadius: "50%",
-          " :hover": {
-            backgroundColor: theme.palette.darkGrayHome,
-          },
+          display: "flex",
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "flex-end",
         }}
       >
-        <img src={CreateIcon} alt={CreateIcon} />
-      </IconWrapper>
-      <IconWrapper
-        sx={{
-          borderRadius: "50%",
-          " :hover": {
-            backgroundColor: theme.palette.darkGrayHome,
-          },
-        }}
-      >
-        <img src={BellIcon} alt={BellIcon} />
-      </IconWrapper>
-      <IconWrapper
-        onClick={handleChannelModal}
-        sx={{
-          borderRadius: "50%",
-          " :hover": {
-            backgroundColor: theme.palette.darkGrayHome,
-          },
-        }}
-      >
-        <img
-          src={BlankProfile}
-          alt={BlankProfile}
-          style={{
-            height: "32px",
+        <IconWrapper
+          sx={{
             borderRadius: "50%",
+            padding: "8px",
+            " :hover": {
+              backgroundColor: theme.palette.darkGrayHome,
+            },
           }}
-        />
-      </IconWrapper>
-      <ChannelModal open={openChannelModal} handleModal={handleChannelModal} theme={theme} navigate={navigate} logout={logout} token={token} />
-      <CreateModal open={openCreateModal} handleModal={handleCreateModal} token={token} theme={theme} navigate={navigate} />
-    </FlexBetween>
+        >
+          <HelpIcon fill={theme.palette.studioGray} />
+        </IconWrapper>
+        <Button
+          variant="outlined"
+          onClick={handleCreateModal}
+          sx={{
+            color: theme.palette.textPrimaryDark,
+            border: `1px solid ${theme.palette.studioBorder}`,
+            margin: "0 8px",
+            padding: "0 16px 0 10px",
+            " :hover": {
+              backgroundColor: "transparent",
+              border: `1px solid ${theme.palette.studioBorder}`,
+            },
+          }}
+        >
+          <CreateIcon stroke={theme.palette.studioRed} />
+          <Typography variant="h6" sx={{ padding: "8px 0 8px 6px" }}>
+            CREATE
+          </Typography>
+        </Button>
+        <IconWrapper
+          onClick={handleChannelModal}
+          sx={{
+            borderRadius: "50%",
+            " :hover": {
+              backgroundColor: theme.palette.darkGrayHome,
+            },
+          }}
+        >
+          <img
+            src={decodedToken.profileImg}
+            alt={BlankProfile}
+            style={{
+              height: "32px",
+              borderRadius: "50%",
+            }}
+          />
+        </IconWrapper>
+        <ChannelModal open={openChannelModal} handleModal={handleChannelModal} theme={theme} navigate={navigate} logout={logout} token={token} />
+        <CreateModal open={openCreateModal} handleModal={handleCreateModal} token={token} theme={theme} navigate={navigate} />
+      </Box>
+    </>
   );
 };
 
-const NavbarLoggedOut = ({ theme, navigate, greaterThan590 }) => {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        minWidth: greaterThan590 ? "225px" : "0px",
-        justifyContent: "flex-end",
-      }}
-    >
-      <IconButton sx={{ marginRight: "8px" }}>
-        <MoreVertIcon
-          sx={{
-            color: theme.palette.textPrimaryDark,
-            fontSize: "24px",
-          }}
-        />
-      </IconButton>
-      <Box
-        sx={{
-          display: "inline-flex",
-          alignItems: "center",
-          border: "1px solid #ffffff33",
-          padding: "5px 15px",
-          borderRadius: "40px",
-          cursor: "pointer",
-          pointerEvents: "all",
-          ":hover": {
-            backgroundColor: "#263850",
-          },
-        }}
-        onClick={() => navigate("/login")}
-      >
-        <img src={EmptyProfile} alt="empty-profile" style={{ marginRight: "6px", marginLeft: "-6px" }} />
-        <Typography variant="h6" sx={{ color: "#3ea6ff" }}>
-          Sign in
-        </Typography>
-      </Box>
-    </Box>
-  );
-};
+// const NavbarLoggedOut = ({ theme, navigate, greaterThan590 }) => {
+//   return (
+//     <Box
+//       sx={{
+//         display: "flex",
+//         alignItems: "center",
+//         minWidth: greaterThan590 ? "225px" : "0px",
+//         justifyContent: "flex-end",
+//       }}
+//     >
+//       <IconButton sx={{ marginRight: "8px" }}>
+//         <MoreVertIcon
+//           sx={{
+//             color: theme.palette.textPrimaryDark,
+//             fontSize: "24px",
+//           }}
+//         />
+//       </IconButton>
+//       <Box
+//         sx={{
+//           display: "inline-flex",
+//           alignItems: "center",
+//           border: "1px solid #ffffff33",
+//           padding: "5px 15px",
+//           borderRadius: "40px",
+//           cursor: "pointer",
+//           pointerEvents: "all",
+//           ":hover": {
+//             backgroundColor: "#263850",
+//           },
+//         }}
+//         onClick={() => navigate("/login")}
+//       >
+//         <img src={EmptyProfile} alt="empty-profile" style={{ marginRight: "6px", marginLeft: "-6px" }} />
+//         <Typography variant="h6" sx={{ color: "#3ea6ff" }}>
+//           Sign in
+//         </Typography>
+//       </Box>
+//     </Box>
+//   );
+// };
 
 export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.global.token);
+  const decodedToken = decodeToken(token);
   const [openChannelModal, setOpenChannelModal] = useState(false);
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [logout, { isLoading }] = useLogoutUserMutation();
@@ -529,7 +449,7 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
       isSideBarOpen={isSideBarOpen}
       sx={{
         position: "fixed",
-        background: theme.palette.bgHomeDark,
+        background: theme.palette.studioBackground,
         boxShadow: "none",
         display: "block",
         "& .MuiToolbar-regular": {
@@ -553,21 +473,15 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
               sx={{
                 padding: "8px",
                 color: theme.palette.textPrimaryDark,
+                marginRight: "16px",
               }}
             >
-              <MenuIcon fontSize={"40"} />
+              <MenuIcon sx={{ fontSize: "28px" }} />
             </IconButton>
             {/* change the yt icon to dynamic icon */}
-            <img
-              onClick={() => navigate("/")}
-              src={YoutubeLightIcon}
-              alt=""
-              style={{
-                marginLeft: "11px",
-                cursor: "pointer",
-                pointerEvents: "all",
-              }}
-            />
+            <Box sx={{ marginRight: "96px", paddingTop: "8px", cursor: "pointer", pointerEvents: "all" }}>
+              <img onClick={() => navigate(`/studio/${decodedToken.id}`)} src={YoutubeStudioLightIcon} alt="" />
+            </Box>
           </Box>
           {!greaterThan590 && (
             <Box
@@ -598,40 +512,39 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
           )}
           {greaterThan590 && (
             <Search className="search-bar">
-              <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
               <IconWrapper
                 sx={{
                   position: "absolute",
+                  left: "0px",
                   padding: theme.spacing(0, 2),
                   pointerEvents: "all",
-                  borderRadius: "0 40px 40px 0",
-                  backgroundColor: "#222222",
+                  borderColor: theme.palette.studioBorder,
+                  borderRadius: "4px",
+                  backgroundColor: theme.palette.studioBackground,
                 }}
               >
                 <SearchIcon
                   sx={{
-                    color: theme.palette.textPrimaryDark,
+                    color: "#606060",
                     fontSize: "24px",
                   }}
                 />
               </IconWrapper>
+              <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
             </Search>
           )}
-          {token ? (
-            <NavbarLoggedIn
-              theme={theme}
-              openChannelModal={openChannelModal}
-              handleChannelModal={handleChannelModal}
-              navigate={navigate}
-              logout={logout}
-              isLoadingLogout={isLoading}
-              openCreateModal={openCreateModal}
-              handleCreateModal={handleCreateModal}
-              token={token}
-            />
-          ) : (
-            <NavbarLoggedOut greaterThan590={greaterThan590} theme={theme} navigate={navigate} />
-          )}
+
+          <RightComponent
+            theme={theme}
+            openChannelModal={openChannelModal}
+            handleChannelModal={handleChannelModal}
+            navigate={navigate}
+            handleCreateModal={handleCreateModal}
+            openCreateModal={openCreateModal}
+            token={token}
+            decodedToken={decodedToken}
+            logout={logout}
+          />
         </FlexBetween>
       </Toolbar>
     </AppBar>

@@ -280,4 +280,17 @@ const navItems11 = [
   },
 ];
 
-export { navItems1, navItems2LoggedIn, navItems2LoggedOut, navItems3, navItems4, navItems5, navItems6, navItems7, navItems8, navItems9, navItems10, navItems11 };
+export {
+  navItems1,
+  navItems2LoggedIn,
+  navItems2LoggedOut,
+  navItems3,
+  navItems4,
+  navItems5,
+  navItems6,
+  navItems7,
+  navItems8,
+  navItems9,
+  navItems10,
+  navItems11,
+};

@@ -10,6 +10,11 @@ export const tokensDark = {
   loginBorder: "#dadce0",
   loginText: "#202124",
   loginPlaceholder: "#5f6368",
+
+  studioBorder: "#ffffff1a",
+  studioRed: "#FF4E45",
+  studioGray: "#AAAAAA",
+  studioBackground: "#282828",
 };
 
 export const tokensLight = {};
