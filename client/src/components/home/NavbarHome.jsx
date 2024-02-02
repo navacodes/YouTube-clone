@@ -24,14 +24,15 @@ import FlexBetween from "../FlexBetween.jsx";
 
 import SearchIcon from "@mui/icons-material/Search";
 import YoutubeLightIcon from "../../svgs/YoutubeLight.svg";
-import CreateIcon from "../../svgs/Create.svg";
+import { CreateIcon } from "../../svgs/Svgs.jsx";
 import BellIcon from "../../svgs/Bell-Icon.svg";
 import BlankProfile from "../../img/blankProfile.jpg";
 import EmptyProfile from "../../svgs/EmptyProfile.svg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useSelector } from "react-redux";
 import { navItems6, navItems7, navItems8, navItems9, navItems10, navItems11 } from "./NavItems.js";
+
+import { useSelector } from "react-redux";
 import { useLogoutUserMutation } from "../../state/api.js";
 
 const AppBar = styled(MuiAppBar, {
@@ -441,7 +442,7 @@ const NavbarLoggedIn = ({ theme, openChannelModal, handleChannelModal, navigate,
           },
         }}
       >
-        <img src={CreateIcon} alt={CreateIcon} />
+        <CreateIcon />
       </IconWrapper>
       <IconWrapper
         sx={{
