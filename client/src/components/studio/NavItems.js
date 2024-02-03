@@ -1,67 +1,68 @@
-import YourChannelIcon from "../../svgs/YourChannel.svg";
-import YoutubeIcon from "../../svgs/Youtube.svg";
-import SwitchAccountIcon from "../../svgs/SwitchAccountStudio.svg";
-import SignOutIcon from "../../svgs/SignOutStudio.svg";
-import AppearanceIcon from "../../svgs/AppearanceStudio.svg";
-import FeedbackIcon from "../../svgs/FeedbackStudio.svg";
-
-import UploadVideoIcon from "../../svgs/UploadVideoStudio.svg";
-import GoLiveIcon from "../../svgs/GoLiveStudio.svg";
-import CreatePostIcon from "../../svgs/CreatePost.svg";
-import NewPlaylistIcon from "../../svgs/NewPlaylist.svg";
-import NewPodcastIcon from "../../svgs/NewPodcast.svg";
+import {
+  YourChannelIcon,
+  YoutubeIcon,
+  SwitchAccountIcon,
+  SignOutIcon,
+  AppearanceIcon,
+  FeedBackIcon,
+  UploadVideoIcon,
+  GoLiveIcon,
+  CreatePostIcon,
+  NewPlaylistIcon,
+  NewPodcastIcon,
+} from "../../svgs/Svgs";
 
 export const navItems1 = [
   {
     text: "Your channel",
-    icon: YourChannelIcon,
+    icon: <YourChannelIcon fill="#909090" />,
   },
   {
     text: "Youtube",
-    icon: YoutubeIcon,
+    icon: <YoutubeIcon fill="#909090" />,
   },
   {
     text: "Switch account",
-    icon: SwitchAccountIcon,
+    icon: <SwitchAccountIcon fill="#909090" />,
   },
   {
     text: "Sign out",
-    icon: SignOutIcon,
+    icon: <SignOutIcon fill="#909090" />,
   },
 ];
 
 export const navItems2 = [
   {
     text: "Appearance: Device theme",
-    icon: AppearanceIcon,
+    icon: <AppearanceIcon fill="#909090" />,
   },
   {
     text: "Send feedback",
-    icon: FeedbackIcon,
+    icon: <FeedBackIcon fill="#909090" />,
   },
 ];
 
 export const navItems3 = [
   {
     text: "Upload videos",
-    icon: UploadVideoIcon,
+    icon: <UploadVideoIcon fill="#AAAAAA" />,
     active: false,
   },
   {
     text: "Go live",
-    icon: GoLiveIcon,
+    icon: <GoLiveIcon fill="#AAAAAA" />,
     active: false,
   },
   {
     text: "Create post",
-    icon: CreatePostIcon,
+    icon: <CreatePostIcon fill="#AAAAAA" />,
   },
   {
     text: "New playlist",
-    icon: NewPlaylistIcon,
+    icon: <NewPlaylistIcon fill="#AAAAAA" />,
   },
   {
     text: "New podcast",
-    icon: NewPodcastIcon,
+    icon: <NewPodcastIcon fill="#AAAAAA" />,
   },
 ];
