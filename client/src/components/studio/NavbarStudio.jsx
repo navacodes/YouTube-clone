@@ -178,7 +178,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
                         color: "white",
                       }}
                     >
-                      <img src={icon} alt={icon} />
+                      {icon}
                     </ListItemIcon>
                     <ListItemText primary={text} />
                     {text.includes("Switch") ? <ChevronRightIcon /> : ""}
@@ -221,7 +221,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
                         color: "white",
                       }}
                     >
-                      <img src={icon} alt={icon} />
+                      {icon}
                     </ListItemIcon>
                     <ListItemText primary={text} />
                     {text.includes("theme") ? <ChevronRightIcon /> : ""}
@@ -236,7 +236,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
   );
 };
 
-const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
+const CreateModal = ({ open, handleModal, theme }) => {
   const style = {
     position: "absolute",
     top: "5.5%",
@@ -246,7 +246,6 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
     borderRadius: "4px",
     boxShadow: 24,
   };
-  const { decodedToken } = useJwt(token);
   return (
     <Modal
       open={open}
@@ -287,10 +286,10 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
                     sx={{
                       color: "white",
                       minWidth: "0px",
-                      margin:"4px 16px 4px 0"
+                      margin: "4px 16px 4px 0",
                     }}
                   >
-                    <img src={icon} alt={icon} />
+                    {icon}
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItemButton>
@@ -374,7 +373,7 @@ const RightComponent = ({
           />
         </IconWrapper>
         <ChannelModal open={openChannelModal} handleModal={handleChannelModal} theme={theme} navigate={navigate} logout={logout} token={token} />
-        <CreateModal open={openCreateModal} handleModal={handleCreateModal} token={token} theme={theme} navigate={navigate} />
+        <CreateModal open={openCreateModal} handleModal={handleCreateModal} theme={theme} />
       </Box>
     </>
   );
