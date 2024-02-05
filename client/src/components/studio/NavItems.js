@@ -10,6 +10,16 @@ import {
   CreatePostIcon,
   NewPlaylistIcon,
   NewPodcastIcon,
+  DashboardIcon,
+  ContentIcon,
+  AnalyticsIcon,
+  CommentsIcon,
+  SubtitlesIcon,
+  CopyrightIcon,
+  EarnIcon,
+  CustomisationIcon,
+  AudioLibraryIcon,
+  SettingsIcon,
 } from "../../svgs/Svgs";
 
 export const navItems1 = [
@@ -64,5 +74,54 @@ export const navItems3 = [
   {
     text: "New podcast",
     icon: <NewPodcastIcon fill="#AAAAAA" />,
+  },
+];
+
+export const navItems4 = [
+  {
+    text: "Dashboard",
+    icon: <DashboardIcon fill="#909090" />,
+  },
+  {
+    text: "Content",
+    icon: <ContentIcon fill="#FF4E45" />,
+  },
+  {
+    text: "Analytics",
+    icon: <AnalyticsIcon fill="#909090" />,
+  },
+  {
+    text: "Comments",
+    icon: <CommentsIcon fill="#909090" />,
+  },
+  {
+    text: "Subtitles",
+    icon: <SubtitlesIcon fill="#909090" />,
+  },
+  {
+    text: "Copyright",
+    icon: <CopyrightIcon fill="#909090" />,
+  },
+  {
+    text: "Earn",
+    icon: <EarnIcon fill="#909090" />,
+  },
+  {
+    text: "Customisation",
+    icon: <CustomisationIcon fill="#909090" />,
+  },
+  {
+    text: "Audio library",
+    icon: <AudioLibraryIcon fill="#909090" />,
+  },
+];
+export const navItems5 = [
+  {
+    text: "Settings",
+    icon: <SettingsIcon fill="#909090" />,
+  },
+  {
+    text: "Send feedback",
+    icon: <FeedBackIcon fill="#909090" />,
   },
 ];
