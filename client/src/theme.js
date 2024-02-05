@@ -13,9 +13,9 @@ export const tokensDark = {
 
   studioBorder: "#ffffff1a",
   studioRed: "#FF4E45",
-  studioGray: "#AAAAAA",
-  studioBackground: "#282828",
-  studioIconGray: "#909090",
+  studioLightGray: "#AAAAAA",
+  studioMediumGray: "#282828",
+  studioDarkGray: "#1f1f1f",
 };
 
 export const tokensLight = {};
