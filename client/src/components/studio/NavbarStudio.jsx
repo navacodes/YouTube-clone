@@ -45,7 +45,7 @@ const Search = styled("div")(({ theme }) => ({
   flex: " 0 1 732px",
   position: "relative",
   borderRadius: 4,
-  backgroundColor: theme.palette.studioBackground,
+  backgroundColor: theme.palette.studioMediumGray,
   border: `1px solid #606060`,
   marginLeft: "40px",
   maxWidth: "640px",
@@ -163,7 +163,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
                   <ListItemButton
                     sx={{
                       color: theme.palette.textPrimaryDark,
-                      backgroundColor: theme.palette.studioBackground,
+                      backgroundColor: theme.palette.studioMediumGray,
                       verticalAlign: "middle",
                     }}
                     onClick={() => {
@@ -212,7 +212,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
                     }}
                     sx={{
                       color: theme.palette.textPrimaryDark,
-                      backgroundColor: theme.palette.studioBackground,
+                      backgroundColor: theme.palette.studioMediumGray,
                       verticalAlign: "middle",
                     }}
                   >
@@ -428,6 +428,7 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
   const decodedToken = decodeToken(token);
   const [openChannelModal, setOpenChannelModal] = useState(false);
   const [openCreateModal, setOpenCreateModal] = useState(false);
+  // eslint-disable-next-line
   const [logout, { isLoading }] = useLogoutUserMutation();
   const greaterThan590 = useMediaQuery("(min-width:590px)"); // true when greaterThan590
 
@@ -448,7 +449,7 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
       isSideBarOpen={isSideBarOpen}
       sx={{
         position: "fixed",
-        background: theme.palette.studioBackground,
+        background: theme.palette.studioMediumGray,
         boxShadow: "none",
         display: "block",
         "& .MuiToolbar-regular": {
@@ -460,6 +461,7 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
         sx={{
           width: "100%",
           paddingX: "24px",
+          boxShadow: "0 1px 4px 1px rgba(0,0,0,0.2)",
         }}
       >
         <FlexBetween className="space-between-navbar" sx={{ width: "100%", flexDirection: "row" }}>
@@ -519,7 +521,7 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
                   pointerEvents: "all",
                   borderColor: theme.palette.studioBorder,
                   borderRadius: "4px",
-                  backgroundColor: theme.palette.studioBackground,
+                  backgroundColor: theme.palette.studioMediumGray,
                 }}
               >
                 <SearchIcon
