@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useState } from "react";
-import { useJwt } from "react-jwt";
+import { decodeToken, useJwt } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import {
@@ -80,8 +80,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => {
-  const { decodedToken } = useJwt(token);
+const ChannelModal = ({ open, handleModal, theme, navigate, logout, decodedToken }) => {
   // console.log(decodedToken);
   const style = {
     position: "absolute",
@@ -358,7 +357,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
   );
 };
 
-const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
+const CreateModal = ({ open, handleModal, theme, navigate, decodedToken }) => {
   const style = {
     position: "absolute",
     top: "5.5%",
@@ -368,7 +367,6 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
     borderRadius: "12px",
     boxShadow: 24,
   };
-  const { decodedToken } = useJwt(token);
   return (
     <Modal
       open={open}
@@ -426,7 +424,7 @@ const CreateModal = ({ open, handleModal, theme, navigate, token }) => {
   );
 };
 
-const NavbarLoggedIn = ({ theme, openChannelModal, handleChannelModal, navigate, logout, handleCreateModal, openCreateModal, token }) => {
+const NavbarLoggedIn = ({ theme, openChannelModal, handleChannelModal, navigate, logout, handleCreateModal, openCreateModal, decodedToken }) => {
   return (
     <FlexBetween
       sx={{
@@ -464,16 +462,15 @@ const NavbarLoggedIn = ({ theme, openChannelModal, handleChannelModal, navigate,
         }}
       >
         <img
-          src={BlankProfile}
-          alt={BlankProfile}
+          src={decodedToken?.profileImg}
           style={{
             height: "32px",
             borderRadius: "50%",
           }}
         />
       </IconWrapper>
-      <ChannelModal open={openChannelModal} handleModal={handleChannelModal} theme={theme} navigate={navigate} logout={logout} token={token} />
-      <CreateModal open={openCreateModal} handleModal={handleCreateModal} token={token} theme={theme} navigate={navigate} />
+      <ChannelModal open={openChannelModal} handleModal={handleChannelModal} theme={theme} navigate={navigate} logout={logout} decodedToken={decodedToken} />
+      <CreateModal open={openCreateModal} handleModal={handleCreateModal} decodedToken={decodedToken} theme={theme} navigate={navigate} />
     </FlexBetween>
   );
 };
@@ -524,6 +521,7 @@ export default function NavbarHome({ isSideBarOpen, setIsSideBarOpen }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.global.token);
+  const decodedToken = !token ? null : decodeToken(token);
   const [openChannelModal, setOpenChannelModal] = useState(false);
   const [openCreateModal, setOpenCreateModal] = useState(false);
   // eslint-disable-next-line
@@ -644,7 +642,7 @@ export default function NavbarHome({ isSideBarOpen, setIsSideBarOpen }) {
               logout={logout}
               openCreateModal={openCreateModal}
               handleCreateModal={handleCreateModal}
-              token={token}
+              decodedToken={decodedToken}
             />
           ) : (
             <NavbarLoggedOut greaterThan590={greaterThan590} theme={theme} navigate={navigate} />
