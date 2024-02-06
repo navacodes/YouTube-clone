@@ -15,6 +15,9 @@ import Home from "./scenes/home/";
 import StudioLayout from "./scenes/studio/StudioLayout";
 import Studio from "./scenes/studio";
 
+import Page404 from "./components/Page404";
+import Noroute from "./components/Noroute";
+
 function App() {
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
@@ -36,8 +39,11 @@ function App() {
             </Route>
             <Route element={<StudioLayout />}>
               <Route path="/studio" element={<Navigate to={token ? `/studio/${decodedToken.id}` : `/login`} replace />} />
-              <Route path={token ? `/studio/${decodedToken.id}` : `/login`} element={<Studio />} />
+              <Route path="/studio/*" element={<Navigate to={token ? `/studio/${decodedToken.id}` : `/login`} replace />} />
+              <Route path={`/studio/${decodedToken?.id}`} element={<Studio />} />
             </Route>
+            <Route path={`/noroute`} element={<Noroute />} />
+            <Route path={`/*`} element={<Page404 />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
