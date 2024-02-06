@@ -190,7 +190,7 @@ export default function SidebarHome({ isSideBarOpen, setIsSideBarOpen }) {
               >
                 <ListItemButton
                   onClick={() => {
-                    navigate(`/${lcText === "your videos" ? "studio" : "noroute"}/${decodedToken.id}`);
+                    navigate(`/${lcText === "your videos" ? "studio" : "noroute"}`);
                     setActive(lcText);
                   }}
                   sx={{
