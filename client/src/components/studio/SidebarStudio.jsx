@@ -61,7 +61,9 @@ export default function SidebarStudio({ isSideBarOpen, setIsSideBarOpen }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [windowSize1310]);
 
-  return (
+  return !token ? (
+    <div style={{ color: theme.palette.textPrimaryDark }}>Login First.. </div>
+  ) : (
     <Box component="nav">
       <Drawer
         variant="permanent"

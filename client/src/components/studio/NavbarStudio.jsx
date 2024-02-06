@@ -425,7 +425,7 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.global.token);
-  const decodedToken = decodeToken(token);
+  const decodedToken = !token ? null : decodeToken(token);
   const [openChannelModal, setOpenChannelModal] = useState(false);
   const [openCreateModal, setOpenCreateModal] = useState(false);
   // eslint-disable-next-line
@@ -443,7 +443,9 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
     setIsSideBarOpen(!isSideBarOpen);
   };
 
-  return (
+  return !token ? (
+    <div style={{ color: theme.palette.textPrimaryDark }}>Login First...</div>
+  ) : (
     <AppBar
       position="fixed"
       isSideBarOpen={isSideBarOpen}
@@ -484,33 +486,6 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
               <img onClick={() => navigate(`/studio/${decodedToken.id}`)} src={YoutubeStudioLightIcon} alt="" />
             </Box>
           </Box>
-          {!greaterThan590 && (
-            <Box
-              sx={{
-                display: "flex",
-                flex: 1,
-                fleBbasis: "0.000000001px",
-                justifyContent: "flex-end",
-              }}
-            >
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                sx={{
-                  padding: "8px",
-                  color: theme.palette.textPrimaryDark,
-                }}
-              >
-                <SearchIcon
-                  sx={{
-                    color: theme.palette.textPrimaryDark,
-                    fontSize: "24px",
-                  }}
-                />
-              </IconButton>
-            </Box>
-          )}
           {greaterThan590 && (
             <Search className="search-bar">
               <IconWrapper
