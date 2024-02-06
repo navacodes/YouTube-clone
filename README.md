@@ -1,5 +1,12 @@
 # YouTube Clone
 
+For loggin-in:
+```sh
+Email: devcode@ytclone.com,
+Password: test1234
+```
+
+
 This is the YouTube clone I am building.
 I am building this clone to practice MERN. I am making sure that the UI of this app is identical to the real one.
 
@@ -22,6 +29,7 @@ https://github.com/Dev-Code24/YouTube-clone/assets/97425135/c2b90788-d96b-4fd6-9
 The following is how the clone works as of now. I have added the InfinteScroll feature to the videos and have added the "click to show more shorts" feature on the show more button
 
 https://github.com/Dev-Code24/YouTube-clone/assets/97425135/a6869377-ccdd-4f08-b6d8-c100f1e0809c
+
 
 
 
