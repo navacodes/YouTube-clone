@@ -1,12 +1,12 @@
-import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import cors from "cors";
-import dotenv from "dotenv";
-import cookieParser from "cookie-parser";
-import mongoSanitize from "express-mongo-sanitize";
-import helmet from "helmet";
-import morgan from "morgan";
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
+const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
+const morgan = require("morgan");
 import videosRoutes from "./routes/videos.js";
 import studioRoutes from "./routes/studio.js";
 import usersRoutes from "./routes/user.js";
@@ -55,10 +55,7 @@ app.use(globalErrorHandler);
 //MongoDB
 
 const { PORT } = process.env || 5002;
-const mongoURL = process.env.MONGO_URL.replace(
-  "<password>",
-  process.env.MONGO_PASS
-);
+const mongoURL = process.env.MONGO_URL.replace("<password>", process.env.MONGO_PASS);
 
 mongoose
   .connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
