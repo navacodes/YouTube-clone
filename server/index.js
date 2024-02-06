@@ -26,7 +26,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://youtube-clone-backend-puce.vercel.app/",
+    // origin: "http://localhost:3000",
     credentials: true,
   })
 );
