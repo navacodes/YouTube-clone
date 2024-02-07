@@ -1,7 +1,8 @@
 # YouTube Clone
 ```sh
 Disclaimer:
-Since this is deployed using free deployment tools ( Vercel and Render). The API I have built is not fast enough as it should've been.
+Since this is deployed using free deployment tools ( Vercel and Render).
+The API I have built is not fast enough as it should've been.
 ```
 For loggin-in:
 ```sh
