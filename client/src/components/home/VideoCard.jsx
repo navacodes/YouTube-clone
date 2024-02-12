@@ -41,8 +41,7 @@ const VideoCard = ({ videoData }) => {
     }
   };
   const handleProgress = () => {
-    const progressPercentage =
-      (videoRef.current.currentTime / videoRef.current.duration) * 100;
+    const progressPercentage = (videoRef.current.currentTime / videoRef.current.duration) * 100;
     progressBarRef.current.style.width = `${progressPercentage}%`;
 
     setTime(Math.floor(videoRef.current.currentTime));
@@ -56,7 +55,8 @@ const VideoCard = ({ videoData }) => {
         marginRight: "16px",
         marginBottom: "39px",
       }}
-      className="video-box">
+      className="video-box"
+    >
       <Box sx={{ width: "100%" }} className="video-container">
         <video
           onMouseEnter={handleMouseEnter}
@@ -68,7 +68,8 @@ const VideoCard = ({ videoData }) => {
           ref={videoRef}
           style={style}
           src={videoData.mediaUrl}
-          className="video">
+          className="video"
+        >
           <source src={videoData.mediaUrl} type="video/mp4" />
         </video>
         <div
@@ -78,7 +79,8 @@ const VideoCard = ({ videoData }) => {
             marginTop: "-7px",
             zIndex: 1200,
             position: "relative",
-          }}>
+          }}
+        >
           <div
             className="progress"
             style={{ height: "2px", backgroundColor: "white" }}
@@ -88,10 +90,7 @@ const VideoCard = ({ videoData }) => {
             // onMouseMove={(e) => mousedown && scrub(e)}
             // onMouseUp={() => (mousedown = false)}
           >
-            <div
-              className="progress__filled"
-              style={{ height: "100%", backgroundColor: "red" }}
-              ref={progressBarRef}></div>
+            <div className="progress__filled" style={{ height: "100%", backgroundColor: "red" }} ref={progressBarRef}></div>
             <div
               className="vidTimeStamps"
               style={{
@@ -99,9 +98,9 @@ const VideoCard = ({ videoData }) => {
                 marginTop: "-27px",
                 paddingBottom: "3px",
                 paddingLeft: "8px",
-                background:
-                  "linear-gradient(180deg, rgba(251,251,251,0) 37%, rgba(94,94,94,0.8225884103641457) 100%)",
-              }}>
+                background: "linear-gradient(180deg, rgba(251,251,251,0) 37%, rgba(94,94,94,0.8225884103641457) 100%)",
+              }}
+            >
               <Typography variant="h6">
                 {" "}
                 {`${formatVideoTime(totalTime, time).formattedCurrentTime} /
@@ -111,9 +110,7 @@ const VideoCard = ({ videoData }) => {
           </div>
         </div>
       </Box>
-      <Box
-        className="video-data"
-        sx={{ display: "flex", marginTop: "12px", marginRight: "50px" }}>
+      <Box className="video-data" sx={{ display: "flex", marginTop: "12px", marginRight: "50px" }}>
         <Box className="channel-image">
           <img
             src={videoData.createdBy.imgUrl} //
@@ -122,11 +119,7 @@ const VideoCard = ({ videoData }) => {
           />
         </Box>
         <Box className="video-details" sx={{ marginLeft: "12px" }}>
-          <Typography
-            variant="h5"
-            sx={{ color: theme.palette.textPrimaryDark }}>
-            {videoData.title}
-          </Typography>
+          <Typography variant="h5">{videoData.title}</Typography>
           <Box className="video-basic-details" sx={{ marginTop: "4px" }}>
             <Box className="video-basic-detail">
               <Typography variant="h6" sx={{ color: "#AAAAAA" }}>

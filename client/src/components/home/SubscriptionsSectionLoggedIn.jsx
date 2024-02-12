@@ -1,13 +1,5 @@
 /* eslint-disable array-callback-return */
-import {
-  Divider,
-  Typography,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Divider, Typography, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import { useGetSubsriptionQuery } from "../../state/api";
@@ -17,14 +9,7 @@ const showLessSubscriptions = (setElementsToAdd, showMoreSubscriptionRef) => {
   setElementsToAdd([]);
   showMoreSubscriptionRef.current.style.display = "flex";
 };
-const addMoreSubscriptions = (
-  data,
-  theme,
-  isSideBarOpen,
-  elementsToAdd,
-  setElementsToAdd,
-  showMoreSubscriptionRef
-) => {
+const addMoreSubscriptions = (data, theme, isSideBarOpen, elementsToAdd, setElementsToAdd, showMoreSubscriptionRef) => {
   const showLessSubscriptionsFn = () => {
     showLessSubscriptions(setElementsToAdd, showMoreSubscriptionRef);
   };
@@ -43,21 +28,23 @@ const addMoreSubscriptions = (
               fontSize: "14px",
             },
           }}
-          disablePadding>
+          disablePadding
+        >
           <ListItemButton
             key={`${channel.name}-${idx}-listitembtn`}
             sx={{
               backgroundColor: theme.palette.bgHomeDark,
-              color: theme.palette.textPrimaryDark,
               padding: isSideBarOpen ? "8px 12px" : " 12px 10px 12px 16px",
               borderRadius: "10px",
-            }}>
+            }}
+          >
             <ListItemIcon
               key={`${channel.name}-${idx}`}
               sx={{
                 color: "white",
                 borderRadius: "50%",
-              }}>
+              }}
+            >
               <img
                 src={channel?.imgUrl}
                 width="24px"
@@ -69,11 +56,7 @@ const addMoreSubscriptions = (
             </ListItemIcon>
             <ListItemText
               key={`${channel.name}-${idx}-listitemtext`}
-              primary={
-                channel.name.length <= 18
-                  ? channel.name
-                  : channel.name.substring(0, 17).concat("...")
-              }
+              primary={channel.name.length <= 18 ? channel.name : channel.name.substring(0, 17).concat("...")}
             />
           </ListItemButton>
         </ListItem>
@@ -96,19 +79,22 @@ const addMoreSubscriptions = (
           },
         }}
         onClick={showLessSubscriptionsFn}
-        disablePadding>
+        disablePadding
+      >
         <ListItemButton
           sx={{
             backgroundColor: theme.palette.bgHomeDark,
-            color: theme.palette.textPrimaryDark,
+
             padding: isSideBarOpen ? "8px 12px" : " 12px 10px 12px 16px",
             borderRadius: "10px",
-          }}>
+          }}
+        >
           <ListItemIcon
             sx={{
               color: "white",
               borderRadius: "50%",
-            }}>
+            }}
+          >
             <ExpandLessOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary={`Show less`} />
@@ -124,22 +110,11 @@ const addMoreSubscriptions = (
   setElementsToAdd([...elementsToAdd, ...newElements, showLessElement]);
 };
 
-export default function SubscriptionsSectionLoggedIn({
-  isSideBarOpen,
-  theme,
-  showMoreSubscriptionRef,
-}) {
+export default function SubscriptionsSectionLoggedIn({ isSideBarOpen, theme, showMoreSubscriptionRef }) {
   const [elementsToAdd, setElementsToAdd] = useState([]);
   const { data, isLoading } = useGetSubsriptionQuery();
   const addMoreSubscriptionsCallFn = () => {
-    addMoreSubscriptions(
-      data,
-      theme,
-      isSideBarOpen,
-      elementsToAdd,
-      setElementsToAdd,
-      showMoreSubscriptionRef
-    );
+    addMoreSubscriptions(data, theme, isSideBarOpen, elementsToAdd, setElementsToAdd, showMoreSubscriptionRef);
   };
 
   return (
@@ -151,8 +126,8 @@ export default function SubscriptionsSectionLoggedIn({
           component="div"
           sx={{
             padding: "18px 108px 4px 20px",
-            color: theme.palette.textPrimaryDark,
-          }}>
+          }}
+        >
           Subscriptions
         </Typography>
 
@@ -160,8 +135,8 @@ export default function SubscriptionsSectionLoggedIn({
           <Typography
             sx={{
               padding: "18px 108px 4px 20px",
-              color: theme.palette.textPrimaryDark,
-            }}>
+            }}
+          >
             Loading...
           </Typography>
         ) : (
@@ -169,7 +144,8 @@ export default function SubscriptionsSectionLoggedIn({
             sx={{
               paddingTop: "0px",
               paddingBottom: "10px",
-            }}>
+            }}
+          >
             {data.channels.map((channel, idx, array) => {
               if (idx <= 7) {
                 return (
@@ -185,21 +161,22 @@ export default function SubscriptionsSectionLoggedIn({
                         fontSize: "14px",
                       },
                     }}
-                    disablePadding>
+                    disablePadding
+                  >
                     <ListItemButton
                       sx={{
                         backgroundColor: theme.palette.bgHomeDark,
-                        color: theme.palette.textPrimaryDark,
-                        padding: isSideBarOpen
-                          ? "8px 12px"
-                          : " 12px 10px 12px 16px",
+
+                        padding: isSideBarOpen ? "8px 12px" : " 12px 10px 12px 16px",
                         borderRadius: "10px",
-                      }}>
+                      }}
+                    >
                       <ListItemIcon
                         sx={{
                           color: "white",
                           borderRadius: "50%",
-                        }}>
+                        }}
+                      >
                         <img
                           src={channel?.imgUrl}
                           width="24px"
@@ -209,13 +186,7 @@ export default function SubscriptionsSectionLoggedIn({
                           }}
                         />
                       </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          channel.name.length <= 18
-                            ? channel.name
-                            : channel.name.substring(0, 17).concat("...")
-                        }
-                      />
+                      <ListItemText primary={channel.name.length <= 18 ? channel.name : channel.name.substring(0, 17).concat("...")} />
                     </ListItemButton>
                   </ListItem>
                 );
@@ -235,18 +206,18 @@ export default function SubscriptionsSectionLoggedIn({
                 },
               }}
               onClick={addMoreSubscriptionsCallFn}
-              disablePadding>
+              disablePadding
+            >
               <ListItemButton
                 sx={{
                   backgroundColor: theme.palette.bgHomeDark,
-                  color: theme.palette.textPrimaryDark,
+
                   padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
                   borderRadius: "10px",
-                }}>
+                }}
+              >
                 <ListItemIcon>{<ExpandMoreOutlinedIcon />}</ListItemIcon>
-                <ListItemText
-                  primary={`Show ${data.channels.length - 7} more`}
-                />
+                <ListItemText primary={`Show ${data.channels.length - 7} more`} />
               </ListItemButton>
             </ListItem>
             {elementsToAdd}

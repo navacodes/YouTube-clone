@@ -62,7 +62,7 @@ export default function SidebarStudio({ isSideBarOpen, setIsSideBarOpen }) {
   }, [windowSize1310]);
 
   return !token ? (
-    <div style={{ color: theme.palette.textPrimaryDark }}>Login First.. </div>
+    <div>Login First.. </div>
   ) : (
     <Box component="nav">
       <Drawer
@@ -178,7 +178,6 @@ export default function SidebarStudio({ isSideBarOpen, setIsSideBarOpen }) {
                     // }
                   }}
                   sx={{
-                    color: theme.palette.textPrimaryDark,
                     backgroundColor: text === "Content" ? theme.palette.studioDarkGray : theme.palette.studioMediumGray,
                     padding: isSideBarOpen ? "8.75px 20px 8.75px 16px" : " 12px 10px 12px 22px",
                     verticalAlign: "middle",
@@ -231,7 +230,6 @@ export default function SidebarStudio({ isSideBarOpen, setIsSideBarOpen }) {
                     // }
                   }}
                   sx={{
-                    color: theme.palette.textPrimaryDark,
                     backgroundColor: text === "Content" ? theme.palette.studioDarkGray : theme.palette.studioMediumGray,
                     padding: isSideBarOpen ? "8.75px 20px 8.75px 16px" : " 12px 10px 12px 22px",
                     verticalAlign: "middle",

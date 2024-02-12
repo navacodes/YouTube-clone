@@ -73,7 +73,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 1),
     fontSize: "16px",
-    color: theme.palette.textPrimaryDark,
+
     // vertical padding + font size from searchIcon
     paddingRight: `calc(1em + ${theme.spacing(4)})`,
     width: "100%",
@@ -138,12 +138,8 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, decodedToken
             </IconWrapper>
           </Box>
           <Box className="modal-userData">
-            <Typography variant="h5" sx={{ color: theme.palette.textPrimaryDark }}>
-              {decodedToken?.name}
-            </Typography>
-            <Typography variant="h5" sx={{ color: theme.palette.textPrimaryDark }}>
-              @{decodedToken?.channelName.toLowerCase()}
-            </Typography>
+            <Typography variant="h5">{decodedToken?.name}</Typography>
+            <Typography variant="h5">@{decodedToken?.channelName.toLowerCase()}</Typography>
             <Typography
               onClick={() => {
                 navigate(`/studio/${decodedToken?.id}`);
@@ -175,7 +171,6 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, decodedToken
                 >
                   <ListItemButton
                     sx={{
-                      color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.darkGrayHome,
                       verticalAlign: "middle",
                     }}
@@ -224,7 +219,6 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, decodedToken
                       }
                     }}
                     sx={{
-                      color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.darkGrayHome,
                       verticalAlign: "middle",
                     }}
@@ -260,7 +254,6 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, decodedToken
                 >
                   <ListItemButton
                     sx={{
-                      color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.darkGrayHome,
                       verticalAlign: "middle",
                     }}
@@ -297,7 +290,6 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, decodedToken
                 >
                   <ListItemButton
                     sx={{
-                      color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.darkGrayHome,
                       verticalAlign: "middle",
                     }}
@@ -333,7 +325,6 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, decodedToken
                 >
                   <ListItemButton
                     sx={{
-                      color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.darkGrayHome,
                       verticalAlign: "middle",
                     }}
@@ -397,7 +388,6 @@ const CreateModal = ({ open, handleModal, theme, navigate, decodedToken }) => {
               >
                 <ListItemButton
                   sx={{
-                    color: theme.palette.textPrimaryDark,
                     backgroundColor: theme.palette.darkGrayHome,
                     verticalAlign: "middle",
                   }}
@@ -469,7 +459,14 @@ const NavbarLoggedIn = ({ theme, openChannelModal, handleChannelModal, navigate,
           }}
         />
       </IconWrapper>
-      <ChannelModal open={openChannelModal} handleModal={handleChannelModal} theme={theme} navigate={navigate} logout={logout} decodedToken={decodedToken} />
+      <ChannelModal
+        open={openChannelModal}
+        handleModal={handleChannelModal}
+        theme={theme}
+        navigate={navigate}
+        logout={logout}
+        decodedToken={decodedToken}
+      />
       <CreateModal open={openCreateModal} handleModal={handleCreateModal} decodedToken={decodedToken} theme={theme} navigate={navigate} />
     </FlexBetween>
   );
@@ -488,7 +485,6 @@ const NavbarLoggedOut = ({ theme, navigate, greaterThan590 }) => {
       <IconButton sx={{ marginRight: "8px" }}>
         <MoreVertIcon
           sx={{
-            color: theme.palette.textPrimaryDark,
             fontSize: "24px",
           }}
         />
@@ -568,7 +564,6 @@ export default function NavbarHome({ isSideBarOpen, setIsSideBarOpen }) {
               edge="start"
               sx={{
                 padding: "8px",
-                color: theme.palette.textPrimaryDark,
               }}
             >
               <MenuIcon fontSize={"40"} />
@@ -600,12 +595,10 @@ export default function NavbarHome({ isSideBarOpen, setIsSideBarOpen }) {
                 edge="start"
                 sx={{
                   padding: "8px",
-                  color: theme.palette.textPrimaryDark,
                 }}
               >
                 <SearchIcon
                   sx={{
-                    color: theme.palette.textPrimaryDark,
                     fontSize: "24px",
                   }}
                 />
@@ -626,7 +619,6 @@ export default function NavbarHome({ isSideBarOpen, setIsSideBarOpen }) {
               >
                 <SearchIcon
                   sx={{
-                    color: theme.palette.textPrimaryDark,
                     fontSize: "24px",
                   }}
                 />

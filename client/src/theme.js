@@ -33,7 +33,7 @@ export const themeSettings = (mode) => {
               main: "#1a73e8",
             },
             text: {
-              primary: "#000",
+              primary: "#fff",
             },
           }
         : {

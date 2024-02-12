@@ -134,12 +134,8 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
             </IconWrapper>
           </Box>
           <Box className="modal-userData">
-            <Typography variant="h5" sx={{ color: theme.palette.textPrimaryDark }}>
-              {decodedToken?.name}
-            </Typography>
-            <Typography variant="h5" sx={{ color: theme.palette.textPrimaryDark }}>
-              @{decodedToken?.channelName.toLowerCase()}
-            </Typography>
+            <Typography variant="h5">{decodedToken?.name}</Typography>
+            <Typography variant="h5">@{decodedToken?.channelName.toLowerCase()}</Typography>
           </Box>
         </Box>
         <Divider />
@@ -162,7 +158,6 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
                 >
                   <ListItemButton
                     sx={{
-                      color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.studioMediumGray,
                       verticalAlign: "middle",
                     }}
@@ -211,7 +206,6 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
                       }
                     }}
                     sx={{
-                      color: theme.palette.textPrimaryDark,
                       backgroundColor: theme.palette.studioMediumGray,
                       verticalAlign: "middle",
                     }}
@@ -277,7 +271,6 @@ const CreateModal = ({ open, handleModal, theme }) => {
               >
                 <ListItemButton
                   sx={{
-                    color: theme.palette.textPrimaryDark,
                     backgroundColor: "#1f1f1f1",
                     verticalAlign: "middle",
                   }}
@@ -339,7 +332,6 @@ const RightComponent = ({
           variant="outlined"
           onClick={handleCreateModal}
           sx={{
-            color: theme.palette.textPrimaryDark,
             border: `1px solid ${theme.palette.studioBorder}`,
             margin: "0 8px",
             padding: "0 16px 0 10px",
@@ -392,7 +384,7 @@ const RightComponent = ({
 //       <IconButton sx={{ marginRight: "8px" }}>
 //         <MoreVertIcon
 //           sx={{
-//             color: theme.palette.textPrimaryDark,
+//
 //             fontSize: "24px",
 //           }}
 //         />
@@ -444,7 +436,7 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
   };
 
   return !token ? (
-    <div style={{ color: theme.palette.textPrimaryDark }}>Login First...</div>
+    <div>Login First...</div>
   ) : (
     <AppBar
       position="fixed"
@@ -475,7 +467,6 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
               edge="start"
               sx={{
                 padding: "8px",
-                color: theme.palette.textPrimaryDark,
                 marginRight: "16px",
               }}
             >

@@ -18,7 +18,6 @@ import CloseIcon from "@mui/icons-material/Close";
 const GridSizeContext = createContext(null);
 const Home = () => {
   const theme = useTheme();
-  const _infiniteScroll = useRef(null);
   const moreShorts = useRef(null);
   const moreThan1500 = useMediaQuery("(min-width:1590px)");
   // gives true when window size > 1500 grid size 4
@@ -195,7 +194,7 @@ const Home = () => {
               >
                 <Box sx={{ display: "flex" }}>
                   <img style={{ marginRight: "8px" }} src={ShortsLogo} alt="" />
-                  <Typography sx={{ color: theme.palette.textPrimaryDark, fontWeight: "600" }} variant="h4">
+                  <Typography sx={{ fontWeight: "600" }} variant="h4">
                     Shorts
                   </Typography>
                 </Box>
@@ -234,7 +233,6 @@ const Home = () => {
           {/* Rest of the rows */}
           {/* work on the manual refetch of data in infiniteScroll  */}
           <InfiniteScroll
-            ref={_infiniteScroll}
             dataLength={() => {
               return vidState.length;
             }}
@@ -245,7 +243,6 @@ const Home = () => {
               <p
                 style={{
                   textAlign: "center",
-                  color: theme.palette.textPrimaryDark,
                 }}
               >
                 <b>You have seen it all</b>

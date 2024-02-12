@@ -10,7 +10,7 @@ const Noroute = () => {
     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", height: "100%" }}>
       <Box sx={{ marginBottom: "20px", display: "flex", alignItems: "center", flexDirection: "column" }}>
         <img src={Monkey404} alt="" />
-        <Typography variant="h5" sx={{ color: theme.palette.textPrimaryDark, marginTop: "10px" }}>
+        <Typography variant="h5" sx={{  marginTop: "10px" }}>
           This page isn't developed yet. Sorry about that.
         </Typography>
       </Box>

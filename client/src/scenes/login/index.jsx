@@ -1,13 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Box,
-  TextField,
-  Typography,
-  Button,
-  Checkbox,
-  FormControlLabel,
-} from "@mui/material";
+import { Box, TextField, Typography, Button, Checkbox, FormControlLabel } from "@mui/material";
 import GoogleLogo from "../../svgs/GoogleIcon.svg";
 import loginUserIcon from "../../svgs/googleLoginUser.svg";
 import { useTheme } from "@mui/material/styles";
@@ -96,7 +89,8 @@ const Login = () => {
         backgroundColor: "white",
         display: "flex",
         alignContent: "center",
-      }}>
+      }}
+    >
       <Box
         className="loginFormContainer"
         sx={{
@@ -109,37 +103,38 @@ const Login = () => {
           alignItems: "center",
           padding: "48px 40px 36px",
           flexDirection: "column",
-        }}>
-        <img
-          src={GoogleLogo}
-          style={{ height: "24px", width: "75px" }}
-          alt={`GoogleLogo`}
-        />
+        }}
+      >
+        <img src={GoogleLogo} style={{ height: "24px", width: "75px" }} alt={`GoogleLogo`} />
         <Box
           sx={{
             width: "100%",
             height: "400px",
             marginX: "40px",
-          }}>
+          }}
+        >
           <Box
             ref={emailSection}
             className="loginFormEmail"
             sx={{
-              width: "366px",
+              maxWidth: "366px",
               height: "345.41px",
-            }}>
+            }}
+          >
             <form
               action=""
               style={{
                 width: "100%",
                 paddingTop: "16px",
-              }}>
+              }}
+            >
               <Typography
                 variant="h3"
                 sx={{
                   color: "#202124",
                   textAlign: "center",
-                }}>
+                }}
+              >
                 Sign in
               </Typography>
               <Typography
@@ -148,14 +143,16 @@ const Login = () => {
                   color: "#202124",
                   textAlign: "center",
                   paddingTop: "7px",
-                }}>
+                }}
+              >
                 to continue to YouTube
               </Typography>
               <Box sx={{ width: "100%" }}>
                 <Box
                   sx={{
                     paddingTop: "24px",
-                  }}>
+                  }}
+                >
                   <Box className="textFieldBox" sx={{ width: "100%" }}>
                     <TextField
                       type="email"
@@ -196,7 +193,8 @@ const Login = () => {
                         color: theme.palette.loginBlue,
                         fontWeight: 600,
                         letterSpacing: 0.25,
-                      }}>
+                      }}
+                    >
                       Forgot email ?
                     </Typography>
                   </Box>
@@ -209,14 +207,17 @@ const Login = () => {
                       fontSize: "14px",
                       paddingTop: "9px",
                       paddingBottom: "3px",
-                    }}>
+                      color: "#000",
+                    }}
+                  >
                     Not your computer? Use Guest mode to sign in privately.{` `}
                     <span
                       style={{
                         color: theme.palette.loginBlue,
                         fontWeight: 600,
                         letterSpacing: 0.25,
-                      }}>
+                      }}
+                    >
                       Learn more
                     </span>
                   </Box>
@@ -225,10 +226,7 @@ const Login = () => {
               <Box mt="32px" ml="-8px">
                 <FlexBetween>
                   <Button size="large">Create account</Button>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    onClick={() => nextButtonClicked()}>
+                  <Button variant="contained" size="large" onClick={() => nextButtonClicked()}>
                     Next
                   </Button>
                 </FlexBetween>
@@ -236,10 +234,7 @@ const Login = () => {
             </form>
           </Box>
 
-          <Box
-            ref={passwordSection}
-            className="loginForEmailAndPass"
-            sx={{ width: "366px", height: "345.41px" }}>
+          <Box ref={passwordSection} className="loginForEmailAndPass" sx={{ maxWidth: "366px", height: "345.41px" }}>
             <form
               ref={finalFormRef}
               action=""
@@ -247,13 +242,15 @@ const Login = () => {
               style={{
                 width: "100%",
                 paddingTop: "16px",
-              }}>
+              }}
+            >
               <Typography
                 variant="h3"
                 sx={{
                   color: "#202124",
                   textAlign: "center",
-                }}>
+                }}
+              >
                 Welcome
               </Typography>
               <Box
@@ -262,7 +259,8 @@ const Login = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   marginTop: "7px",
-                }}>
+                }}
+              >
                 <Box
                   sx={{
                     display: "inline-flex",
@@ -272,7 +270,8 @@ const Login = () => {
                     border: "1px solid #dadce0",
                     padding: "5px 15px 5px 10px",
                     maxWidth: "100%",
-                  }}>
+                  }}
+                >
                   <img
                     src={loginUserIcon}
                     style={{
@@ -287,7 +286,8 @@ const Login = () => {
                     sx={{
                       color: "#3c4043",
                       textAlign: "center",
-                    }}>
+                    }}
+                  >
                     {details.email}
                   </Typography>
                 </Box>
@@ -296,7 +296,8 @@ const Login = () => {
                 <Box
                   sx={{
                     paddingTop: "24px",
-                  }}>
+                  }}
+                >
                   <Box className="textFieldBox" sx={{ width: "100%" }}>
                     <TextField
                       ref={passwordInputRef}
@@ -336,7 +337,8 @@ const Login = () => {
                         alignItems: "center",
                         paddingTop: "11px",
                         paddingBottom: "5px",
-                      }}>
+                      }}
+                    >
                       <FormControlLabel
                         control={
                           <Checkbox

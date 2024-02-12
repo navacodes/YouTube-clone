@@ -115,7 +115,6 @@ export default function SidebarHome({ isSideBarOpen, setIsSideBarOpen }) {
                     }
                   }}
                   sx={{
-                    color: theme.palette.textPrimaryDark,
                     backgroundColor: text === "Home" ? theme.palette.darkGrayHome : theme.palette.bgHomeDark,
                     borderRadius: "10px",
                     padding: isSideBarOpen ? "8px 12px" : " 12px 10px 12px 16px",
@@ -160,7 +159,6 @@ export default function SidebarHome({ isSideBarOpen, setIsSideBarOpen }) {
                 >
                   <ListItemButton
                     sx={{
-                      color: theme.palette.textPrimaryDark,
                       padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
                       borderRadius: "10px",
                     }}
@@ -195,7 +193,7 @@ export default function SidebarHome({ isSideBarOpen, setIsSideBarOpen }) {
                   }}
                   sx={{
                     backgroundColor: theme.palette.bgHomeDark,
-                    color: theme.palette.textPrimaryDark,
+
                     padding: isSideBarOpen ? "8px 12px" : " 12px 10px 12px 16px",
                     borderRadius: "10px",
                   }}
@@ -230,7 +228,6 @@ export default function SidebarHome({ isSideBarOpen, setIsSideBarOpen }) {
               component="div"
               sx={{
                 padding: "18px 108px 4px 20px",
-                color: theme.palette.textPrimaryDark,
               }}
             >
               Explore
@@ -260,7 +257,6 @@ export default function SidebarHome({ isSideBarOpen, setIsSideBarOpen }) {
                     >
                       <ListItemButton
                         sx={{
-                          color: theme.palette.textPrimaryDark,
                           padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
                           borderRadius: "10px",
                         }}
@@ -294,7 +290,6 @@ export default function SidebarHome({ isSideBarOpen, setIsSideBarOpen }) {
               component="div"
               sx={{
                 padding: "18px 108px 4px 20px",
-                color: theme.palette.textPrimaryDark,
               }}
             >
               More from YouTube
@@ -325,7 +320,6 @@ export default function SidebarHome({ isSideBarOpen, setIsSideBarOpen }) {
                     >
                       <ListItemButton
                         sx={{
-                          color: theme.palette.textPrimaryDark,
                           padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
                           borderRadius: "10px",
                         }}
@@ -378,7 +372,6 @@ export default function SidebarHome({ isSideBarOpen, setIsSideBarOpen }) {
                   >
                     <ListItemButton
                       sx={{
-                        color: theme.palette.textPrimaryDark,
                         padding: isSideBarOpen ? "8px 12px" : " 8px 14px",
                         borderRadius: "10px",
                       }}
@@ -450,4 +443,3 @@ export default function SidebarHome({ isSideBarOpen, setIsSideBarOpen }) {
     </Box>
   );
 }
-

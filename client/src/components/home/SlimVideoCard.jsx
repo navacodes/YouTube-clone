@@ -41,7 +41,8 @@ const SlimVideoCard = ({ slimVideo }) => {
         marginRight: "16px",
         marginBottom: "19px",
       }}
-      className="video-box">
+      className="video-box"
+    >
       <Box sx={{ width: "100%" }} className="video-container">
         <video
           onMouseEnter={handleMouseEnter}
@@ -52,7 +53,8 @@ const SlimVideoCard = ({ slimVideo }) => {
           ref={videoRef}
           style={style}
           src={slimVideo.mediaUrl}
-          className="video">
+          className="video"
+        >
           <source src={slimVideo.mediaUrl} type="video/mp4" />
         </video>
         <div
@@ -62,17 +64,12 @@ const SlimVideoCard = ({ slimVideo }) => {
             marginTop: "-7px",
             zIndex: 1200,
             position: "relative",
-          }}></div>
+          }}
+        ></div>
       </Box>
-      <Box
-        className="video-data"
-        sx={{ display: "flex", marginTop: "12px", marginRight: "50px" }}>
+      <Box className="video-data" sx={{ display: "flex", marginTop: "12px", marginRight: "50px" }}>
         <Box className="video-details" sx={{ marginLeft: "2px" }}>
-          <Typography
-            variant="h5"
-            sx={{ color: theme.palette.textPrimaryDark }}>
-            {slimVideo.title}
-          </Typography>
+          <Typography variant="h5">{slimVideo.title}</Typography>
           <Box className="video-basic-details" sx={{ marginTop: "4px" }}>
             <Box className="video-basic-detail">
               <Typography variant="h6" sx={{ color: "#AAAAAA", lineHeight: 1 }}>
