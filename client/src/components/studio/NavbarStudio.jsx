@@ -342,7 +342,7 @@ const RightComponent = ({
           }}
         >
           <CreateIcon stroke={theme.palette.studioRed} />
-          <Typography variant="h6" sx={{ padding: "8px 0 8px 6px" }}>
+          <Typography variant="h6" sx={{ padding: "8px 0 8px 6px", color: theme.palette.textPrimaryDark }}>
             CREATE
           </Typography>
         </Button>

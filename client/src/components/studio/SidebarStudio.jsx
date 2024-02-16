@@ -1,19 +1,16 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
-import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { decodeToken } from "react-jwt";
 import { styled, useTheme } from "@mui/material/styles";
 import { Box, List, Typography, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
 import MuiDrawer from "@mui/material/Drawer";
-import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import SubscriptionsSectionLoggedOut from "../home/SubscriptionsSectionLoggedOut.jsx";
 
 import { navItems4, navItems5 } from "../studio/NavItems.js";
 import { useMediaQuery } from "@mui/material";
-import FlexBetween from "../FlexBetween.jsx";
 
 const drawerWidth = 256;
 
