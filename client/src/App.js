@@ -23,7 +23,6 @@ function App() {
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const token = useSelector((state) => state.global.token);
   const decodedToken = !token ? null : decodeToken(token);
-  console.log(decodedToken);
 
   return (
     <div className="app">
