@@ -229,7 +229,7 @@ export const CreatePostIcon = ({ size = 24, fill = "white" }) => {
       <path
         d="M15.01 7.34L16.65 8.98L8.64 17H6.99V15.36L15.01 7.34ZM15.01 5.92L5.99 14.94V18H9.05L18.07 8.98L15.01 5.92ZM17.91 4.43L19.58 6.1L18.91 6.77L17.24 5.1L17.91 4.43ZM17.91 3.02L15.83 5.1L18.92 8.19L21 6.11L17.91 3.02ZM21 10H20V20H4V4H14V3H3V21H21V10Z"
         fill={fill}
-        fill-opacity="0.666667"
+        fillOpacity="0.666667"
       />
     </svg>
   );
@@ -238,7 +238,7 @@ export const CreatePostIcon = ({ size = 24, fill = "white" }) => {
 export const NewPlaylistIcon = ({ size = 24, fill = "white" }) => {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M22 13H18V17H16V13H12V11H16V7H18V11H22V13ZM14 7H2V8H14V7ZM2 12H10V11H2V12ZM2 16H10V15H2V16Z" fill={fill} fill-opacity="0.666667" />
+      <path d="M22 13H18V17H16V13H12V11H16V7H18V11H22V13ZM14 7H2V8H14V7ZM2 12H10V11H2V12ZM2 16H10V15H2V16Z" fill={fill} fillOpacity="0.666667" />
     </svg>
   );
 };
@@ -249,7 +249,7 @@ export const NewPodcastIcon = ({ size = 24, fill = "white" }) => {
       <path
         d="M6 12C6 8.69 8.69 6 12 6C15.31 6 18 8.69 18 12C18 13.66 17.33 15.16 16.23 16.25L15.52 15.54C16.44 14.63 17 13.38 17 12C17 9.24 14.76 7 12 7C9.24 7 7 9.24 7 12C7 13.38 7.56 14.63 8.47 15.54L7.76 16.25C6.67 15.16 6 13.66 6 12ZM14 12C14 10.9 13.1 10 12 10C10.9 10 10 10.9 10 12C10 12.74 10.4 13.38 11 13.72V22H13V13.72C13.6 13.38 14 12.74 14 12ZM4.94 19.08L5.65 18.37C4.01 16.74 3 14.49 3 12C3 7.04 7.04 3 12 3C16.96 3 21 7.04 21 12C21 14.49 19.99 16.74 18.35 18.37L19.06 19.08C20.88 17.27 22 14.77 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 14.77 3.12 17.27 4.94 19.08Z"
         fill={fill}
-        fill-opacity="0.666667"
+        fillOpacity="0.666667"
       />
     </svg>
   );
