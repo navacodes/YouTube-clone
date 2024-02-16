@@ -1,7 +1,7 @@
 import { useContext, useRef } from "react";
 import { GridSizeContext } from "../../scenes/home";
 import { Box, Typography } from "@mui/material";
-import { formatNumber } from "./FormatFns";
+import { formatNumber } from "../FormatFns";
 
 const SlimVideoCard = ({ slimVideo }) => {
   const { slimGridSize, theme } = useContext(GridSizeContext);
