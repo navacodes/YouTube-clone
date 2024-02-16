@@ -13,7 +13,7 @@ const videoSchema = new mongoose.Schema(
     },
     views: {
       type: Number,
-      default: 10000,
+      default: 0,
     },
     videoType: {
       type: String,
@@ -27,8 +27,6 @@ const videoSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-
 
 const Video = mongoose.model("Video", videoSchema);
 
