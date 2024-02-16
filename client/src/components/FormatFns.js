@@ -33,14 +33,10 @@ export const formatNumber = function (num) {
     return num.toString();
   } else if (num < 1000000) {
     const formattedNum = (num / 1000).toFixed(1);
-    return formattedNum.endsWith(".0")
-      ? `${formattedNum.slice(0, -2)}k`
-      : `${formattedNum}k`;
+    return formattedNum.endsWith(".0") ? `${formattedNum.slice(0, -2)}k` : `${formattedNum}k`;
   } else {
     const formattedNum = (num / 1000000).toFixed(2);
-    return formattedNum.endsWith(".00")
-      ? `${formattedNum.slice(0, -3)}M`
-      : `${formattedNum}M`;
+    return formattedNum.endsWith(".00") ? `${formattedNum.slice(0, -3)}M` : `${formattedNum}M`;
   }
 };
 export const formatVideoTime = function (totalTime, currentTime) {
@@ -58,20 +54,40 @@ export const formatVideoTime = function (totalTime, currentTime) {
   const formatTime = (value) => (value < 10 ? `0${value}` : `${value}`);
 
   if (totalTime < 3600) {
-    const formattedTotalTime = `${formatTime(totalMinutes)}:${formatTime(
-      totalSecondsRemaining
-    )}`;
-    const formattedCurrentTime = `${formatTime(currentMinutes)}:${formatTime(
-      currentSecondsRemaining
-    )}`;
+    const formattedTotalTime = `${formatTime(totalMinutes)}:${formatTime(totalSecondsRemaining)}`;
+    const formattedCurrentTime = `${formatTime(currentMinutes)}:${formatTime(currentSecondsRemaining)}`;
     return { formattedTotalTime, formattedCurrentTime };
   } else {
-    const formattedTotalTime = `${formatTime(totalHours)}:${formatTime(
-      totalMinutes
-    )}:${formatTime(totalSecondsRemaining)}`;
-    const formattedCurrentTime = `${formatTime(currentHours)}:${formatTime(
-      currentMinutes
-    )}:${formatTime(currentSecondsRemaining)}`;
+    const formattedTotalTime = `${formatTime(totalHours)}:${formatTime(totalMinutes)}:${formatTime(totalSecondsRemaining)}`;
+    const formattedCurrentTime = `${formatTime(currentHours)}:${formatTime(currentMinutes)}:${formatTime(currentSecondsRemaining)}`;
     return { formattedTotalTime, formattedCurrentTime };
   }
+};
+
+export const convertToReadableDate = function (dateString) {
+  const options = { month: "short", day: "numeric", year: "numeric" };
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", options);
+};
+
+export const transformArray = function (arr) {
+  const transformedArray = arr.map((obj) => {
+    return {
+      id: obj.title,
+      date: convertToReadableDate(obj.createdAt),
+      visibility: obj.privateVid ? "Private" : "Public",
+      views: Number(obj.views),
+      videoData: {
+        mediaUrl: obj.mediaUrl,
+        description: obj.description,
+        title: obj.title,
+      },
+      restrictions: "None",
+      comments: "-",
+      likeVsDislike: "-",
+
+    };
+  });
+
+  return transformedArray;
 };
