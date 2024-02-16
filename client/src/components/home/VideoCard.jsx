@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { GridSizeContext } from "../../scenes/home";
-import { formatNumber, formatTimeAgo, formatVideoTime } from "./FormatFns";
+import { formatNumber, formatTimeAgo, formatVideoTime } from "../FormatFns";
 
 const VideoCard = ({ videoData }) => {
   const { gridSize, theme } = useContext(GridSizeContext);
@@ -46,7 +46,6 @@ const VideoCard = ({ videoData }) => {
 
     setTime(Math.floor(videoRef.current.currentTime));
 
-    // console.log(time + ":" + totalTime);
   };
   return (
     <Box
