@@ -52,6 +52,10 @@ const Studio = () => {
       const newData = transformArray(videoData.videos);
       setVideoRowsData((prev) => [...prev, ...newData]);
     }
+
+    return () => {
+      setVideoRowsData([]);
+    };
   }, [vidLoading, videoData]);
 
   useEffect(() => {
@@ -59,10 +63,13 @@ const Studio = () => {
       const newData = transformArray(shortVideoData.videos);
       setShortsRowsData((prev) => [...prev, ...newData]);
     }
+    return () => {
+      setShortsRowsData([]);
+    };
   }, [shortVidLoading, shortVideoData]);
 
-  // Create a list, in which when a list item is selected custom data grid is rendered depending upon
-  // the list item state which will be initialized
+  // Create a list, in which, when a list-item is selected custom data-grid is rendered depending upon
+  // the list-item-state 
   return (
     <div>
       <Box sx={{ paddingLeft: "32px", paddingTop: "23px", position: "sticky", left: "0", marginBottom: "15px" }}>
@@ -95,6 +102,9 @@ const Studio = () => {
               },
               "& .MuiDataGrid-cell": {
                 maxHeight: "100% !important",
+                ":focus": {
+                  outline: "none",
+                },
               },
               "& .MuiDataGrid-row": {
                 maxHeight: "100% !important",
@@ -139,6 +149,9 @@ const Studio = () => {
               },
               "& .MuiDataGrid-cell": {
                 maxHeight: "100% !important",
+                ":focus": {
+                  outline: "none",
+                },
               },
               "& .MuiDataGrid-row": {
                 maxHeight: "100% !important",
