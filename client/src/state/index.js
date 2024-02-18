@@ -5,6 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   mode: "dark",
   token: null,
+  videoId: null,
 };
 
 export const globalSlice = createSlice({
@@ -18,13 +19,17 @@ export const globalSlice = createSlice({
       const { accessToken } = action.payload;
       state.token = accessToken;
     },
-    setLogOut: (state, action) => {
+    setLogOut: (state) => {
       state.token = null;
+    },
+    setVideoId: (state, action) => {
+      const { videoId } = action.payload;
+      state.videoId = videoId;
     },
   },
 });
 
-export const { setMode, setCredentials, setLogOut } = globalSlice.actions;
+export const { setMode, setCredentials, setLogOut, setVideoId } = globalSlice.actions;
 
 export default globalSlice.reducer;
 
