@@ -33,37 +33,35 @@ const SelectContentNavbar = ({ theme, setSelected, selected }) => {
           };
 
           return (
-            <>
-              <ListItem
-                key={`${idx}-${text}`}
-                sx={
-                  ({
-                    position: "relative",
-                    backgroundColor: "#fff",
-                    "& .MuiListItemButton-root:hover": {
-                      backgroundColor: theme.palette.studioDarkGray,
-                    },
+            <ListItem
+              key={`${idx}-${text}`}
+              sx={
+                ({
+                  position: "relative",
+                  backgroundColor: "#fff",
+                  "& .MuiListItemButton-root:hover": {
+                    backgroundColor: theme.palette.studioDarkGray,
                   },
-                  text === selected ? { ...beforeStyle } : {})
-                }
-                disablePadding
+                },
+                text === selected ? { ...beforeStyle } : {})
+              }
+              disablePadding
+            >
+              <ListItemButton
+                onClick={() => {
+                  setSelected(text);
+                }}
+                sx={{
+                  marginLeft: "8px",
+                  marginRight: "32px",
+                  padding: "0 5px 10px 5px",
+                  color: text === selected ? "#3ea6ff" : "#fff",
+                  verticalAlign: "middle",
+                }}
               >
-                <ListItemButton
-                  onClick={() => {
-                    setSelected(text);
-                  }}
-                  sx={{
-                    marginLeft: "8px",
-                    marginRight: "32px",
-                    padding: "0 5px 10px 5px",
-                    color: text === selected ? "#3ea6ff" : "#fff",
-                    verticalAlign: "middle",
-                  }}
-                >
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            </>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
           );
         })}
       </List>
