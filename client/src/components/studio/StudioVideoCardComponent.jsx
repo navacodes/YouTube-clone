@@ -1,9 +1,15 @@
 import { useTheme } from "@emotion/react";
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import HoverElements from "./HoverElements";
+import { useDispatch } from "react-redux";
+import { setVideoId } from "../../state/";
 
 const StudioVideoCardComponent = ({ videoData }) => {
   const theme = useTheme();
+  const [hover, setHover] = useState(false);
+  const dispatch = useDispatch();
+
   return (
     <div className="studio-videocard" style={{ height: "100%", width: "100%", display: "flex" }}>
       <Box className="left" sx={{ width: "120px", height: "68px" }}>
@@ -16,11 +22,16 @@ const StudioVideoCardComponent = ({ videoData }) => {
           {videoData.title}
         </Typography>
         <Box
+          onMouseEnter={() => {
+            setHover(true);
+            dispatch(setVideoId({ videoId: videoData._id }));
+          }}
+          onMouseLeave={() => setHover(false)}
           sx={{
             fontSize: "12px",
             whiteSpace: "wrap",
             width: "100%",
-            height: "32px",
+            height: "34px",
             letterSpacing: "0.011em",
             lineHeight: "16px",
             display: "-webkit-box",
@@ -30,7 +41,7 @@ const StudioVideoCardComponent = ({ videoData }) => {
             color: theme.palette.studioLightGray,
           }}
         >
-          {videoData.description}
+          {hover ? <HoverElements theme={theme} videoId={videoData.videoId} /> : videoData.description}
         </Box>
       </Box>
     </div>
