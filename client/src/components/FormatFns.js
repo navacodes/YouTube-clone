@@ -73,7 +73,7 @@ export const convertToReadableDate = function (dateString) {
 export const transformArray = function (arr) {
   const transformedArray = arr.map((obj) => {
     return {
-      id: obj.title,
+      id: obj._id,
       date: convertToReadableDate(obj.createdAt),
       visibility: obj.privateVid ? "Private" : "Public",
       views: Number(obj.views),
@@ -81,11 +81,11 @@ export const transformArray = function (arr) {
         mediaUrl: obj.mediaUrl,
         description: obj.description,
         title: obj.title,
+        videoId: obj._id,
       },
       restrictions: "None",
       comments: "-",
       likeVsDislike: "-",
-
     };
   });
 
