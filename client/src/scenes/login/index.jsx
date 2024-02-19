@@ -27,9 +27,7 @@ const Login = () => {
 
   const LoginFunction = async (email, password) => {
     try {
-      // console.log(email, password);
       const data = await login({ email, password }).unwrap();
-      // console.log(data);
       dispatch(setCredentials({ accessToken: data.token }));
 
       if (data.token) alert("Logged in, redirecting to Youtube");
