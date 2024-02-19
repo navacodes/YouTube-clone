@@ -46,11 +46,11 @@ userSchema.methods.getVideos = async function (videoType) {
     const videos = await Video.find({
       _id: { $in: videoIds },
       videoType: videoType,
-    }).select("-_id -createdBy -updatedAt -__v"); // Exclude _id and userId (already included in populate)
+    }).select("-createdBy -updatedAt -__v"); 
     return videos;
   } catch (error) {
     console.error("Error fetching videos:", error);
-    throw error; // Re-throw the error for proper handling
+    throw error; 
   }
 };
 
