@@ -24,8 +24,6 @@ function App() {
   const token = useSelector((state) => state.global.token);
   const decodedToken = !token ? null : decodeToken(token);
   const videoId = useSelector((state) => state.global.videoId);
-  // console.log("videoId");
-  // console.log(videoId);
 
   return (
     <div className="app">
