@@ -10,6 +10,7 @@ import StudioVideoCardComponent from "../../components/studio/StudioVideoCardCom
 import DataTable from "../../components/studio/DataTable";
 
 import { transformArray } from "../../components/FormatFns";
+import UploadDialog from "../../components/studio/UploadDialog";
 
 const Studio = () => {
   const columns = [
@@ -80,6 +81,7 @@ const Studio = () => {
       <SelectContentNavbar theme={theme} setSelected={setSelected} selected={selected} />
       {selected === "Videos" ? <DataTable theme={theme} columns={columns} rowsData={videoRowsData} /> : null}
       {selected === "Shorts" ? <DataTable theme={theme} columns={columns} rowsData={shortsRowsData} /> : null}
+      <UploadDialog />
     </div>
   );
 };

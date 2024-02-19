@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useJwt, decodeToken } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
@@ -31,6 +31,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useSelector } from "react-redux";
 import { navItems1, navItems2, navItems3 } from "../studio/NavItems.js";
 import { useLogoutUserMutation } from "../../state/api.js";
+import { StudioContext } from "../../scenes/studio/StudioLayout.jsx";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "isSideBarOpen",
@@ -230,7 +231,7 @@ const ChannelModal = ({ open, handleModal, theme, navigate, logout, token }) => 
   );
 };
 
-const CreateModal = ({ open, handleModal, theme }) => {
+const CreateModal = ({ open, handleModal, setUploadDialogOpen }) => {
   const style = {
     position: "absolute",
     top: "5.5%",
@@ -266,6 +267,12 @@ const CreateModal = ({ open, handleModal, theme }) => {
                   "& .MuiTypography-root": {
                     fontSize: "15px",
                   },
+                }}
+                onClick={() => {
+                  if (text === "Upload videos") {
+                    handleModal();
+                    setUploadDialogOpen(true);
+                  }
                 }}
                 disablePadding
               >
@@ -305,6 +312,7 @@ const RightComponent = ({
   token,
   decodedToken,
   logout,
+  setUploadDialogOpen,
 }) => {
   return (
     <>
@@ -365,55 +373,14 @@ const RightComponent = ({
           />
         </IconWrapper>
         <ChannelModal open={openChannelModal} handleModal={handleChannelModal} theme={theme} navigate={navigate} logout={logout} token={token} />
-        <CreateModal open={openCreateModal} handleModal={handleCreateModal} theme={theme} />
+        <CreateModal open={openCreateModal} handleModal={handleCreateModal} setUploadDialogOpen={setUploadDialogOpen} />
       </Box>
     </>
   );
 };
 
-// const NavbarLoggedOut = ({ theme, navigate, greaterThan590 }) => {
-//   return (
-//     <Box
-//       sx={{
-//         display: "flex",
-//         alignItems: "center",
-//         minWidth: greaterThan590 ? "225px" : "0px",
-//         justifyContent: "flex-end",
-//       }}
-//     >
-//       <IconButton sx={{ marginRight: "8px" }}>
-//         <MoreVertIcon
-//           sx={{
-//
-//             fontSize: "24px",
-//           }}
-//         />
-//       </IconButton>
-//       <Box
-//         sx={{
-//           display: "inline-flex",
-//           alignItems: "center",
-//           border: "1px solid #ffffff33",
-//           padding: "5px 15px",
-//           borderRadius: "40px",
-//           cursor: "pointer",
-//           pointerEvents: "all",
-//           ":hover": {
-//             backgroundColor: "#263850",
-//           },
-//         }}
-//         onClick={() => navigate("/login")}
-//       >
-//         <img src={EmptyProfile} alt="empty-profile" style={{ marginRight: "6px", marginLeft: "-6px" }} />
-//         <Typography variant="h6" sx={{ color: "#3ea6ff" }}>
-//           Sign in
-//         </Typography>
-//       </Box>
-//     </Box>
-//   );
-// };
-
 export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
+  const { setUploadDialogOpen } = useContext(StudioContext);
   const theme = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.global.token);
@@ -511,6 +478,7 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
             token={token}
             decodedToken={decodedToken}
             logout={logout}
+            setUploadDialogOpen={setUploadDialogOpen}
           />
         </FlexBetween>
       </Toolbar>
