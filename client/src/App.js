@@ -23,6 +23,9 @@ function App() {
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const token = useSelector((state) => state.global.token);
   const decodedToken = !token ? null : decodeToken(token);
+  const videoId = useSelector((state) => state.global.videoId);
+  // console.log("videoId");
+  // console.log(videoId);
 
   return (
     <div className="app">
@@ -38,6 +41,7 @@ function App() {
             </Route>
             <Route element={<StudioLayout />}>
               <Route path="/studio" element={<Navigate to={token ? `/studio/${decodedToken.id}` : `/login`} replace />} />
+              <Route path={`/studio/video/edit/${videoId}`} element={<Navigate to={token ? `/studio/video/edit/${videoId}` : `/login`} replace />} />
               <Route path="/studio/*" element={<Navigate to={token ? `/studio/${decodedToken.id}` : `/login`} replace />} />
               <Route path={`/studio/${decodedToken?.id}`} element={<Studio />} />
             </Route>
