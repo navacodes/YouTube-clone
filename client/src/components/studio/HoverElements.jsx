@@ -6,14 +6,13 @@ import { useNavigate } from "react-router-dom";
 
 const HoverElements = ({ theme, videoId }) => {
   const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate(`/studio/video/edit/${videoId}`);
+  };
 
   return (
     <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-start", gap: 1.2 }}>
-      <IconButton
-        // onClick={navigate(`/studio/video/edit/${videoId}`)}
-        size="small"
-        children={<EditStudioIcon fill={theme.palette.studioLightGray} size={20} />}
-      />
+      <IconButton onClick={handleNavigate} size="small" children={<EditStudioIcon fill={theme.palette.studioLightGray} size={20} />} />
       <IconButton size="small" children={<AnalyticsIcon fill={theme.palette.studioLightGray} size={20} />} />
       <IconButton size="small" children={<CommentsIcon fill={theme.palette.studioLightGray} size={20} />} />
       <IconButton size="small" children={<YoutubeIcon fill={theme.palette.studioLightGray} size={20} />} />

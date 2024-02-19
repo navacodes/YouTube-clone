@@ -11,7 +11,15 @@ const StudioVideoCardComponent = ({ videoData }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="studio-videocard" style={{ height: "100%", width: "100%", display: "flex" }}>
+    <div
+      onMouseEnter={() => {
+        setHover(true);
+        dispatch(setVideoId({ videoId: videoData.videoId }));
+      }}
+      onMouseLeave={() => setHover(false)}
+      className="studio-videocard"
+      style={{ height: "100%", width: "100%", display: "flex" }}
+    >
       <Box className="left" sx={{ width: "120px", height: "68px" }}>
         <video muted preload="metadata" src={videoData.mediaUrl} className="video" style={{ height: "100%" }}>
           <source src={videoData.mediaUrl} type="video/mp4" />
@@ -22,11 +30,6 @@ const StudioVideoCardComponent = ({ videoData }) => {
           {videoData.title}
         </Typography>
         <Box
-          onMouseEnter={() => {
-            setHover(true);
-            dispatch(setVideoId({ videoId: videoData._id }));
-          }}
-          onMouseLeave={() => setHover(false)}
           sx={{
             fontSize: "12px",
             whiteSpace: "wrap",
