@@ -4,7 +4,7 @@ import { GridSizeContext } from "../../scenes/home";
 import { formatNumber, formatTimeAgo, formatVideoTime } from "../FormatFns";
 
 const VideoCard = ({ videoData }) => {
-  const { gridSize, theme } = useContext(GridSizeContext);
+  const { gridSize } = useContext(GridSizeContext);
   const style = {
     width: "100%",
     position: "relative",
@@ -45,7 +45,6 @@ const VideoCard = ({ videoData }) => {
     progressBarRef.current.style.width = `${progressPercentage}%`;
 
     setTime(Math.floor(videoRef.current.currentTime));
-
   };
   return (
     <Box

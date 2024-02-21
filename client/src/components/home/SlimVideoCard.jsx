@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import { formatNumber } from "../FormatFns";
 
 const SlimVideoCard = ({ slimVideo }) => {
-  const { slimGridSize, theme } = useContext(GridSizeContext);
+  const { slimGridSize } = useContext(GridSizeContext);
   const videoRef = useRef(null);
   const controllRef = useRef(null);
   const style = {

@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useState } from "react";
-import { decodeToken, useJwt } from "react-jwt";
+import { decodeToken } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import {
@@ -26,7 +26,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import YoutubeLightIcon from "../../svgs/YoutubeLight.svg";
 import { CreateIcon } from "../../svgs/Svgs.jsx";
 import BellIcon from "../../svgs/Bell-Icon.svg";
-import BlankProfile from "../../img/blankProfile.jpg";
 import EmptyProfile from "../../svgs/EmptyProfile.svg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -453,6 +452,7 @@ const NavbarLoggedIn = ({ theme, openChannelModal, handleChannelModal, navigate,
       >
         <img
           src={decodedToken?.profileImg}
+          alt="profile-img"
           style={{
             height: "32px",
             borderRadius: "50%",

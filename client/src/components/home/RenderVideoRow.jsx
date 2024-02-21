@@ -4,7 +4,7 @@ import { GridSizeContext } from "../../scenes/home";
 import VideoRow from "./VideoRow";
 
 export default function VideoRows({ isLoading, videos, row }) {
-  const { gridSize, theme } = useContext(GridSizeContext);
+  const { gridSize } = useContext(GridSizeContext);
 
   if (isLoading) {
     return <div style={{ width: "100%" }}></div>;
