@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTheme } from "@emotion/react";
 import { useGetMySlimVideosQuery, useGetMyVideosQuery } from "../../state/api";
 import { useSelector } from "react-redux";
@@ -6,13 +6,16 @@ import { decodeToken } from "react-jwt";
 import { Box, Typography } from "@mui/material";
 
 import SelectContentNavbar from "../../components/studio/SelectContentNavbar";
-import StudioVideoCardComponent from "../../components/studio/StudioVideoCardComponent";
+import StudioVideoCardComponent from "../../components/studio/video-card/StudioVideoCardComponent";
 import DataTable from "../../components/studio/DataTable";
 
 import { transformArray } from "../../components/FormatFns";
-import UploadDialog from "../../components/studio/UploadDialog";
+import UploadDialog from "../../components/studio/file-upload/UploadDialog";
+import AfterUploadDialog from "../../components/studio/file-upload/AfterUploadDialog";
+import { StudioContext } from "./StudioLayout";
 
 const Studio = () => {
+  const { uploadDialogOpen, setUploadDialogOpen } = useContext(StudioContext);
   const columns = [
     {
       field: "video",
@@ -43,7 +46,11 @@ const Studio = () => {
   const theme = useTheme();
   const [videoRowsData, setVideoRowsData] = useState([]);
   const [shortsRowsData, setShortsRowsData] = useState([]);
+  const [selectedFile, setselectedFile] = useState({ name: "", file: null });
+  const [afterUploadDialogOpen, setAfterUploadDialogOpen] = useState(true);
   const [selected, setSelected] = useState("Videos");
+  const [timeline, setTimeline] = useState("Details");
+
   const token = useSelector((state) => state.global.token);
   const decodedToken = !token ? null : decodeToken(token);
 
@@ -71,8 +78,14 @@ const Studio = () => {
     };
   }, [shortVidLoading, shortVideoData]);
 
-  // Create a list, in which, when a list-item is selected custom data-grid is rendered depending upon
-  // the list-item-state
+  // useEffect(() => {
+  //   if (uploadDialogOpen && selectedFile.name !== "" && !afterUploadDialogOpen) {
+  //     setAfterUploadDialogOpen(true);
+  //     setUploadDialogOpen(false);
+  //   }
+  //   // eslint-disable-next-line
+  // }, [afterUploadDialogOpen, uploadDialogOpen, selectedFile.name]);
+
   return (
     <div>
       <Box sx={{ paddingLeft: "32px", paddingTop: "23px", position: "sticky", left: "0", marginBottom: "15px" }}>
@@ -81,7 +94,14 @@ const Studio = () => {
       <SelectContentNavbar theme={theme} setSelected={setSelected} selected={selected} />
       {selected === "Videos" ? <DataTable theme={theme} columns={columns} rowsData={videoRowsData} /> : null}
       {selected === "Shorts" ? <DataTable theme={theme} columns={columns} rowsData={shortsRowsData} /> : null}
-      <UploadDialog />
+      <UploadDialog selectedFile={selectedFile} setselectedFile={setselectedFile} />
+      <AfterUploadDialog
+        selectedFile={selectedFile}
+        afterUploadDialogOpen={afterUploadDialogOpen}
+        setAfterUploadDialogOpen={setAfterUploadDialogOpen}
+        timeline={timeline}
+        setTimeline={setTimeline}
+      />
     </div>
   );
 };
