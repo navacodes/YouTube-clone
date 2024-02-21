@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import HoverElements from "./HoverElements";
 import { useDispatch } from "react-redux";
-import { setVideoId } from "../../state/";
+import { setVideoId } from "../../../state";
 
 const StudioVideoCardComponent = ({ videoData }) => {
   const theme = useTheme();

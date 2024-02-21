@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import React from "react";
-import { YoutubeIcon, EditStudioIcon, AnalyticsIcon, CommentsIcon } from "../../svgs/Svgs";
+import { YoutubeIcon, EditStudioIcon, AnalyticsIcon, CommentsIcon } from "../../../svgs/Svgs";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
