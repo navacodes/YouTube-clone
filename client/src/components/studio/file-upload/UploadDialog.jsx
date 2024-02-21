@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import UploadIcon from "@mui/icons-material/Upload";
-import { Button, Typography, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
+import { Typography, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
-// import { FeedBackIcon } from "../../svgs/Svgs";
 
-import { StudioContext } from "../../scenes/studio/StudioLayout";
+import { StudioContext } from "../../../scenes/studio/StudioLayout";
 import { useTheme } from "@emotion/react";
+
+import UploadButton from "./UploadButton";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -17,7 +18,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const UploadDialog = () => {
+const UploadDialog = ({ selectedFile, setselectedFile }) => {
   const { uploadDialogOpen, setUploadDialogOpen } = useContext(StudioContext);
   const theme = useTheme();
 
@@ -78,27 +79,14 @@ const UploadDialog = () => {
           <Typography gutterBottom sx={{ color: theme.palette.studioLightGray }}>
             Your videos will be private until you publish them.
           </Typography>
-          <Button
-            variant="contained"
-            sx={{
-              color: "#0b0b0b",
-              fontSize: "15px",
-              fontWeight: "600",
-              backgroundColor: "#3a99eb",
-              marginTop: "26px",
-              marginBottom: "auto",
-              ":hover": {
-                backgroundColor: "#3a99eb",
-              },
-            }}
-          >
-            SELECT FILES
-          </Button>
+
+          <UploadButton selectedFile={selectedFile} setselectedFile={setselectedFile} />
+
           <Typography variant="h6" sx={{ fontSize: "12px", color: theme.palette.studioLightGray }}>
             By submitting your videos to YouTube, you acknowledge that you agree to YouTube's{" "}
             <span style={{ color: "#3ea6ff" }}>Terms of Service</span> and <span style={{ color: "#3ea6ff" }}>Community Guidelines</span>.
           </Typography>
-          <Typography variant="h6" sx={{ fontSize: "12px", color: theme.palette.studioLightGray,marginBottom:"4px" }}>
+          <Typography variant="h6" sx={{ fontSize: "12px", color: theme.palette.studioLightGray, marginBottom: "4px" }}>
             Please be sure not to violate others' copyright or privacy rights. <span style={{ color: "#3ea6ff" }}>Learn more</span>
           </Typography>
         </DialogContent>
