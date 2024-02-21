@@ -31,7 +31,7 @@ export default class InfiniteScroll extends Component {
 
   componentDidMount() {
     if (typeof this.props.dataLength === "undefined") {
-      throw new Error(`mandatory prop "dataLength" is missing. The prop is needed` + ` when loading more content. Check README.md for usage`);
+      throw new Error(`mandatory prop "dataLength" is missing. The prop is needed when loading more content. Check README.md for usage`);
     }
 
     this._scrollableNode = this.getScrollableTarget();
@@ -41,7 +41,12 @@ export default class InfiniteScroll extends Component {
       this.el.addEventListener("scroll", this.throttledOnScrollListener);
     }
 
-    if (typeof this.props.initialScrollY === "number" && this.el && this.el instanceof HTMLElement && this.el.scrollHeight > this.props.initialScrollY) {
+    if (
+      typeof this.props.initialScrollY === "number" &&
+      this.el &&
+      this.el instanceof HTMLElement &&
+      this.el.scrollHeight > this.props.initialScrollY
+    ) {
       this.el.scrollTo(0, this.props.initialScrollY);
     }
 
@@ -226,13 +231,16 @@ export default class InfiniteScroll extends Component {
       setTimeout(() => this.props.onScroll && this.props.onScroll(event), 0);
     }
 
-    const target = this.props.height || this._scrollableNode ? event.target : document.documentElement.scrollTop ? document.documentElement : document.body;
+    const target =
+      this.props.height || this._scrollableNode ? event.target : document.documentElement.scrollTop ? document.documentElement : document.body;
 
     // return immediately if the action has already been triggered,
     // prevents multiple triggers.
     if (this.actionTriggered) return;
 
-    const atBottom = this.props.inverse ? this.isElementAtTop(target, this.props.scrollThreshold) : this.isElementAtBottom(target, this.props.scrollThreshold);
+    const atBottom = this.props.inverse
+      ? this.isElementAtTop(target, this.props.scrollThreshold)
+      : this.isElementAtBottom(target, this.props.scrollThreshold);
 
     // call the `next` function in the props to trigger the next data fetch
     if (atBottom && this.props.hasMore) {
