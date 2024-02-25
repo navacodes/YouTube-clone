@@ -68,10 +68,33 @@ export const myApi = createApi({
       method: "GET",
       providesTags: ["MyVideos"],
     }),
+    uploadVideoOnCloudinary: build.mutation({
+      query: (formData) => ({
+        url: "/api/v1/videos/upload",
+        method: "POST",
+        body: formData,
+      }),
+    }),
+    publishVideo: build.mutation({
+      query: (formData) => ({
+        url: "/api/v1/videos/publish",
+        method: "POST",
+        body: formData,
+      }),
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginUserMutation, useGetSubsriptionQuery, useLogoutUserMutation, useGetVideosQuery, useGetSlimVideosQuery, useGetMyVideosQuery,useGetMySlimVideosQuery } =
-  myApi;
+export const {
+  useLoginUserMutation,
+  useGetSubsriptionQuery,
+  useLogoutUserMutation,
+  useGetVideosQuery,
+  useGetSlimVideosQuery,
+  useGetMyVideosQuery,
+  useGetMySlimVideosQuery,
+  useUploadVideoOnCloudinaryMutation,
+  usePublishVideoMutation,
+} = myApi;
