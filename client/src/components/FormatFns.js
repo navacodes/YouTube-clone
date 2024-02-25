@@ -91,3 +91,12 @@ export const transformArray = function (arr) {
 
   return transformedArray;
 };
+export const truncateString = function (inputString) {
+  const maxLength = 30;
+
+  if (inputString.length > maxLength) {
+    return inputString.slice(0, maxLength - 3) + "...";
+  }
+
+  return inputString;
+};
