@@ -54,7 +54,7 @@ app.use(globalErrorHandler);
 
 //MongoDB
 
-const { PORT } = process.env || 5002;
+const PORT = process.env.PORT || 5002;
 const mongoURL = process.env.MONGO_URL.replace("<password>", process.env.MONGO_PASS);
 
 mongoose
