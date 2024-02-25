@@ -28,7 +28,7 @@ const UploadDialog = ({ selectedFile, setselectedFile }) => {
   return (
     <>
       <BootstrapDialog
-        onClose={handleClose}
+        onClose={(event, reason) => reason !== "backdropClick" && reason !== "escapeKeyDown" && handleClose(event)}
         aria-labelledby="customized-dialog-title"
         open={uploadDialogOpen}
         sx={{

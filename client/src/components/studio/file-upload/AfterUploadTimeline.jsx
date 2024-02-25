@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
+import { Box, Stepper, Step, StepLabel, Typography } from "@mui/material";
 
 const steps = ["Details", "Video elements", "Checks", "Visibility"];
 
@@ -18,8 +18,16 @@ const AfterUploadTimeline = ({ activeStep }) => {
         })}
       </Stepper>
 
-      <Typography sx={{ mt: 2, mb: 1 }}>{steps[activeStep]}</Typography>
-      
+      <Typography
+        sx={{
+          mt: 2,
+          mb: 1,
+          fontSize: "25px",
+          marginBottom: steps[activeStep] !== "Details" ? "5px" : "17px",
+        }}
+      >
+        {steps[activeStep]}
+      </Typography>
     </Box>
   );
 };
