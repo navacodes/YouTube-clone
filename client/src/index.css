@@ -93,8 +93,7 @@ body,
   visibility: hidden;
 }
 
-
-/*  */
+/* UploadDialog Upload btn */
 
 .file-label {
   position: relative;
@@ -104,5 +103,27 @@ body,
   color: #fff;
   border-radius: 3px;
   cursor: pointer;
-  font-size: 14px
+  font-size: 14px;
+}
+
+/* Upload form input */
+
+.upload-form-input {
+  font-size: 15px;
+  background-color: inherit;
+  border: none;
+  color: #fff;
+  overflow-wrap: break-word;
+  height: 100%;
+  margin-bottom: 25px;
+}
+.upload-form-input:focus-visible {
+  outline: none;
+}
+.upload-form-input:empty::before {
+  content: attr(data-placeholder); /* Use data-placeholder attribute for placeholder text */
+  color: #aaaaaa;
+  opacity: 0.5;
+  pointer-events: none; /* Allow users to click through it */
+  margin-bottom: 5px; /* Optional spacing adjustment */
 }
