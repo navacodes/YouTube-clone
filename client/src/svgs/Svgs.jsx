@@ -265,3 +265,11 @@ export const EditStudioIcon = ({ fill = "white", size = 24 }) => {
     </svg>
   );
 };
+
+export const AddRelatedVideoStudio = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 5.87L18.2 12L9 18.13V5.87ZM8 4V20L20 12L8 4Z" fill={fill} />
+    </svg>
+  );
+};
