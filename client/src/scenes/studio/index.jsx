@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTheme } from "@emotion/react";
-import { useGetMySlimVideosQuery, useGetMyVideosQuery } from "../../state/api";
+import { useGetMySlimVideosQuery, useGetMyVideosQuery, useUploadVideoOnCloudinaryMutation } from "../../state/api";
 import { useSelector } from "react-redux";
 import { decodeToken } from "react-jwt";
 import { Box, Typography } from "@mui/material";
@@ -46,16 +46,47 @@ const Studio = () => {
   const theme = useTheme();
   const [videoRowsData, setVideoRowsData] = useState([]);
   const [shortsRowsData, setShortsRowsData] = useState([]);
+  // State below stores the uploaded video-file data and name.
   const [selectedFile, setselectedFile] = useState({ name: "", file: null });
-  const [afterUploadDialogOpen, setAfterUploadDialogOpen] = useState(true);
+  // State below manages opening and closing state of the After upload Dialog
+  const [afterUploadDialogOpen, setAfterUploadDialogOpen] = useState(false);
+  // State below manages the state of table: either Video table or Shorts Table
   const [selected, setSelected] = useState("Videos");
+  // State below manages the steps of the timeline while filling form for uploading video
   const [timeline, setTimeline] = useState("Details");
+
+  const [vidDuration, setVidDuration] = useState(0);
+
+  const [videoUrl, setVideoUrl] = useState(null);
 
   const token = useSelector((state) => state.global.token);
   const decodedToken = !token ? null : decodeToken(token);
 
   const { data: videoData, isLoading: vidLoading } = useGetMyVideosQuery({ userId: decodedToken.id, page: 1, pageSize: 30 });
   const { data: shortVideoData, isLoading: shortVidLoading } = useGetMySlimVideosQuery({ userId: decodedToken.id, page: 1, pageSize: 30 });
+
+  const [uploadVideo, { isLoading }] = useUploadVideoOnCloudinaryMutation();
+
+  const handleUpload = async () => {
+    let result;
+    try {
+      const formData = new FormData();
+      formData.append("video", selectedFile.file);
+
+      // Use RTK Query to upload video
+      result = await uploadVideo(formData);
+
+      // Access the public URL from the result
+      console.log(result);
+      setVideoUrl(result.data.videoUrl);
+      setVidDuration(result.data.vidDuration);
+    } catch (error) {
+      alert(`Error ${result.error.status}. Something bad happened.`);
+      setAfterUploadDialogOpen(false);
+      setselectedFile({ name: "", file: null });
+      setVideoUrl(null);
+    }
+  };
 
   useEffect(() => {
     if (!vidLoading && videoData.videos) {
@@ -78,13 +109,20 @@ const Studio = () => {
     };
   }, [shortVidLoading, shortVideoData]);
 
-  // useEffect(() => {
-  //   if (uploadDialogOpen && selectedFile.name !== "" && !afterUploadDialogOpen) {
-  //     setAfterUploadDialogOpen(true);
-  //     setUploadDialogOpen(false);
-  //   }
-  //   // eslint-disable-next-line
-  // }, [afterUploadDialogOpen, uploadDialogOpen, selectedFile.name]);
+  useEffect(() => {
+    if (uploadDialogOpen && selectedFile.name !== "" && !afterUploadDialogOpen) {
+      setAfterUploadDialogOpen(true);
+      setUploadDialogOpen(false);
+    }
+    // eslint-disable-next-line
+  }, [afterUploadDialogOpen, uploadDialogOpen, selectedFile.name]);
+
+  // Handling the upload of the video like Youtube
+  useEffect(() => {
+    if (selectedFile.file !== null && selectedFile.name !== "") handleUpload();
+
+    // eslint-disable-next-line
+  }, [selectedFile.file, selectedFile.name]);
 
   return (
     <div>
@@ -101,6 +139,9 @@ const Studio = () => {
         setAfterUploadDialogOpen={setAfterUploadDialogOpen}
         timeline={timeline}
         setTimeline={setTimeline}
+        videoUrl={videoUrl}
+        uploading={isLoading}
+        vidDuration={vidDuration}
       />
     </div>
   );
