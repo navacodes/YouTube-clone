@@ -82,6 +82,13 @@ export const myApi = createApi({
         body: formData,
       }),
     }),
+    permanentDelete: build.mutation({
+      query: (formData) => ({
+        url: "/api/v1/videos/permanent-delete",
+        method: "POST",
+        body: formData,
+      }),
+    }),
   }),
 });
 
@@ -97,4 +104,5 @@ export const {
   useGetMySlimVideosQuery,
   useUploadVideoOnCloudinaryMutation,
   usePublishVideoMutation,
+  usePermanentDeleteMutation,
 } = myApi;
