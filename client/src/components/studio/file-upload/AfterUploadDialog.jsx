@@ -79,7 +79,7 @@ const AfterUploadDialog = ({
       formData.append("cloudinaryPublicId", videoCloudinaryData.cloudinaryPublicId);
 
       result = await publishVideo(formData);
-      console.log(result);
+      // console.log(result);
       handleClose();
       if (result?.error?.status === "error") alert("Could not upload your video.");
     } catch (error) {

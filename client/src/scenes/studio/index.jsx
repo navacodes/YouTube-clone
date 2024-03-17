@@ -96,7 +96,7 @@ const Studio = () => {
   useEffect(() => {
     if (!vidLoading && videoData.videos) {
       const newData = transformArray(videoData.videos);
-      console.log(newData);
+      // console.log(newData);
       setVideoRowsData((prev) => [...prev, ...newData]);
     }
 
