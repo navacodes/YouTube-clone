@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import AfterUploadTimeline from "./AfterUploadTimeline";
 import { useTheme } from "@emotion/react";
@@ -12,18 +12,22 @@ import { useSelector } from "react-redux";
 import { decodeToken } from "react-jwt";
 
 import CloseIcon from "@mui/icons-material/Close";
+import { StudioContext } from "../../../scenes/studio";
 
 const AfterUploadDialog = ({
   selectedFile,
+  setselectedFile,
   afterUploadDialogOpen,
   setAfterUploadDialogOpen,
   timeline,
   setTimeline,
-  videoUrl,
+  videoCloudinaryData,
+  setVideoCloudinaryData,
   uploading,
   vidDuration,
 }) => {
   const theme = useTheme();
+  const { shortsRefetch, videoRefetch } = useContext(StudioContext);
   const token = useSelector((state) => state.global.token);
   const decodedToken = !token ? null : decodeToken(token);
 
@@ -41,10 +45,15 @@ const AfterUploadDialog = ({
   };
 
   const handleClose = () => {
-    setAfterUploadDialogOpen(false);
     setDesInput("");
     setTitleInput("");
     setVisibility("Private");
+    setVideoCloudinaryData({ videoUrl: null, cloudinaryPublicId: null });
+    setselectedFile({ name: "", file: null });
+    shortsRefetch();
+    videoRefetch();
+    setActiveStep(0);
+    setAfterUploadDialogOpen(false);
   };
 
   const handleNext = () => {
@@ -56,25 +65,23 @@ const AfterUploadDialog = ({
   };
 
   const handleVideoPublish = async () => {
-    let result;
+    let result = null;
     try {
       const privateVid = visibility === "Private" ? true : false;
       const videoType = vidDuration > 60 ? "video" : "short";
       const formData = new FormData();
       formData.append("title", titleInput);
       formData.append("description", desInput);
-      formData.append("mediaUrl", videoUrl);
+      formData.append("mediaUrl", videoCloudinaryData.videoUrl);
       formData.append("privateVid", privateVid);
       formData.append("videoType", videoType);
       formData.append("createdBy", decodedToken.id);
+      formData.append("cloudinaryPublicId", videoCloudinaryData.cloudinaryPublicId);
 
-      for (const [key, value] of formData.entries()) {
-        console.log(key, ":", value);
-      }
       result = await publishVideo(formData);
-      console.log(result.data);
-
+      console.log(result);
       handleClose();
+      if (result?.error?.status === "error") alert("Could not upload your video.");
     } catch (error) {
       console.log(error);
     }
@@ -127,13 +134,15 @@ const AfterUploadDialog = ({
               setTitleInput={setTitleInput}
               desInput={desInput}
               setDesInput={setDesInput}
-              videoUrl={videoUrl}
+              videoUrl={videoCloudinaryData.videoUrl}
               filename={selectedFile.name}
             />
           )}
           {activeStep === 1 && <VideoElements />}
           {activeStep === 2 && <Checks />}
-          {activeStep === 3 && <Visibility handleRadioClick={handleRadioClick} videoUrl={videoUrl} filename={selectedFile.name} />}
+          {activeStep === 3 && (
+            <Visibility handleRadioClick={handleRadioClick} videoUrl={videoCloudinaryData.videoUrl} filename={selectedFile.name} />
+          )}
         </DialogContent>
         <DialogActions>
           <Box sx={{ flex: "1 1 auto", marginLeft: "6px" }}>{uploading ? "Processing..." : "Video Processed !"}</Box>
