@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useTheme } from "@emotion/react";
-import { useGetMySlimVideosQuery, useGetMyVideosQuery, useUploadVideoOnCloudinaryMutation } from "../../state/api";
+import { useGetMySlimVideosQuery, useGetMyVideosQuery, usePermanentDeleteMutation, useUploadVideoOnCloudinaryMutation } from "../../state/api";
 import { useSelector } from "react-redux";
 import { decodeToken } from "react-jwt";
 import { Box, Typography } from "@mui/material";
@@ -12,10 +12,11 @@ import DataTable from "../../components/studio/DataTable";
 import { transformArray } from "../../components/FormatFns";
 import UploadDialog from "../../components/studio/file-upload/UploadDialog";
 import AfterUploadDialog from "../../components/studio/file-upload/AfterUploadDialog";
-import { StudioContext } from "./StudioLayout";
+import { StudioLayoutContext } from "./StudioLayout";
 
+export const StudioContext = createContext();
 const Studio = () => {
-  const { uploadDialogOpen, setUploadDialogOpen } = useContext(StudioContext);
+  const { uploadDialogOpen, setUploadDialogOpen } = useContext(StudioLayoutContext);
   const columns = [
     {
       field: "video",
@@ -32,7 +33,7 @@ const Studio = () => {
       field: "date",
       headerName: "Date",
       // type: "date",
-      width: 90,
+      width: 100,
     },
     {
       field: "views",
@@ -57,18 +58,23 @@ const Studio = () => {
 
   const [vidDuration, setVidDuration] = useState(0);
 
-  const [videoUrl, setVideoUrl] = useState(null);
+  const [videoCloudinaryData, setVideoCloudinaryData] = useState({ videoUrl: null, cloudinaryPublicId: null });
 
   const token = useSelector((state) => state.global.token);
   const decodedToken = !token ? null : decodeToken(token);
 
-  const { data: videoData, isLoading: vidLoading } = useGetMyVideosQuery({ userId: decodedToken.id, page: 1, pageSize: 30 });
-  const { data: shortVideoData, isLoading: shortVidLoading } = useGetMySlimVideosQuery({ userId: decodedToken.id, page: 1, pageSize: 30 });
+  const { data: videoData, isLoading: vidLoading, refetch: videoRefetch } = useGetMyVideosQuery({ userId: decodedToken.id, page: 1, pageSize: 30 });
+  const {
+    data: shortVideoData,
+    isLoading: shortVidLoading,
+    refetch: shortsRefetch,
+  } = useGetMySlimVideosQuery({ userId: decodedToken.id, page: 1, pageSize: 30 });
 
   const [uploadVideo, { isLoading }] = useUploadVideoOnCloudinaryMutation();
+  const [deleteVideo] = usePermanentDeleteMutation();
 
   const handleUpload = async () => {
-    let result;
+    let result = null;
     try {
       const formData = new FormData();
       formData.append("video", selectedFile.file);
@@ -77,20 +83,20 @@ const Studio = () => {
       result = await uploadVideo(formData);
 
       // Access the public URL from the result
-      console.log(result);
-      setVideoUrl(result.data.videoUrl);
+      setVideoCloudinaryData({ cloudinaryPublicId: result.data.public_id, videoUrl: result.data.videoUrl });
       setVidDuration(result.data.vidDuration);
     } catch (error) {
-      alert(`Error ${result.error.status}. Something bad happened.`);
+      alert(`Error ${result?.error?.status}. Something bad happened.`);
       setAfterUploadDialogOpen(false);
       setselectedFile({ name: "", file: null });
-      setVideoUrl(null);
+      setVideoCloudinaryData({ videoUrl: null, cloudinaryPublicId: null });
     }
   };
 
   useEffect(() => {
     if (!vidLoading && videoData.videos) {
       const newData = transformArray(videoData.videos);
+      console.log(newData);
       setVideoRowsData((prev) => [...prev, ...newData]);
     }
 
@@ -126,23 +132,36 @@ const Studio = () => {
 
   return (
     <div>
-      <Box sx={{ paddingLeft: "32px", paddingTop: "23px", position: "sticky", left: "0", marginBottom: "15px" }}>
-        <Typography variant="h3">Channel content</Typography>
-      </Box>
-      <SelectContentNavbar theme={theme} setSelected={setSelected} selected={selected} />
-      {selected === "Videos" ? <DataTable theme={theme} columns={columns} rowsData={videoRowsData} /> : null}
-      {selected === "Shorts" ? <DataTable theme={theme} columns={columns} rowsData={shortsRowsData} /> : null}
-      <UploadDialog selectedFile={selectedFile} setselectedFile={setselectedFile} />
-      <AfterUploadDialog
-        selectedFile={selectedFile}
-        afterUploadDialogOpen={afterUploadDialogOpen}
-        setAfterUploadDialogOpen={setAfterUploadDialogOpen}
-        timeline={timeline}
-        setTimeline={setTimeline}
-        videoUrl={videoUrl}
-        uploading={isLoading}
-        vidDuration={vidDuration}
-      />
+      <StudioContext.Provider
+        value={{
+          deleteVideo: deleteVideo,
+          userId: decodedToken.id,
+          videoRefetch: videoRefetch,
+          shortsRefetch: shortsRefetch,
+        }}
+      >
+        <Box sx={{ paddingLeft: "32px", paddingTop: "23px", position: "sticky", left: "0", marginBottom: "15px" }}>
+          <Typography variant="h3">Channel content</Typography>
+        </Box>
+        <SelectContentNavbar theme={theme} setSelected={setSelected} selected={selected} />
+        {selected === "Videos" ? <DataTable theme={theme} columns={columns} rowsData={videoRowsData} /> : null}
+        {selected === "Shorts" ? <DataTable theme={theme} columns={columns} rowsData={shortsRowsData} /> : null}
+        <UploadDialog selectedFile={selectedFile} setselectedFile={setselectedFile} />
+        <AfterUploadDialog
+          selectedFile={selectedFile}
+          setselectedFile={setselectedFile}
+          afterUploadDialogOpen={afterUploadDialogOpen}
+          setAfterUploadDialogOpen={setAfterUploadDialogOpen}
+          timeline={timeline}
+          setTimeline={setTimeline}
+          videoCloudinaryData={videoCloudinaryData}
+          setVideoCloudinaryData={setVideoCloudinaryData}
+          uploading={isLoading}
+          vidDuration={vidDuration}
+          videoRefetch={videoRefetch}
+          shortsRefetch={shortsRefetch}
+        />
+      </StudioContext.Provider>
     </div>
   );
 };
