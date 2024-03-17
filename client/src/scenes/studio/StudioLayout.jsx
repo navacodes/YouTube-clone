@@ -5,17 +5,18 @@ import SidebarStudio from "../../components/studio/SidebarStudio";
 import NavbarStudio from "../../components/studio/NavbarStudio";
 import { useTheme } from "@emotion/react";
 
-export const StudioContext = createContext(null);
+export const StudioLayoutContext = createContext(null);
 
 const StudioLayout = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
   const theme = useTheme();
-  return (
-    <StudioContext.Provider
+  return ( 
+    <StudioLayoutContext.Provider
       value={{
         uploadDialogOpen: uploadDialogOpen,
         setUploadDialogOpen: setUploadDialogOpen,
+        isSideBarOpen: isSideBarOpen,
       }}
     >
       <Box sx={{ width: "100%", height: "100%", background: theme.palette.studioMediumGray }}>
@@ -42,7 +43,7 @@ const StudioLayout = () => {
           </Box>
         </Box>
       </Box>
-    </StudioContext.Provider>
+    </StudioLayoutContext.Provider>
   );
 };
 

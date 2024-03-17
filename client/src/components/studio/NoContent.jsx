@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import NoContentImg from "../../img/noContent.png";
 import { Box, Button, Typography } from "@mui/material";
-import { StudioContext } from "../../scenes/studio/StudioLayout";
+import { StudioLayoutContext } from "../../scenes/studio/StudioLayout";
 
 const NoContent = () => {
-  const { setUploadDialogOpen } = useContext(StudioContext);
+  const { setUploadDialogOpen } = useContext(StudioLayoutContext);
 
   return (
     <Box className="no-content-box" sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>

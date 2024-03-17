@@ -4,7 +4,7 @@ import { Typography, Dialog, DialogTitle, DialogContent, IconButton } from "@mui
 import { styled } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { StudioContext } from "../../../scenes/studio/StudioLayout";
+import { StudioLayoutContext } from "../../../scenes/studio/StudioLayout";
 import { useTheme } from "@emotion/react";
 
 import UploadButton from "./UploadButton";
@@ -19,7 +19,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 const UploadDialog = ({ selectedFile, setselectedFile }) => {
-  const { uploadDialogOpen, setUploadDialogOpen } = useContext(StudioContext);
+  const { uploadDialogOpen, setUploadDialogOpen } = useContext(StudioLayoutContext);
   const theme = useTheme();
 
   const handleClose = () => {

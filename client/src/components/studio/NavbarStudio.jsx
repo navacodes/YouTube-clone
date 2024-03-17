@@ -31,7 +31,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useSelector } from "react-redux";
 import { navItems1, navItems2, navItems3 } from "../studio/NavItems.js";
 import { useLogoutUserMutation } from "../../state/api.js";
-import { StudioContext } from "../../scenes/studio/StudioLayout.jsx";
+import { StudioLayoutContext } from "../../scenes/studio/StudioLayout.jsx";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "isSideBarOpen",
@@ -380,7 +380,7 @@ const RightComponent = ({
 };
 
 export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
-  const { setUploadDialogOpen } = useContext(StudioContext);
+  const { setUploadDialogOpen } = useContext(StudioLayoutContext);
   const theme = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.global.token);
