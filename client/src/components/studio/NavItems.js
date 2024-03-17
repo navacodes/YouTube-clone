@@ -20,6 +20,11 @@ import {
   CustomisationIcon,
   AudioLibraryIcon,
   SettingsIcon,
+  EditStudioIcon,
+  GetShareableLinkIcon,
+  PromoteIcon,
+  DownloadIcon,
+  DeleteForeverIcon,
 } from "../../svgs/Svgs";
 
 export const navItems1 = [
@@ -124,4 +129,15 @@ export const navItems5 = [
     text: "Send feedback",
     icon: <FeedBackIcon fill="#909090" />,
   },
+];
+
+export const navItems6 = [
+  { text: "Edit title and description", icon: <EditStudioIcon fill="#AAAAAA" /> },
+  {
+    text: "Get shearable link",
+    icon: <GetShareableLinkIcon fill="#AAAAAA" />,
+  },
+  { text: "Promote", icon: <PromoteIcon fill="#AAAAAA" /> },
+  { text: "Download", icon: <DownloadIcon fill="#AAAAAA" /> },
+  { text: "Delete forever", icon: <DeleteForeverIcon fill="#AAAAAA" /> },
 ];
