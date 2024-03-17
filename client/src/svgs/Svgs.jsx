@@ -266,10 +266,64 @@ export const EditStudioIcon = ({ fill = "white", size = 24 }) => {
   );
 };
 
+export const ThreeDotsVert = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M12 16.5C12.83 16.5 13.5 17.17 13.5 18C13.5 18.83 12.83 19.5 12 19.5C11.17 19.5 10.5 18.83 10.5 18C10.5 17.17 11.17 16.5 12 16.5ZM10.5 12C10.5 12.83 11.17 13.5 12 13.5C12.83 13.5 13.5 12.83 13.5 12C13.5 11.17 12.83 10.5 12 10.5C11.17 10.5 10.5 11.17 10.5 12ZM10.5 6C10.5 6.83 11.17 7.5 12 7.5C12.83 7.5 13.5 6.83 13.5 6C13.5 5.17 12.83 4.5 12 4.5C11.17 4.5 10.5 5.17 10.5 6Z"
+        fill={fill}
+      />
+    </svg>
+  );
+};
+
 export const AddRelatedVideoStudio = ({ fill = "white", size = 24 }) => {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M9 5.87L18.2 12L9 18.13V5.87ZM8 4V20L20 12L8 4Z" fill={fill} />
+    </svg>
+  );
+};
+
+export const GetShareableLinkIcon = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17 14.9998C16.06 14.9998 15.23 15.4398 14.68 16.1198L9.74 13.2098C9.9 12.8398 10 12.4298 10 11.9998C10 11.5898 9.92 11.1898 9.76 10.8298L14.71 7.91976C15.26 8.56976 16.08 8.99976 17 8.99976C18.65 8.99976 20 7.64976 20 5.99976C20 4.34976 18.65 2.99976 17 2.99976C15.35 2.99976 14 4.34976 14 5.99976C14 6.36976 14.08 6.72976 14.2 7.05976L9.21 9.98976C8.66 9.38976 7.88 8.99976 7 8.99976C5.35 8.99976 4 10.3498 4 11.9998C4 13.6498 5.35 14.9998 7 14.9998C7.86 14.9998 8.63 14.6298 9.18 14.0498L14.19 16.9898C14.07 17.3098 14 17.6398 14 17.9998C14 19.6498 15.35 20.9998 17 20.9998C18.65 20.9998 20 19.6498 20 17.9998C20 16.3498 18.65 14.9998 17 14.9998ZM17 3.99976C18.1 3.99976 19 4.89976 19 5.99976C19 7.09976 18.1 7.99976 17 7.99976C15.9 7.99976 15 7.09976 15 5.99976C15 4.89976 15.9 3.99976 17 3.99976ZM7 13.9998C5.9 13.9998 5 13.0998 5 11.9998C5 10.8998 5.9 9.99976 7 9.99976C8.1 9.99976 9 10.8998 9 11.9998C9 13.0998 8.1 13.9998 7 13.9998ZM17 19.9998C15.9 19.9998 15 19.0998 15 17.9998C15 16.8998 15.9 15.9998 17 15.9998C18.1 15.9998 19 16.8998 19 17.9998C19 19.0998 18.1 19.9998 17 19.9998Z"
+        fill={fill}
+      />
+    </svg>
+  );
+};
+
+export const PromoteIcon = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19.1945 4L16 6.40726L17.2036 8.00453L20.3982 5.59727L19.1945 4Z" fill="black" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M8 9L14 5V8.53516C15.1956 9.22678 16 10.5195 16 12.0001C16 13.4806 15.1956 14.7733 14 15.4649V19L8 15H7V19H5V15H2V9H8ZM8.30278 9.99997L13 6.86852V17.1315L8.30278 14H3V9.99997H8.30278Z"
+        fill={fill}
+      />
+      <path d="M18 11H22V13H18V11Z" fill={fill} />
+      <path d="M17.2041 16L20.3986 18.4073L19.195 20.0046L16.0005 17.5973L17.2041 16Z" fill={fill} />
+    </svg>
+  );
+};
+
+export const DownloadIcon = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17 18V19H6V18H17ZM16.5 11.4L15.8 10.7L12 14.4V4H11V14.4L7.2 10.6L6.5 11.3L11.5 16.3L16.5 11.4Z" fill={fill} />
+    </svg>
+  );
+};
+
+export const DeleteForeverIcon = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11 17H9V8H11V17ZM15 8H13V17H15V8ZM19 4V5H18V21H6V5H5V4H9V3H15V4H19ZM17 5H7V20H17V5Z" fill={fill} />
     </svg>
   );
 };
