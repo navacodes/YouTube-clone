@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 import { promisify } from "util";
 
 const signToken = (tokenData) => {
-  console.log(tokenData);
   return jwt.sign({ ...tokenData }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
@@ -20,13 +19,11 @@ const createAndSendToken = (user, statusCode, res) => {
     country: user.country,
   });
   const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
+    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
     sameSite: "None",
     httpOnly: true,
   };
-  console.log("when deploying this app set cookieeoptions.secure == true");
+  // console.log("when deploying this app set cookieeoptions.secure == true");
 
   // cookieOptions.secure = true;
   res.cookie("jwt", token, cookieOptions);
@@ -39,10 +36,10 @@ const createAndSendToken = (user, statusCode, res) => {
 
 export const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(req.body);
 
   // 1) Checking if email and password are not undefined
-  if (!email || !password)
-    return next(new AppError(`Provide both, email and password`, 400));
+  if (!email || !password) return next(new AppError(`Provide both, email and password`, 400));
 
   // 2) Check if email && password are correct
   const user = await User.findOne({ email }).select("+password");
@@ -72,10 +69,7 @@ export const logOut = (req, res) => {
 export const protect = catchAsync(async (req, res, next) => {
   let token = "";
   //1) Get the token, check if it exist
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
+  if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
     token = req.headers.authorization.split(" ")[1];
   } else if (req.cookies.jwt) {
     token = req.cookies.jwt;
@@ -88,11 +82,7 @@ export const protect = catchAsync(async (req, res, next) => {
 
   // //2) Verification of the token
 
-  const decodedPayload = await promisify(jwt.verify)(
-    token,
-    process.env.JWT_SECRET
-  );
-  console.log(decodedPayload);
+  const decodedPayload = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   const user = await User.findById(decodedPayload.id);
   if (!user) {
     return new AppError("Login again ! Your session has expired", 404);

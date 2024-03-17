@@ -19,6 +19,10 @@ const videoSchema = new mongoose.Schema(
       type: String,
       enum: ["video", "short"],
     },
+    cloudinaryPublicId: {
+      type: String,
+      required: true,
+    },
     privateVid: {
       type: Boolean,
       default: false,
