@@ -82,6 +82,7 @@ export const transformArray = function (arr) {
         description: obj.description,
         title: obj.title,
         videoId: obj._id,
+        cloudinaryPublicId: obj.cloudinaryPublicId,
       },
       restrictions: "None",
       comments: "-",
