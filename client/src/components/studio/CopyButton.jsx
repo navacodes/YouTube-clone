@@ -22,8 +22,14 @@ const CopyButton = ({ linkToCopy }) => {
     <Box
       aria-label="Copy"
       onClick={handleCopyClick}
-      disabled={linkToCopy === null}
-      sx={{ color: theme.palette.studioLightGray, ":hover": { color: "white" }, display: "flex", alignItems: "center",marginRight:"8px" }}
+      sx={{
+        color: theme.palette.studioLightGray,
+        ":hover": { color: "white" },
+        display: "flex",
+        alignItems: "center",
+        marginRight: "8px",
+        cursor: "pointer",
+      }}
     >
       {<ContentCopyOutlinedIcon />}
     </Box>
