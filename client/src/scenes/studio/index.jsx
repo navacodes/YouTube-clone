@@ -13,10 +13,12 @@ import { transformArray } from "../../components/FormatFns";
 import UploadDialog from "../../components/studio/file-upload/UploadDialog";
 import AfterUploadDialog from "../../components/studio/file-upload/AfterUploadDialog";
 import { StudioLayoutContext } from "./StudioLayout";
+import Edit from "./edit";
 
 export const StudioContext = createContext();
+export let handleRefetch;
 const Studio = () => {
-  const { uploadDialogOpen, setUploadDialogOpen } = useContext(StudioLayoutContext);
+  const { uploadDialogOpen, setUploadDialogOpen, editVideoPageInUse } = useContext(StudioLayoutContext);
   const columns = [
     {
       field: "video",
@@ -93,6 +95,11 @@ const Studio = () => {
     }
   };
 
+  handleRefetch = function () {
+    videoRefetch();
+    shortsRefetch();
+  };
+
   useEffect(() => {
     if (!vidLoading && videoData.videos) {
       const newData = transformArray(videoData.videos);
@@ -129,23 +136,26 @@ const Studio = () => {
 
     // eslint-disable-next-line
   }, [selectedFile.file, selectedFile.name]);
-
   return (
-    <div>
-      <StudioContext.Provider
-        value={{
-          deleteVideo: deleteVideo,
-          userId: decodedToken.id,
-          videoRefetch: videoRefetch,
-          shortsRefetch: shortsRefetch,
-        }}
-      >
-        <Box sx={{ paddingLeft: "32px", paddingTop: "23px", position: "sticky", left: "0", marginBottom: "15px" }}>
-          <Typography variant="h3">Channel content</Typography>
-        </Box>
-        <SelectContentNavbar theme={theme} setSelected={setSelected} selected={selected} />
-        {selected === "Videos" ? <DataTable theme={theme} columns={columns} rowsData={videoRowsData} /> : null}
-        {selected === "Shorts" ? <DataTable theme={theme} columns={columns} rowsData={shortsRowsData} /> : null}
+    <StudioContext.Provider
+      value={{
+        deleteVideo: deleteVideo,
+        userId: decodedToken.id,
+      }}
+    >
+      <div className="studio-index">
+        {editVideoPageInUse ? (
+          <Edit userId={decodedToken.id} handleRefetch={handleRefetch} />
+        ) : (
+          <Box sx={{ height: "100%" }}>
+            <Box sx={{ paddingLeft: "32px", paddingTop: "23px", position: "sticky", left: "0", marginBottom: "15px" }}>
+              <Typography variant="h3">Channel content</Typography>
+            </Box>
+            <SelectContentNavbar theme={theme} setSelected={setSelected} selected={selected} />
+            {selected === "Videos" ? <DataTable theme={theme} columns={columns} rowsData={videoRowsData} /> : null}
+            {selected === "Shorts" ? <DataTable theme={theme} columns={columns} rowsData={shortsRowsData} /> : null}
+          </Box>
+        )}
         <UploadDialog selectedFile={selectedFile} setselectedFile={setselectedFile} />
         <AfterUploadDialog
           selectedFile={selectedFile}
@@ -161,8 +171,8 @@ const Studio = () => {
           videoRefetch={videoRefetch}
           shortsRefetch={shortsRefetch}
         />
-      </StudioContext.Provider>
-    </div>
+      </div>
+    </StudioContext.Provider>
   );
 };
 
