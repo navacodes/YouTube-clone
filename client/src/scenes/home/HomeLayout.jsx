@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import NavbarHome from "../../components/home/NavbarHome";
@@ -8,6 +8,14 @@ import FeedFilter from "../../components/home/FeedFilter";
 
 const HomeLayout = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
+  useEffect(() => {
+    let bgColor = "#121212";
+    if (window.location.pathname.startsWith("/home")) bgColor = "#121212";
+    document.body.style.backgroundColor = bgColor;
+    return () => {
+      document.body.style.backgroundColor = "#121212";
+    };
+  }, []);
 
   return (
     <Box sx={{ width: "100%", height: "100%" }}>
@@ -28,7 +36,7 @@ const HomeLayout = () => {
             marginTop: "120px",
           }}
         >
-          <Box sx={{ paddingLeft: "20px" }}>
+          <Box sx={{ paddingLeft: "20px", backgroundColor: "#121212" }}>
             <Outlet />
           </Box>
         </Box>
