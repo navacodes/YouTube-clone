@@ -7,7 +7,16 @@ const NoContent = () => {
   const { setUploadDialogOpen } = useContext(StudioLayoutContext);
 
   return (
-    <Box className="no-content-box" sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+    <Box
+      className="no-content-box"
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        height: "calc(100vh - 338.6px)",
+      }}
+    >
       <img src={NoContentImg} alt="No-Content" />
       <Typography sx={{ fontSize: "15px", color: "#aaa", marginBottom: "15px" }}>No content available</Typography>
       <Button
