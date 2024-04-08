@@ -441,7 +441,7 @@ export default function NavbarStudio({ isSideBarOpen, setIsSideBarOpen }) {
             </IconButton>
             {/* change the yt icon to dynamic icon */}
             <Box sx={{ marginRight: "96px", paddingTop: "8px", cursor: "pointer", pointerEvents: "all" }}>
-              <img onClick={() => navigate(`/studio/${decodedToken.id}`)} src={YoutubeStudioLightIcon} alt="" />
+              <img onClick={() => navigate(`/studio/${decodedToken?.id}`)} src={YoutubeStudioLightIcon} alt="" />
             </Box>
           </Box>
           {greaterThan590 && (
