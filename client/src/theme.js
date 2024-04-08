@@ -35,7 +35,7 @@ export const themeSettings = (mode) => {
             },
             text: {
               primary: "#fff",
-            },
+          },
           }
         : {
             // palette values for light mode
