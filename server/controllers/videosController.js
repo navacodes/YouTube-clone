@@ -51,6 +51,7 @@ export const permanentDeleteMyVideo = async (req, res) => {
   const deletedCloudinary = await cloudinary.uploader.destroy(cloudinaryPublicId, {
     resource_type: "video",
   });
+  console.log(deletedCloudinary);
   if (deletedVideo.deletedCount === 1 && deletedCloudinary.result === "ok") {
     const updatedUser = await User.findByIdAndUpdate(userId, { $pull: { videos: videoId } }, { new: true });
     console.log(`Video with public ID ${cloudinaryPublicId} deleted successfully.`);
@@ -65,4 +66,74 @@ export const permanentDeleteMyVideo = async (req, res) => {
     console.log(deletedCloudinary.result);
     res.status(404).json({ error: "Video not found" });
   }
+};
+
+export const getMyEditVideo = async (req, res) => {
+  const { videoId, userId } = req.query;
+
+  try {
+    // Check if the user exists and has the video in their videos array
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    if (!user.videos.includes(videoId)) {
+      return res.status(403).json({ error: "User does not have access to this video" });
+    }
+
+    // Retrieve the video by its ID
+    const video = await Video.findById(videoId).select("-__v -createdBy -updatedAt -createdAt -_id");
+    if (!video) {
+      return res.status(404).json({ error: "Video not found" });
+    }
+
+    // Return the video data
+    return res.status(200).json({
+      message: "success",
+      videoData: video,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const postMyEditVideo = async (req, res) => {
+  const { videoId, userId, title, description, privateVid } = req.body;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (!user.videos.includes(videoId)) {
+      return res.status(403).json({ message: "User does not have access to this video" });
+    }
+
+    const video = await Video.findById(videoId).select("-__v -createdBy -updatedAt -createdAt");
+    if (!video) {
+      return res.status(404).json({ message: "Video not found" });
+    }
+
+    video.title = title || video.title;
+    video.description = description || video.description;
+    video.privateVid = privateVid || video.privateVid;
+
+    // Saving the video
+    await video.save();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error", message: error });
+  }
+
+  res.status(200).json({
+    message: "Video successfully updated!",
+    data: {
+      videoId,
+      userId,
+      title,
+      description,
+      privateVid,
+    },
+  });
 };

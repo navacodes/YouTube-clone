@@ -20,5 +20,7 @@ const upload = multer({ storage });
 router.route("/upload").post(authController.protect, upload.single("video"), videosController.postMyVideoOnCloudinary);
 router.route("/publish").post(authController.protect, upload.none(), videosController.publishMyVideo);
 router.route("/permanent-delete").post(authController.protect, upload.none(), videosController.permanentDeleteMyVideo);
+router.route("/edit").get(authController.protect, videosController.getMyEditVideo);
+router.route("/edit/save").post(authController.protect, upload.none(), videosController.postMyEditVideo);
 
 export default router;
