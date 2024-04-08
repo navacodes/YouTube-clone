@@ -25,6 +25,9 @@ import {
   PromoteIcon,
   DownloadIcon,
   DeleteForeverIcon,
+  EditStudioFilledIcon,
+  EditorStudioIcon,
+  ClipsStudioIcon,
 } from "../../svgs/Svgs";
 
 export const navItems1 = [
@@ -140,4 +143,35 @@ export const navItems6 = [
   { text: "Promote", icon: <PromoteIcon fill="#AAAAAA" /> },
   { text: "Download", icon: <DownloadIcon fill="#AAAAAA" /> },
   { text: "Delete forever", icon: <DeleteForeverIcon fill="#AAAAAA" /> },
+];
+
+export const navItems7 = [
+  {
+    text: "Details",
+    icon: <EditStudioFilledIcon fill="#FF4E45" />,
+  },
+  {
+    text: "Analytics",
+    icon: <AnalyticsIcon fill="#909090" />,
+  },
+  {
+    text: "Editor",
+    icon: <EditorStudioIcon fill="#909090" />,
+  },
+  {
+    text: "Comments",
+    icon: <CommentsIcon fill="#909090" />,
+  },
+  {
+    text: "Subtitles",
+    icon: <SubtitlesIcon fill="#909090" />,
+  },
+  {
+    text: "Copyright",
+    icon: <CopyrightIcon fill="#909090" />,
+  },
+  {
+    text: "Clips",
+    icon: <ClipsStudioIcon fill="#909090" />,
+  },
 ];
