@@ -66,7 +66,7 @@ export const myApi = createApi({
     getMySlimVideos: build.query({
       query: ({ userId, page = 1, pageSize = 30 }) => `/api/v1/studio/${userId}/shorts?page=${page}&pageSize=${pageSize}`,
       method: "GET",
-      providesTags: ["MyVideos"],
+      providesTags: ["MySlimVideos"],
     }),
     uploadVideoOnCloudinary: build.mutation({
       query: (formData) => ({
@@ -89,6 +89,20 @@ export const myApi = createApi({
         body: formData,
       }),
     }),
+    getEditVideo: build.query({
+      query: ({ userId, videoId }) => ({
+        url: `/api/v1/videos/edit?userId=${userId}&videoId=${videoId}`,
+        method: "GET",
+        providesTags: ["MyEditVideos"],
+      }),
+    }),
+    saveEditedVideo: build.mutation({
+      query: (formData) => ({
+        url: "/api/v1/videos/edit/save",
+        method: "POST",
+        body: formData,
+      }),
+    }),
   }),
 });
 
@@ -105,4 +119,6 @@ export const {
   useUploadVideoOnCloudinaryMutation,
   usePublishVideoMutation,
   usePermanentDeleteMutation,
+  useGetEditVideoQuery,
+  useSaveEditedVideoMutation,
 } = myApi;
