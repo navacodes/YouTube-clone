@@ -49,11 +49,11 @@ const StudioVideoCardComponent = ({ videoData }) => {
               color: theme.palette.studioLightGray,
             }}
           >
-            {hover ? <HoverElements setOpen={setHoverModal} theme={theme} videoId={videoData.videoId} /> : videoData.description}
+            {hover ? <HoverElements setOpen={setHoverModal} theme={theme} videoData={videoData} /> : videoData.description}
           </Box>
         </Box>
       </div>
-      <HoverElementsModal cloudinaryPublicId={videoData.cloudinaryPublicId} videoId={videoData.videoId} open={hoverModal} setOpen={setHoverModal} />
+      <HoverElementsModal videoData={videoData} open={hoverModal} setOpen={setHoverModal} />
     </>
   );
 };

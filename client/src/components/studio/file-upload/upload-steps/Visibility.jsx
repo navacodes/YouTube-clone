@@ -3,7 +3,7 @@ import { Box, FormControl, FormControlLabel, Radio, RadioGroup, Typography } fro
 import { useTheme } from "@emotion/react";
 
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
-import VideoBoxInUpload from "./VideoBoxInUpload";
+import VideoBoxWithDetails from "../../VideoBoxWithDetails";
 
 const Visibility = ({ handleRadioClick, videoUrl, filename }) => {
   const theme = useTheme();
@@ -36,7 +36,7 @@ const Visibility = ({ handleRadioClick, videoUrl, filename }) => {
               }}
             >
               <FormControlLabel
-                value="female"
+                value="Private"
                 control={
                   <Radio
                     sx={{
@@ -53,7 +53,7 @@ const Visibility = ({ handleRadioClick, videoUrl, filename }) => {
                 Only you and people you choose can watch your video
               </Typography>
               <FormControlLabel
-                value="male"
+                value="Unlisted"
                 control={
                   <Radio
                     sx={{
@@ -71,7 +71,7 @@ const Visibility = ({ handleRadioClick, videoUrl, filename }) => {
               </Typography>
 
               <FormControlLabel
-                value="other"
+                value="Public"
                 control={
                   <Radio
                     sx={{
@@ -147,7 +147,9 @@ const Visibility = ({ handleRadioClick, videoUrl, filename }) => {
           </Box>
         </Box>
       </Box>
-      <VideoBoxInUpload videoUrl={videoUrl} filename={filename} />
+      <Box sx={{ paddingLeft: "24px" }}>
+        <VideoBoxWithDetails videoUrl={videoUrl} filename={filename} />
+      </Box>
     </Box>
   );
 };

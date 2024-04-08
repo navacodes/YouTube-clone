@@ -5,13 +5,13 @@ import { StudioLayoutContext } from "../../../scenes/studio/StudioLayout";
 import { useNavigate } from "react-router-dom";
 import { StudioContext } from "../../../scenes/studio";
 
-const HoverElementsModal = ({ open, setOpen, videoId, cloudinaryPublicId }) => {
+const HoverElementsModal = ({ open, setOpen, videoData }) => {
   const { isSideBarOpen } = useContext(StudioLayoutContext);
   const { deleteVideo, userId, videoRefetch, shortsRefetch } = useContext(StudioContext);
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`/studio/video/edit/${videoId}`);
+    navigate(`/studio/video/edit/${videoData.videoId}`);
   };
 
   const closeModal = () => {
@@ -22,9 +22,9 @@ const HoverElementsModal = ({ open, setOpen, videoId, cloudinaryPublicId }) => {
     let result;
     try {
       const formData = new FormData();
-      formData.append("videoId", videoId);
+      formData.append("videoId", videoData.videoId);
       formData.append("userId", userId);
-      formData.append("cloudinaryPublicId", cloudinaryPublicId);
+      formData.append("cloudinaryPublicId", videoData.cloudinaryPublicId);
       result = await deleteVideo(formData);
 
       videoRefetch();
@@ -34,12 +34,12 @@ const HoverElementsModal = ({ open, setOpen, videoId, cloudinaryPublicId }) => {
 
   const modalRef = useRef(null);
 
-  const button = document.getElementById(`${videoId}-button`);
+  const button = document.getElementById(`${videoData.videoId}-button`);
   const buttonRect = button ? button.getBoundingClientRect() : { top: 0, left: 0 };
 
   const modalStyle = {
     top: isSideBarOpen ? `${buttonRect.top - 228}px` : `${buttonRect.top - 228}px`,
-    left: isSideBarOpen ? `${buttonRect.left - 260}px` : `${buttonRect.top - 50}px`,
+    left: isSideBarOpen ? `${buttonRect.left - 260}px` : `${buttonRect.left - 75}px`,
   };
 
   const handleOutsideClick = (event) => {

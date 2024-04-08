@@ -67,7 +67,7 @@ const AfterUploadDialog = ({
   const handleVideoPublish = async () => {
     let result = null;
     try {
-      const privateVid = visibility === "Private" ? true : false;
+      const privateVid = visibility !== "Public" ? true : false;
       const videoType = vidDuration > 60 ? "video" : "short";
       const formData = new FormData();
       formData.append("title", titleInput);

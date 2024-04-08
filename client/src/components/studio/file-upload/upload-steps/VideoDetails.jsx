@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React, { useRef } from "react";
-import VideoBoxInUpload from "./VideoBoxInUpload";
+import VideoBoxWithDetails from "../../VideoBoxWithDetails";
 import { HelpIcon } from "../../../../svgs/Svgs";
 import { useTheme } from "@emotion/react";
 
@@ -100,6 +100,7 @@ const VideoDetails = ({ titleInput, setTitleInput, desInput, setDesInput, videoU
             placeholder="You can type here"
             className="upload-form-input"
             data-placeholder="Enter video title"
+            style={{ overflow: "auto" }}
           ></div>
           <span style={{ position: "absolute", bottom: "10px", right: "10px", color: theme.palette.studioLightGray }} ref={videoTitleWordCount}>
             {titleInput.length}/100
@@ -149,6 +150,7 @@ const VideoDetails = ({ titleInput, setTitleInput, desInput, setDesInput, videoU
             placeholder="You can type here"
             className="upload-form-input"
             data-placeholder="Enter your text here"
+            style={{ overflow: "auto" }}
           ></div>
           <span style={{ position: "absolute", bottom: "10px", right: "10px", color: theme.palette.studioLightGray }} ref={videoDesWordCount}>
             {desInput.length}/500
@@ -189,7 +191,9 @@ const VideoDetails = ({ titleInput, setTitleInput, desInput, setDesInput, videoU
         </Box>
       </Box>
       {/* Video */}
-      <VideoBoxInUpload videoUrl={videoUrl} filename={filename} />
+      <Box sx={{ paddingLeft: "24px" }}>
+        <VideoBoxWithDetails videoUrl={videoUrl} filename={filename} />
+      </Box>
     </Box>
   );
 };
