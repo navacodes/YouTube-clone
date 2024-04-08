@@ -265,6 +265,13 @@ export const EditStudioIcon = ({ fill = "white", size = 24 }) => {
     </svg>
   );
 };
+export const EditStudioFilledIcon = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14.06 6.19L3 17.25V21H6.75L17.81 9.94L14.06 6.19ZM17.61 2.63L15.06 5.18L18.85 8.97001L21.4 6.42L17.61 2.63Z" fill={fill} />
+    </svg>
+  );
+};
 
 export const ThreeDotsVert = ({ fill = "white", size = 24 }) => {
   return (
@@ -324,6 +331,69 @@ export const DeleteForeverIcon = ({ fill = "white", size = 24 }) => {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M11 17H9V8H11V17ZM15 8H13V17H15V8ZM19 4V5H18V21H6V5H5V4H9V3H15V4H19ZM17 5H7V20H17V5Z" fill={fill} />
+    </svg>
+  );
+};
+
+export const ArrowBackIcon = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 11V12H5.63997L12.36 18.72L11.65 19.43L3.71997 11.5L11.64 3.58L12.35 4.29L5.63997 11H21Z" fill={fill} />
+    </svg>
+  );
+};
+
+export const EditorStudioIcon = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M2 4.99982V18.9998H22V4.99982H2ZM21 5.99982V17.9998H3V5.99982H5L6.5 8.99982H9.5L8 5.99982H10L11.5 8.99982H14.5L13 5.99982H15L16.5 8.99982H19.5L18 5.99982H21Z"
+        fill={fill}
+      />
+    </svg>
+  );
+};
+
+export const ClipsStudioIcon = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M8 7C8 7.55 7.55 8 7 8C6.45 8 6 7.55 6 7C6 6.45 6.45 6 7 6C7.55 6 8 6.45 8 7ZM7 16C6.45 16 6 16.45 6 17C6 17.55 6.45 18 7 18C7.55 18 8 17.55 8 17C8 16.45 7.55 16 7 16ZM10.79 8.23L21 18.44V20H17.73L11.97 14.24L10.7 15.51C10.89 15.97 11 16.47 11 17C11 19.21 9.21 21 7 21C4.79 21 3 19.21 3 17C3 14.79 4.79 13 7 13C7.42 13 7.81 13.08 8.19 13.2L9.56 11.83L8.45 10.72C8 10.89 7.51 11 7 11C4.79 11 3 9.21 3 7C3 4.79 4.79 3 7 3C9.21 3 11 4.79 11 7C11 7.43 10.91 7.84 10.79 8.23ZM10.08 8.94L9.65 8.5L9.84 7.92C9.95 7.58 10 7.28 10 7C10 5.35 8.65 4 7 4C5.35 4 4 5.35 4 7C4 8.65 5.35 10 7 10C7.36 10 7.73 9.93 8.09 9.79L8.7 9.55L9.16 10.01L10.27 11.12L10.98 11.83L10.27 12.54L8.9 13.91L8.47 14.34L7.89 14.16C7.55 14.05 7.27 14 7 14C5.35 14 4 15.35 4 17C4 18.65 5.35 20 7 20C8.65 20 10 18.65 10 17C10 16.62 9.93 16.25 9.78 15.88L9.53 15.27L10 14.8L11.27 13.53L11.98 12.82L12.69 13.53L18.15 19H20V18.85L10.08 8.94ZM17.73 4H21V5.56L15.48 11.08L13.07 8.67L17.73 4ZM18.15 5L14.48 8.67L15.48 9.67L20 5.15V5H18.15Z"
+        fill={fill}
+      />
+    </svg>
+  );
+};
+
+export const UnlistedVisibility = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17.78 16H13V15H17.78C19.58 15 21.04 13.43 21.04 11.5C21.04 9.57 19.58 8 17.78 8H13V7H17.78C20.13 7 22.04 9.02 22.04 11.5C22.04 13.98 20.13 16 17.78 16ZM11 15H6.18999C4.38999 15 2.92999 13.43 2.92999 11.5C2.92999 9.57 4.38999 8 6.18999 8H11V7H6.18999C3.83999 7 1.92999 9.02 1.92999 11.5C1.92999 13.98 3.83999 16 6.18999 16H11V15ZM16 11H7.99999V12H16V11Z"
+        fill={fill}
+      />
+    </svg>
+  );
+};
+
+export const PublicVisibility = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM3 12C3 11.3 3.09 10.63 3.24 9.98L8 14.71V15.5C8 17.26 9.31 18.72 11 18.96V20.94C6.51 20.44 3 16.62 3 12ZM11.5 18C10.12 18 9 16.88 9 15.5V14.29L3.57 8.89C4.84 5.46 8.13 3 12 3C13.05 3 14.06 3.19 15 3.53V5C15 5.55 14.55 6 14 6H11V8C11 8.55 10.55 9 10 9H8V12H14C14.55 12 15 12.45 15 13V17H17C17.55 17 18 17.45 18 18V18.69C16.41 20.12 14.31 21 12 21V18H11.5ZM18.97 17.69C18.82 16.73 18 16 17 16H16V13C16 11.9 15.1 11 14 11H9V10H10C11.1 10 12 9.1 12 8V7H14C15.1 7 16 6.1 16 5V3.95C18.96 5.43 21 8.48 21 12C21 14.16 20.24 16.14 18.97 17.69Z"
+        fill={fill}
+      />
+    </svg>
+  );
+};
+
+export const PrivateVisibility = ({ fill = "white", size = 24 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17 8V6.63C17 4.08 14.76 2 12 2C9.24 2 7 4.08 7 6.63V8H4V22H20V8H17ZM8 6.63C8 4.61 9.79 2.97 12 2.97C14.21 2.97 16 4.61 16 6.63V8H8V6.63ZM19 21H5V9H19V21ZM12 12C10.34 12 9 13.34 9 15C9 16.66 10.34 18 12 18C13.66 18 15 16.66 15 15C15 13.34 13.66 12 12 12ZM12 17C10.9 17 10 16.1 10 15C10 13.9 10.9 13 12 13C13.1 13 14 13.9 14 15C14 16.1 13.1 17 12 17Z"
+        fill={fill}
+      />
     </svg>
   );
 };
