@@ -1,18 +1,17 @@
 import React from "react";
 import { useTheme } from "@emotion/react";
-// eslint-disable-next-line
-import { Box, IconButton, Typography } from "@mui/material";
-import CopyButton from "../CopyButton";
-import { truncateString } from "../../../FormatFns";
+import { Box, Typography } from "@mui/material";
+import CopyButton from "./CopyButton";
+import { truncateString } from "../FormatFns";
 
-const VideoBoxInUpload = ({ videoUrl, filename }) => {
+const VideoBoxWithDetails = ({ mediaUrl, filename, widthVal = "328", heightVal = "171" }) => {
   const theme = useTheme();
   return (
-    <Box style={{ width: "328px", height: "317px", paddingLeft: "24px" }}>
-      <Box className="video-box-studio" sx={{ width: "304px", height: "171px" }}>
-        {videoUrl !== null ? (
-          <video controls src={videoUrl} style={{ width: "100%", height: "100%" }}>
-            <source src={videoUrl} type="video/mp4" />
+    <Box style={{ width: `${widthVal}px`, height: "auto", marginBottom: "24px" }}>
+      <Box className="video-box-studio" sx={{ width: "auto", height: `${heightVal}px` }}>
+        {mediaUrl !== null ? (
+          <video controls src={mediaUrl} style={{ width: "100%", height: "100%" }}>
+            <source src={mediaUrl} type="video/mp4" />
           </video>
         ) : (
           <Box sx={{ width: "100%", height: "100%", backgroundColor: "black" }}></Box>
@@ -33,10 +32,10 @@ const VideoBoxInUpload = ({ videoUrl, filename }) => {
               Video link
             </Typography>
             <Typography variant="h5" sx={{ fontSize: "15px", margin: "0 16px", padding: "0 0 5px", color: theme.palette.studioBlue }}>
-              {videoUrl !== null ? truncateString(videoUrl) : "Processing..."}
+              {mediaUrl !== null ? truncateString(mediaUrl) : "Processing"}
             </Typography>
           </Box>
-          <CopyButton linkToCopy={videoUrl} />
+          <CopyButton linkToCopy={mediaUrl || ""} />
         </Box>
         <Box>
           <Typography
@@ -59,4 +58,4 @@ const VideoBoxInUpload = ({ videoUrl, filename }) => {
   );
 };
 
-export default VideoBoxInUpload;
+export default VideoBoxWithDetails;
