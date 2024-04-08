@@ -106,9 +106,10 @@ body,
   font-size: 14px;
 }
 
-/* Upload form input */
+/* Upload form input and Edit form input */
 
-.upload-form-input {
+.upload-form-input,
+.edit-form-input {
   font-size: 15px;
   background-color: inherit;
   border: none;
@@ -116,11 +117,14 @@ body,
   overflow-wrap: break-word;
   height: 100%;
   margin-bottom: 25px;
+  font-family: "Roboto", "sans-serif";
 }
-.upload-form-input:focus-visible {
+.upload-form-input:focus-visible,
+.edit-form-input:focus-visible {
   outline: none;
 }
-.upload-form-input:empty::before {
+.upload-form-input:empty::before,
+.edit-form-input:empty::before {
   content: attr(data-placeholder); /* Use data-placeholder attribute for placeholder text */
   color: #aaaaaa;
   opacity: 0.5;
