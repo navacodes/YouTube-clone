@@ -22,7 +22,7 @@ const DataTable = ({ rowsData, theme, columns }) => {
             height: rowsData.length === 0 ? "55px" : "auto",
           },
           "& .MuiDataGrid-virtualScrollerContent": {
-            height: rowsData.length === 0 ? "auto" : "calc(100vh - 300px) !important",
+            height: rowsData.length === 0 ? "auto" : "calc(100vh - 285px) !important",
           },
           "& .MuiDataGrid-cell": {
             maxHeight: "100% !important",
