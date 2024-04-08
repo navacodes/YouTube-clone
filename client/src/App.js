@@ -38,9 +38,8 @@ function App() {
               <Route path="/home" element={<Home />} />
             </Route>
             <Route element={<StudioLayout />}>
-              <Route path="/studio" element={<Navigate to={token ? `/studio/${decodedToken.id}` : `/login`} replace />} />
-              <Route path={`/studio/video/edit/${videoId}`} element={<Navigate to={token ? `/studio/video/edit/${videoId}` : `/login`} replace />} />
-              <Route path="/studio/*" element={<Navigate to={token ? `/studio/${decodedToken.id}` : `/login`} replace />} />
+              <Route path="/studio" element={<Navigate to={token ? `/studio/${decodedToken?.id}` : `/login`} replace />} />
+              <Route path={`/studio/video/edit/${videoId}`} element={<Studio />} />
               <Route path={`/studio/${decodedToken?.id}`} element={<Studio />} />
             </Route>
             <Route path={`/noroute`} element={<Noroute />} />
