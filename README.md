@@ -2,9 +2,10 @@
 ```sh
 Disclaimer:
 Since this is deployed using free deployment tools ( Vercel and Render).
-The API I have built is not fast enough as it should've been.
+The API I have built is not fast enough as it is deployed on the free version of the mentioned deployment tool.
+Also, do not upload any media exceeding 100MB!
 ```
-For loggin-in:
+For loggin-in use the following details:
 ```sh
 Email: devcode@ytclone.com,
 Password: test1234
@@ -23,17 +24,4 @@ The backend of the project is made using NodeJS, and Express. The database for a
 
 [ Update: The UI of this clone is now outdated because while building ( as of Oct 23 ) the UI YouTube updated its UI on Nov 23 ]
 
-The following is the video of the clone working right now
-
-https://github.com/Dev-Code24/YouTube-clone/assets/97425135/ed2fcb4c-2aee-49ab-8d7e-f7b165425a2b
-
-
-The following is the video of the clone working right now ( as of Jan 2 2024, I have not been able to work on the project from Nov'23 - Dec'23 ) 
-
-https://github.com/Dev-Code24/YouTube-clone/assets/97425135/c2b90788-d96b-4fd6-946b-a95974269a9a
-
-
-The following is how the clone works as of now. I have added the InfinteScroll feature to the videos and have added the "click to show more shorts" feature on the show more button
-
-https://github.com/Dev-Code24/YouTube-clone/assets/97425135/a6869377-ccdd-4f08-b6d8-c100f1e0809c
-
+![youtubeclonecover](https://github.com/Dev-Code24/YouTube-clone/assets/97425135/f95c3444-b65d-4150-a87e-3ef409568b51)
