@@ -16,9 +16,7 @@ npm run start
 
 ## Disclaimer:
 ```sh
-Since this is deployed using free deployment tools ( Vercel and Render).
-The API I have built is not fast enough as it is deployed on the free version of the mentioned deployment tool.
-Also, do not upload any media exceeding 100MB!
+Since the backend URL provided to you all, is made just for you all, you are restricted from uploading any video while in development, as the clone has the feature for uploading a video.
 ```
 For loggin-in use the following details:
 ```sh
