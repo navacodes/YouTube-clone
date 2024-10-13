@@ -32,7 +32,7 @@ const VideoBoxWithDetails = ({ mediaUrl, filename, widthVal = "328", heightVal =
               Video link
             </Typography>
             <Typography variant="h5" sx={{ fontSize: "15px", margin: "0 16px", padding: "0 0 5px", color: theme.palette.studioBlue }}>
-              {mediaUrl !== null ? truncateString(mediaUrl) : "Processing"}
+              {mediaUrl ? truncateString(mediaUrl) : "Processing"}
             </Typography>
           </Box>
           <CopyButton linkToCopy={mediaUrl || ""} />
