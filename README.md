@@ -17,12 +17,13 @@ npm run start
 ## Disclaimer:
 Since the backend URL provided to you all, is made just for you all, you are restricted from uploading any video while in development, as the clone has the feature for uploading a video.
 
-For loggin-in use the following details:
+## For loggin-in use the following details:
 ```sh
 Email: devcode@ytclone.com,
 Password: test1234
 ```
 <img width="321" alt="Screenshot 2024-02-06 at 10 35 04 PM" src="https://github.com/Dev-Code24/YouTube-clone/assets/97425135/19fe2dde-82e6-4c18-8636-cd71eb1bdab2">
+
 
 
 
