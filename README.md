@@ -7,7 +7,7 @@ Instead, go to the directory `client/` and follow these steps:
 1. Create a `.env` file.
 2. Add the following variable:
 ```sh
-REACT_APP_BASE_URL = https://youtube-clone-backendrlm.vercel.app/
+REACT_APP_BASE_URL = https://some-backend.vercel.app/
 ```
 3. Now you being, in the `client/` directory, you can start the react server using
 ```sh
