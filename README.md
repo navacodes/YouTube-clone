@@ -6,10 +6,6 @@ Don't run the local server as the `.env` file is not shared publicly.
 Instead, go to the directory `client/` and follow these steps:
 1. Create a `.env` file.
 2. Add the following variable:
-<<<<<<< HEAD
-```sh
-REACT_APP_BASE_URL = https://some-backend.vercel.app/
-=======
 ```sh
 REACT_APP_BASE_URL = https://some-backend.vercel.app/
 ```
@@ -23,7 +19,6 @@ npm run start
 Since this is deployed using free deployment tools ( Vercel and Render).
 The API I have built is not fast enough as it is deployed on the free version of the mentioned deployment tool.
 Also, do not upload any media exceeding 100MB!
->>>>>>> upstream/main
 ```
 3. Now you being, in the `client/` directory, you can start the react server using
 ```sh
