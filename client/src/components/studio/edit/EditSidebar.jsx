@@ -3,7 +3,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { decodeToken } from "react-jwt";
 import { styled, useTheme } from "@mui/material/styles";
-import { Box, List, Typography, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  Box,
+  List,
+  Typography,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 
 import MuiDrawer from "@mui/material/Drawer";
 import { useNavigate } from "react-router-dom";
@@ -117,12 +125,14 @@ export default function EditSidebar({ isSideBarOpen, setIsSideBarOpen }) {
           >
             <ListItemButton
               onClick={() => {
-                navigate(`/studio/${decodedToken.id}}`);
+                navigate(`/studio/${decodedToken.id}`);
                 handleRefetch();
               }}
               sx={{
                 backgroundColor: theme.palette.studioMediumGray,
-                padding: isSideBarOpen ? "8.75px 20px 8.75px 16px" : " 12px 10px 12px 22px",
+                padding: isSideBarOpen
+                  ? "8.75px 20px 8.75px 16px"
+                  : " 12px 10px 12px 22px",
                 verticalAlign: "middle",
               }}
             >
@@ -163,8 +173,23 @@ export default function EditSidebar({ isSideBarOpen, setIsSideBarOpen }) {
           >
             {isSideBarOpen && (
               <>
-                <Typography sx={{ fontSize: "15px", paddingTop: "14px", color: "#FFFFFF" }}>Your Video </Typography>
-                <Typography sx={{ fontSize: "12px", color: theme.palette.studioLightGray }}>{editVideoData.title}</Typography>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    paddingTop: "14px",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  Your Video{" "}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    color: theme.palette.studioLightGray,
+                  }}
+                >
+                  {editVideoData.title}
+                </Typography>
               </>
             )}
           </Box>
@@ -214,8 +239,13 @@ export default function EditSidebar({ isSideBarOpen, setIsSideBarOpen }) {
               >
                 <ListItemButton
                   sx={{
-                    backgroundColor: text === "Details" ? theme.palette.studioDarkGray : theme.palette.studioMediumGray,
-                    padding: isSideBarOpen ? "8.75px 20px 8.75px 16px" : " 12px 10px 12px 22px",
+                    backgroundColor:
+                      text === "Details"
+                        ? theme.palette.studioDarkGray
+                        : theme.palette.studioMediumGray,
+                    padding: isSideBarOpen
+                      ? "8.75px 20px 8.75px 16px"
+                      : " 12px 10px 12px 22px",
                     verticalAlign: "middle",
                   }}
                 >
@@ -258,8 +288,13 @@ export default function EditSidebar({ isSideBarOpen, setIsSideBarOpen }) {
               >
                 <ListItemButton
                   sx={{
-                    backgroundColor: text === "Content" ? theme.palette.studioDarkGray : theme.palette.studioMediumGray,
-                    padding: isSideBarOpen ? "8.75px 20px 8.75px 16px" : " 12px 10px 12px 22px",
+                    backgroundColor:
+                      text === "Content"
+                        ? theme.palette.studioDarkGray
+                        : theme.palette.studioMediumGray,
+                    padding: isSideBarOpen
+                      ? "8.75px 20px 8.75px 16px"
+                      : " 12px 10px 12px 22px",
                     verticalAlign: "middle",
                   }}
                 >
